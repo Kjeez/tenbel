@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { label: 'SOLUTIONS', href: '#competencies', hasDropdown: true },
-  { label: 'PRODUCTS', href: '#products', hasDropdown: true },
-  { label: 'SERVICES', href: '#services', hasDropdown: true },
-  { label: 'PARTNERS', href: '#partners', hasDropdown: false },
-  { label: 'ABOUT US', href: '#why', hasDropdown: false },
-  { label: 'RESOURCES', href: '#media', hasDropdown: false },
+  { label: 'SOLUTIONS', href: '#competencies' },
+  { label: 'PRODUCTS', href: '#products' },
+  { label: 'SERVICES', href: '#services' },
+  { label: 'PARTNERS', href: '#partners' },
+  { label: 'ABOUT US', href: '#why' },
+  { label: 'RESOURCES', href: '#remote-connectivity' },
 ];
 
 export default function Navigation() {
@@ -54,7 +54,6 @@ export default function Navigation() {
                 className="text-[rgba(240,240,248,0.7)] hover:text-white text-[0.8rem] font-medium tracking-[0.08em] transition-colors bg-transparent border-none cursor-pointer flex items-center gap-1"
               >
                 {link.label}
-                {link.hasDropdown && <ChevronDown size={12} />}
               </button>
             </li>
           ))}
@@ -64,6 +63,7 @@ export default function Navigation() {
         <div className="hidden lg:block">
           <button
             onClick={() => scrollToSection('#contact')}
+            aria-label="Contact us"
             className="text-[#E8307A] border border-[#E8307A] hover:bg-[rgba(232,48,122,0.1)] px-6 py-2 rounded-full text-[0.75rem] font-semibold tracking-[0.08em] transition-all bg-transparent cursor-pointer"
           >
             CONTACT US
@@ -75,6 +75,7 @@ export default function Navigation() {
           className="lg:hidden flex items-center justify-center cursor-pointer bg-transparent border-none p-1"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
           aria-label="Toggle menu"
+          aria-expanded={isMobileOpen}
         >
           {isMobileOpen ? <X size={24} className="text-white" /> : <Menu size={24} className="text-white" />}
         </button>

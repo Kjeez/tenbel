@@ -112,11 +112,11 @@ export default function Hero() {
 
           {/* CTAs */}
           <div className="flex flex-wrap gap-3">
-            <button onClick={scrollToProducts} className="btn-primary text-[0.8rem] tracking-[0.06em] uppercase px-6 py-3">
+            <button onClick={scrollToProducts} aria-label="Explore our solutions" className="btn-primary text-[0.8rem] tracking-[0.06em] uppercase px-6 py-3">
               Explore Our Solutions
               <ChevronRight size={16} />
             </button>
-            <button onClick={scrollToContact} className="btn-outline text-[0.8rem] tracking-[0.06em] uppercase px-6 py-3">
+            <button onClick={scrollToContact} aria-label="Talk to an expert" className="btn-outline text-[0.8rem] tracking-[0.06em] uppercase px-6 py-3">
               <Phone size={16} />
               Talk to an Expert
             </button>
@@ -196,7 +196,7 @@ export default function Hero() {
                     <div className="flex items-end gap-1 h-5 md:h-6">
                       <div className="w-[3px] md:w-1 h-2.5 md:h-3 bg-white rounded-t-sm" />
                       <div className="w-[3px] md:w-1 h-3.5 md:h-4 bg-white rounded-t-sm" />
-                      <div className="w-[3px] md:w-1 h-4.5 md:h-5 bg-white rounded-t-sm" />
+                      <div className="w-[3px] md:w-1 h-[18px] md:h-5 bg-white rounded-t-sm" />
                       <div className="w-[3px] md:w-1 h-5 md:h-6 bg-white rounded-t-sm" />
                     </div>
                     <div className="flex items-baseline gap-1 ml-1">

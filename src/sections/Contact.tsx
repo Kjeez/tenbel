@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import { Phone, Mail, MapPin, Mountain, Send, CheckCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Mountain, Send, CheckCircle, AlertCircle } from 'lucide-react';
 
 const contactInfo = [
   {
@@ -38,9 +38,19 @@ const interests = [
   'Other',
 ];
 
+interface FormErrors {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  message?: string;
+}
+
 export default function Contact() {
   const sectionRef = useScrollAnimation('.contact-animate');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [errors, setErrors] = useState<FormErrors>({});
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -50,14 +60,70 @@ export default function Contact() {
     message: '',
   });
 
-  const handleSubmit = () => {
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First name is required';
+    }
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last name is required';
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async () => {
+    if (!validateForm()) return;
+    
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message. Please try again later.');
+      }
+
+      setSubmitted(true);
+      setFormData({ firstName: '', lastName: '', company: '', email: '', interest: '', message: '' });
+      setErrors({});
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (error) {
+      console.error(error);
+      setSubmitError('Failed to send message. Please try again later or contact us directly via email.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    // Clear error for this field when user types
+    if (errors[name as keyof FormErrors]) {
+      setErrors({ ...errors, [name]: undefined });
+    }
   };
+
+  const inputErrorClass = 'border-red-500/60 focus:border-red-500';
+  const inputBaseClass = 'w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] rounded-[10px] text-[#f0f0f8] text-sm px-4 py-3 outline-none focus:border-[rgba(232,48,122,0.5)] transition-colors placeholder:text-[rgba(240,240,248,0.3)]';
 
   return (
     <section id="contact" className="relative z-10 bg-[#0f1020]">
@@ -108,56 +174,73 @@ export default function Contact() {
               <div className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">First Name</label>
+                    <label htmlFor="contact-firstName" className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">First Name <span className="text-red-400">*</span></label>
                     <input
                       type="text"
+                      id="contact-firstName"
                       name="firstName"
                       placeholder="Rajiv"
+                      required
                       value={formData.firstName}
                       onChange={handleChange}
-                      className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] rounded-[10px] text-[#f0f0f8] text-sm px-4 py-3 outline-none focus:border-[rgba(232,48,122,0.5)] transition-colors placeholder:text-[rgba(240,240,248,0.3)]"
+                      className={`${inputBaseClass} ${errors.firstName ? inputErrorClass : ''}`}
                     />
+                    {errors.firstName && (
+                      <p className="text-red-400 text-xs mt-1.5 flex items-center gap-1"><AlertCircle size={12} />{errors.firstName}</p>
+                    )}
                   </div>
                   <div>
-                    <label className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">Last Name</label>
+                    <label htmlFor="contact-lastName" className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">Last Name <span className="text-red-400">*</span></label>
                     <input
                       type="text"
+                      id="contact-lastName"
                       name="lastName"
                       placeholder="Mehta"
+                      required
                       value={formData.lastName}
                       onChange={handleChange}
-                      className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] rounded-[10px] text-[#f0f0f8] text-sm px-4 py-3 outline-none focus:border-[rgba(232,48,122,0.5)] transition-colors placeholder:text-[rgba(240,240,248,0.3)]"
+                      className={`${inputBaseClass} ${errors.lastName ? inputErrorClass : ''}`}
                     />
+                    {errors.lastName && (
+                      <p className="text-red-400 text-xs mt-1.5 flex items-center gap-1"><AlertCircle size={12} />{errors.lastName}</p>
+                    )}
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">Company</label>
+                  <label htmlFor="contact-company" className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">Company</label>
                   <input
                     type="text"
+                    id="contact-company"
                     name="company"
                     placeholder="Your organisation"
                     value={formData.company}
                     onChange={handleChange}
-                    className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] rounded-[10px] text-[#f0f0f8] text-sm px-4 py-3 outline-none focus:border-[rgba(232,48,122,0.5)] transition-colors placeholder:text-[rgba(240,240,248,0.3)]"
+                    className={inputBaseClass}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">Email</label>
+                  <label htmlFor="contact-email" className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">Email <span className="text-red-400">*</span></label>
                   <input
                     type="email"
+                    id="contact-email"
                     name="email"
                     placeholder="you@company.com"
+                    required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] rounded-[10px] text-[#f0f0f8] text-sm px-4 py-3 outline-none focus:border-[rgba(232,48,122,0.5)] transition-colors placeholder:text-[rgba(240,240,248,0.3)]"
+                    className={`${inputBaseClass} ${errors.email ? inputErrorClass : ''}`}
                   />
+                  {errors.email && (
+                    <p className="text-red-400 text-xs mt-1.5 flex items-center gap-1"><AlertCircle size={12} />{errors.email}</p>
+                  )}
                 </div>
 
                 <div>
-                  <label className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">I'm interested in</label>
+                  <label htmlFor="contact-interest" className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">I'm interested in</label>
                   <select
+                    id="contact-interest"
                     name="interest"
                     value={formData.interest}
                     onChange={handleChange}
@@ -171,23 +254,31 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">Message</label>
+                  <label htmlFor="contact-message" className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">Message <span className="text-red-400">*</span></label>
                   <textarea
+                    id="contact-message"
                     name="message"
                     placeholder="Tell us about your connectivity challenge or project..."
                     rows={4}
+                    required
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] rounded-[10px] text-[#f0f0f8] text-sm px-4 py-3 outline-none focus:border-[rgba(232,48,122,0.5)] transition-colors resize-y placeholder:text-[rgba(240,240,248,0.3)]"
+                    className={`${inputBaseClass} resize-y ${errors.message ? inputErrorClass : ''}`}
                   />
+                  {errors.message && (
+                    <p className="text-red-400 text-xs mt-1.5 flex items-center gap-1"><AlertCircle size={12} />{errors.message}</p>
+                  )}
                 </div>
 
                 <button
                   onClick={handleSubmit}
-                  disabled={submitted}
-                  className={`btn-primary w-full justify-center ${submitted ? 'bg-gradient-to-r from-green-500 to-green-700' : ''}`}
+                  disabled={isSubmitting || submitted}
+                  aria-label="Send message"
+                  className={`btn-primary w-full justify-center ${submitted ? 'bg-gradient-to-r from-green-500 to-green-700' : ''} ${(isSubmitting || submitted) ? 'opacity-80 cursor-not-allowed' : ''}`}
                 >
-                  {submitted ? (
+                  {isSubmitting ? (
+                    'Sending...'
+                  ) : submitted ? (
                     <>
                       <CheckCircle size={16} />
                       Message Sent — We'll be in touch!
@@ -199,6 +290,11 @@ export default function Contact() {
                     </>
                   )}
                 </button>
+                {submitError && (
+                  <p className="text-red-400 text-sm text-center mt-3 flex justify-center items-center gap-1">
+                    <AlertCircle size={14} /> {submitError}
+                  </p>
+                )}
               </div>
             </div>
           </div>

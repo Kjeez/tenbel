@@ -1,5 +1,5 @@
 import { useStaggerAnimation } from '../hooks/useScrollAnimation';
-import { Signal, Route, Antenna, LocateFixed, Settings, TrendingUp, Globe2 } from 'lucide-react';
+import { Signal, Route, Antenna, LocateFixed, Settings, TrendingUp, Globe } from 'lucide-react';
 
 const features = [
   {
@@ -51,7 +51,7 @@ const features = [
     iconColor: '#ef4444',
   },
   {
-    icon: Globe2,
+    icon: Globe,
     title: '7. Connectivity Anywhere',
     desc: 'Bringing together consulting expertise, RF engineering, and best-in-class technology to deliver solutions that work where others fail.',
     color: 'rgba(59,130,246,0.15)',

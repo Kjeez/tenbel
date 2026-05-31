@@ -15,7 +15,7 @@ const serviceLinks = [
 const companyLinks = [
   { label: 'About Us', href: '#why' },
   { label: 'Partners', href: '#partners' },
-  { label: 'Media', href: '#media' },
+  { label: 'Resources', href: '#remote-connectivity' },
   { label: 'Contact', href: '#contact' },
 ];
 

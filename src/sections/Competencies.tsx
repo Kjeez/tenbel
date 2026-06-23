@@ -6,24 +6,24 @@ const competencies = [
     icon: Train,
     title: 'Railways & Critical Communications',
     desc: 'Reliable, mission-critical connectivity for the most demanding environments.',
-    color: 'rgba(232,48,122,0.15)',
-    border: 'rgba(232,48,122,0.2)',
+    color: 'rgba(232,48,122,0.08)',
+    border: 'rgba(232,48,122,0.15)',
     iconColor: '#E8307A',
   },
   {
     icon: Wifi,
     title: 'IoT & Enterprise Wireless',
     desc: 'Resilient and scalable solutions for connected businesses and smart infrastructure.',
-    color: 'rgba(99,102,241,0.15)',
-    border: 'rgba(99,102,241,0.2)',
+    color: 'rgba(99,102,241,0.08)',
+    border: 'rgba(99,102,241,0.15)',
     iconColor: '#6366f1',
   },
   {
     icon: ShieldCheck,
     title: 'Failover & Redundancy',
     desc: 'Smart uptime solutions with trusted hardware — connectivity that never quits.',
-    color: 'rgba(168,85,247,0.15)',
-    border: 'rgba(168,85,247,0.2)',
+    color: 'rgba(168,85,247,0.08)',
+    border: 'rgba(168,85,247,0.15)',
     iconColor: '#a855f7',
   },
 ];
@@ -32,7 +32,7 @@ export default function Competencies() {
   const gridRef = useStaggerAnimation('.comp-grid', '.comp-card');
 
   return (
-    <section id="competencies" className="relative z-10 bg-[#0a0b14]">
+    <section id="competencies" className="relative z-10 bg-white">
       <div className="section-inner">
         <span className="section-tag animate-on-scroll">What We Do Best</span>
         <h2 className="section-title animate-on-scroll">Core Competencies</h2>
@@ -54,8 +54,8 @@ export default function Competencies() {
                 >
                   <Icon size={24} style={{ color: item.iconColor }} />
                 </div>
-                <div className="font-semibold text-base mb-2">{item.title}</div>
-                <p className="text-[rgba(240,240,248,0.55)] text-sm leading-[1.65]">{item.desc}</p>
+                <div className="font-semibold text-base mb-2 text-[#1a1a2e]">{item.title}</div>
+                <p className="text-[#64748b] text-sm leading-[1.65]">{item.desc}</p>
               </div>
             );
           })}

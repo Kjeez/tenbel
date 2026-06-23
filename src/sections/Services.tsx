@@ -27,7 +27,7 @@ export default function Services() {
   const gridRef = useStaggerAnimation('.services-grid', '.service-card');
 
   return (
-    <section id="services" className="relative z-10 bg-[#141628]">
+    <section id="services" className="relative z-10 bg-white">
       <div className="section-inner">
         <span className="section-tag animate-on-scroll">Expertise</span>
         <h2 className="section-title animate-on-scroll">Our Service Lines</h2>
@@ -39,13 +39,13 @@ export default function Services() {
           {services.map((item, i) => (
             <div
               key={i}
-              className="service-card bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-2xl p-7 transition-all duration-300 hover:bg-[rgba(232,48,122,0.06)] hover:border-[rgba(232,48,122,0.25)]"
+              className="service-card bg-white border border-[#f1f5f9] rounded-2xl p-7 transition-all duration-300 hover:border-[rgba(232,48,122,0.25)] hover:shadow-card-hover"
             >
               <div className="text-[0.7rem] font-bold tracking-[0.15em] text-[#E8307A] mb-3">
                 {item.num}
               </div>
-              <div className="font-semibold text-base mb-2">{item.title}</div>
-              <p className="text-[rgba(240,240,248,0.55)] text-sm leading-[1.65]">{item.desc}</p>
+              <div className="font-semibold text-base mb-2 text-[#1a1a2e]">{item.title}</div>
+              <p className="text-[#64748b] text-sm leading-[1.65]">{item.desc}</p>
             </div>
           ))}
         </div>

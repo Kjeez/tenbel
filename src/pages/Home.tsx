@@ -13,17 +13,16 @@ import RemoteConnectivity from '../sections/RemoteConnectivity';
 
 export default function Home() {
   return (
-    <main className="relative">
+    <main className="relative bg-white">
       <Navigation />
       <Hero />
-      <WhyExist />
+      <Flagship />
       <Competencies />
       <Products />
-      <Flagship />
       <Services />
       <RemoteConnectivity />
       <Partners />
-
+      <WhyExist />
       <Contact />
       <Footer />
     </main>

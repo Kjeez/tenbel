@@ -29,12 +29,13 @@ const contactInfo = [
 
 const interests = [
   'RF Antennas & Accessories',
-  'Routers & Gateways',
+  'Wireless Networking',
   'Emergency Communications BoX',
   'RFID Systems',
   'Wireless Network Design',
   'IoT Consulting',
-  'EDX Wireless (RF Planning)',
+  'Off Grid Solutions',
+  'Remote Connectivity',
   'Other',
 ];
 
@@ -122,11 +123,11 @@ export default function Contact() {
     }
   };
 
-  const inputErrorClass = 'border-red-500/60 focus:border-red-500';
-  const inputBaseClass = 'w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] rounded-[10px] text-[#f0f0f8] text-sm px-4 py-3 outline-none focus:border-[rgba(232,48,122,0.5)] transition-colors placeholder:text-[rgba(240,240,248,0.3)]';
+  const inputErrorClass = 'border-red-400 focus:border-red-500';
+  const inputBaseClass = 'w-full bg-[#f8fafc] border border-[#e2e8f0] rounded-[10px] text-[#1a1a2e] text-sm px-4 py-3 outline-none focus:border-[#E8307A] focus:ring-2 focus:ring-[rgba(232,48,122,0.1)] transition-all placeholder:text-[#94a3b8]';
 
   return (
-    <section id="contact" className="relative z-10 bg-[#0f1020]">
+    <section id="contact" className="relative z-10 bg-white">
       <div ref={sectionRef} className="section-inner">
         <span className="section-tag contact-animate">Connect With Us</span>
         <h2 className="section-title contact-animate">Let's Talk</h2>
@@ -134,7 +135,7 @@ export default function Contact() {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Contact Info */}
           <div className="contact-animate">
-            <p className="text-[rgba(240,240,248,0.55)] mb-10 leading-[1.75]">
+            <p className="text-[#64748b] mb-10 leading-[1.75]">
               We'd love to walk you and your team through our solutions. Suggest a time and we'll make ourselves available.
             </p>
 
@@ -143,19 +144,19 @@ export default function Contact() {
                 const Icon = item.icon;
                 return (
                   <div key={i} className="flex gap-4 items-start">
-                    <div className="w-11 h-11 rounded-xl bg-[rgba(232,48,122,0.1)] border border-[rgba(232,48,122,0.2)] flex items-center justify-center flex-shrink-0">
+                    <div className="w-11 h-11 rounded-xl bg-[rgba(232,48,122,0.06)] border border-[rgba(232,48,122,0.12)] flex items-center justify-center flex-shrink-0">
                       <Icon size={18} className="text-[#E8307A]" />
                     </div>
                     <div>
-                      <div className="text-[0.75rem] text-[rgba(240,240,248,0.55)] uppercase tracking-[0.08em] mb-1">
+                      <div className="text-[0.75rem] text-[#94a3b8] uppercase tracking-[0.08em] mb-1">
                         {item.label}
                       </div>
                       {item.href ? (
-                        <a href={item.href} className="text-[0.95rem] font-medium text-[#f0f0f8] hover:text-[#f472b6] transition-colors no-underline">
+                        <a href={item.href} className="text-[0.95rem] font-medium text-[#1a1a2e] hover:text-[#E8307A] transition-colors no-underline">
                           {item.val}
                         </a>
                       ) : (
-                        <div className="text-[0.9rem] font-medium text-[#f0f0f8] whitespace-pre-line">
+                        <div className="text-[0.9rem] font-medium text-[#1a1a2e] whitespace-pre-line">
                           {item.val}
                         </div>
                       )}
@@ -168,13 +169,13 @@ export default function Contact() {
 
           {/* Form */}
           <div className="contact-animate">
-            <div className="bg-[#181a2e] border border-[rgba(255,255,255,0.08)] rounded-[20px] p-8 md:p-10">
-              <div className="text-[1.3rem] font-semibold mb-6">Request a Meeting</div>
+            <div className="bg-white border border-[#f1f5f9] rounded-[20px] p-8 md:p-10 shadow-soft">
+              <div className="text-[1.3rem] font-semibold mb-6 text-[#1a1a2e]">Request a Meeting</div>
 
               <div className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="contact-firstName" className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">First Name <span className="text-red-400">*</span></label>
+                    <label htmlFor="contact-firstName" className="block text-[0.8rem] text-[#64748b] mb-2">First Name <span className="text-red-400">*</span></label>
                     <input
                       type="text"
                       id="contact-firstName"
@@ -190,7 +191,7 @@ export default function Contact() {
                     )}
                   </div>
                   <div>
-                    <label htmlFor="contact-lastName" className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">Last Name <span className="text-red-400">*</span></label>
+                    <label htmlFor="contact-lastName" className="block text-[0.8rem] text-[#64748b] mb-2">Last Name <span className="text-red-400">*</span></label>
                     <input
                       type="text"
                       id="contact-lastName"
@@ -208,7 +209,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="contact-company" className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">Company</label>
+                  <label htmlFor="contact-company" className="block text-[0.8rem] text-[#64748b] mb-2">Company</label>
                   <input
                     type="text"
                     id="contact-company"
@@ -221,7 +222,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="contact-email" className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">Email <span className="text-red-400">*</span></label>
+                  <label htmlFor="contact-email" className="block text-[0.8rem] text-[#64748b] mb-2">Email <span className="text-red-400">*</span></label>
                   <input
                     type="email"
                     id="contact-email"
@@ -238,23 +239,23 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="contact-interest" className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">I'm interested in</label>
+                  <label htmlFor="contact-interest" className="block text-[0.8rem] text-[#64748b] mb-2">I'm interested in</label>
                   <select
                     id="contact-interest"
                     name="interest"
                     value={formData.interest}
                     onChange={handleChange}
-                    className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] rounded-[10px] text-[#f0f0f8] text-sm px-4 py-3 outline-none focus:border-[rgba(232,48,122,0.5)] transition-colors appearance-none"
+                    className="w-full bg-[#f8fafc] border border-[#e2e8f0] rounded-[10px] text-[#1a1a2e] text-sm px-4 py-3 outline-none focus:border-[#E8307A] focus:ring-2 focus:ring-[rgba(232,48,122,0.1)] transition-all appearance-none"
                   >
                     <option value="">Select a solution</option>
                     {interests.map((opt, i) => (
-                      <option key={i} value={opt} className="bg-[#181a2e]">{opt}</option>
+                      <option key={i} value={opt} className="bg-white">{opt}</option>
                     ))}
                   </select>
                 </div>
 
                 <div>
-                  <label htmlFor="contact-message" className="block text-[0.8rem] text-[rgba(240,240,248,0.55)] mb-2">Message <span className="text-red-400">*</span></label>
+                  <label htmlFor="contact-message" className="block text-[0.8rem] text-[#64748b] mb-2">Message <span className="text-red-400">*</span></label>
                   <textarea
                     id="contact-message"
                     name="message"
@@ -274,7 +275,7 @@ export default function Contact() {
                   onClick={handleSubmit}
                   disabled={isSubmitting || submitted}
                   aria-label="Send message"
-                  className={`btn-primary w-full justify-center ${submitted ? 'bg-gradient-to-r from-green-500 to-green-700' : ''} ${(isSubmitting || submitted) ? 'opacity-80 cursor-not-allowed' : ''}`}
+                  className={`btn-primary w-full justify-center ${submitted ? '!bg-gradient-to-r !from-green-500 !to-green-600' : ''} ${(isSubmitting || submitted) ? 'opacity-80 cursor-not-allowed' : ''}`}
                 >
                   {isSubmitting ? (
                     'Sending...'

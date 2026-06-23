@@ -48,11 +48,16 @@ module.exports = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        navy: {
-          DEFAULT: '#0a0b14',
-          2: '#0f1020',
-          3: '#141628',
-          card: '#181a2e',
+        // White theme base palette
+        'surface': {
+          DEFAULT: '#ffffff',
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          200: '#e2e8f0',
+        },
+        'navy': {
+          DEFAULT: '#1a1a2e',
+          light: '#2d2d44',
         },
         pink: {
           DEFAULT: '#E8307A',
@@ -73,6 +78,9 @@ module.exports = {
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+        'card': '0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02)',
+        'card-hover': '0 12px 32px rgba(0, 0, 0, 0.08)',
+        'soft': '0 4px 14px rgba(0, 0, 0, 0.06)',
       },
       keyframes: {
         "accordion-down": {

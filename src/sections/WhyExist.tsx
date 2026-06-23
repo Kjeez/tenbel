@@ -27,7 +27,7 @@ export default function WhyExist() {
   const gridRef = useStaggerAnimation('.why-grid', '.why-card');
 
   return (
-    <section id="why" className="relative z-10 bg-[#0f1020]">
+    <section id="why" className="relative z-10 bg-[#f8fafc]">
       <div className="section-inner">
         <span className="section-tag animate-on-scroll">Our Purpose</span>
         <h2 className="section-title animate-on-scroll">Why We Exist</h2>
@@ -41,11 +41,11 @@ export default function WhyExist() {
               key={i}
               className="why-card card-surface gradient-border-top"
             >
-              <div className="text-[3rem] font-extrabold gradient-text opacity-25 leading-none mb-4">
+              <div className="text-[3rem] font-extrabold gradient-text opacity-30 leading-none mb-4">
                 {item.num}
               </div>
-              <div className="font-semibold text-[1.05rem] mb-3">{item.title}</div>
-              <p className="text-[rgba(240,240,248,0.55)] text-sm leading-[1.7]">{item.text}</p>
+              <div className="font-semibold text-[1.05rem] mb-3 text-[#1a1a2e]">{item.title}</div>
+              <p className="text-[#64748b] text-sm leading-[1.7]">{item.text}</p>
             </div>
           ))}
         </div>

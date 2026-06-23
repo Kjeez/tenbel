@@ -4,33 +4,33 @@
 
 @layer base {
   :root {
-    --background: 240 33% 4%;
-    --foreground: 240 20% 97%;
-    --card: 235 28% 13%;
-    --card-foreground: 240 20% 97%;
-    --popover: 235 28% 13%;
-    --popover-foreground: 240 20% 97%;
+    --background: 0 0% 100%;
+    --foreground: 235 30% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 235 30% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 235 30% 12%;
     --primary: 336 80% 55%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 240 20% 8%;
-    --secondary-foreground: 240 20% 97%;
-    --muted: 240 20% 15%;
-    --muted-foreground: 240 10% 65%;
-    --accent: 240 20% 15%;
-    --accent-foreground: 240 20% 97%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 235 30% 12%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 235 30% 12%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 10% 15%;
-    --input: 240 10% 15%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
     --ring: 336 80% 55%;
     --radius: 0.625rem;
-    --sidebar-background: 240 20% 5%;
-    --sidebar-foreground: 240 20% 97%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 235 30% 12%;
     --sidebar-primary: 336 80% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 20% 15%;
-    --sidebar-accent-foreground: 240 20% 97%;
-    --sidebar-border: 240 10% 15%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 235 30% 12%;
+    --sidebar-border: 220 13% 91%;
     --sidebar-ring: 336 80% 55%;
   }
 
@@ -40,22 +40,12 @@
 
   body {
     font-family: 'Inter', sans-serif;
-    background: #0a0b14;
-    color: #f0f0f8;
+    background: #ffffff;
+    color: #1a1a2e;
     overflow-x: hidden;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
   }
 }
 
@@ -96,15 +86,15 @@
   .section-inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 6rem 2rem;
+    padding: 5rem 2rem;
     position: relative;
     z-index: 1;
   }
 
   .section-tag {
     font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
+    font-weight: 600;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: #E8307A;
     margin-bottom: 0.75rem;
@@ -117,10 +107,11 @@
     line-height: 1.15;
     letter-spacing: -0.02em;
     margin-bottom: 1rem;
+    color: #1a1a2e;
   }
 
   .section-desc {
-    color: rgba(240, 240, 248, 0.55);
+    color: #64748b;
     max-width: 560px;
     font-size: 1.05rem;
     line-height: 1.75;
@@ -131,21 +122,22 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: linear-gradient(135deg, #E8307A 0%, #a855f7 50%, #6366f1 100%);
+    background: linear-gradient(135deg, #E8307A 0%, #c026d3 100%);
     color: #fff;
     text-decoration: none;
     padding: 0.85rem 1.75rem;
     border-radius: 50px;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.95rem;
-    transition: transform 0.2s, opacity 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
     border: none;
     cursor: pointer;
+    box-shadow: 0 4px 14px rgba(232, 48, 122, 0.25);
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    opacity: 0.92;
+    box-shadow: 0 6px 20px rgba(232, 48, 122, 0.35);
   }
 
   .btn-outline {
@@ -153,33 +145,36 @@
     align-items: center;
     gap: 0.5rem;
     background: transparent;
-    color: #f0f0f8;
+    color: #1a1a2e;
     text-decoration: none;
     padding: 0.85rem 1.75rem;
     border-radius: 50px;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.95rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: border-color 0.2s, background 0.2s;
+    border: 1.5px solid #e2e8f0;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
     cursor: pointer;
   }
 
   .btn-outline:hover {
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.04);
+    border-color: #E8307A;
+    color: #E8307A;
+    background: rgba(232, 48, 122, 0.04);
   }
 
   .card-surface {
-    background: #181a2e;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #ffffff;
+    border: 1px solid #f1f5f9;
     border-radius: 16px;
     padding: 2rem;
-    transition: border-color 0.3s, transform 0.3s;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   }
 
   .card-surface:hover {
-    border-color: rgba(232, 48, 122, 0.3);
+    border-color: rgba(232, 48, 122, 0.25);
     transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
   }
 }
 

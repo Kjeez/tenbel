@@ -34,15 +34,15 @@ export default function Navigation() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[rgba(10,11,20,0.95)] backdrop-blur-[20px]'
-          : 'bg-transparent'
+          ? 'bg-white/95 backdrop-blur-[20px] shadow-[0_1px_3px_rgba(0,0,0,0.06)]'
+          : 'bg-white/80 backdrop-blur-[10px]'
       }`}
-      style={{ borderBottom: isScrolled ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent' }}
+      style={{ borderBottom: isScrolled ? '1px solid rgba(0,0,0,0.06)' : '1px solid transparent' }}
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-4 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center gap-2 no-underline shrink-0" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-          <img src="/logo-new.png" alt="Tenbel" className="h-14 md:h-16 w-auto" />
+          <img src="/image.png" alt="Tenbel" className="h-10 md:h-12 w-auto" />
         </a>
 
         {/* Desktop Links */}
@@ -51,7 +51,7 @@ export default function Navigation() {
             <li key={link.href}>
               <button
                 onClick={() => scrollToSection(link.href)}
-                className="text-[rgba(240,240,248,0.7)] hover:text-white text-[0.8rem] font-medium tracking-[0.08em] transition-colors bg-transparent border-none cursor-pointer flex items-center gap-1"
+                className="text-[#475569] hover:text-[#E8307A] text-[0.8rem] font-medium tracking-[0.08em] transition-colors bg-transparent border-none cursor-pointer flex items-center gap-1"
               >
                 {link.label}
               </button>
@@ -64,7 +64,7 @@ export default function Navigation() {
           <button
             onClick={() => scrollToSection('#contact')}
             aria-label="Contact us"
-            className="text-[#E8307A] border border-[#E8307A] hover:bg-[rgba(232,48,122,0.1)] px-6 py-2 rounded-full text-[0.75rem] font-semibold tracking-[0.08em] transition-all bg-transparent cursor-pointer"
+            className="text-white bg-gradient-to-r from-[#E8307A] to-[#c026d3] hover:shadow-lg px-6 py-2.5 rounded-full text-[0.75rem] font-semibold tracking-[0.08em] transition-all cursor-pointer border-none"
           >
             CONTACT US
           </button>
@@ -77,13 +77,13 @@ export default function Navigation() {
           aria-label="Toggle menu"
           aria-expanded={isMobileOpen}
         >
-          {isMobileOpen ? <X size={24} className="text-white" /> : <Menu size={24} className="text-white" />}
+          {isMobileOpen ? <X size={24} className="text-[#1a1a2e]" /> : <Menu size={24} className="text-[#1a1a2e]" />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden absolute top-full left-0 right-0 bg-[#0a0b14] border-b border-[rgba(255,255,255,0.08)] transition-all duration-300 overflow-hidden ${
+        className={`lg:hidden absolute top-full left-0 right-0 bg-white border-b border-[rgba(0,0,0,0.06)] shadow-lg transition-all duration-300 overflow-hidden ${
           isMobileOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
@@ -92,14 +92,14 @@ export default function Navigation() {
             <button
               key={link.href}
               onClick={() => scrollToSection(link.href)}
-              className="text-[rgba(240,240,248,0.7)] hover:text-white text-sm text-left transition-colors bg-transparent border-none cursor-pointer"
+              className="text-[#475569] hover:text-[#E8307A] text-sm text-left transition-colors bg-transparent border-none cursor-pointer"
             >
               {link.label}
             </button>
           ))}
           <button
             onClick={() => scrollToSection('#contact')}
-            className="text-[#E8307A] border border-[#E8307A] px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-all bg-transparent cursor-pointer w-fit"
+            className="text-white bg-gradient-to-r from-[#E8307A] to-[#c026d3] px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-all border-none cursor-pointer w-fit"
           >
             CONTACT US
           </button>

@@ -43,6 +43,7 @@ interface FormErrors {
   firstName?: string;
   lastName?: string;
   email?: string;
+  phone?: string;
   message?: string;
 }
 
@@ -57,6 +58,7 @@ export default function Contact() {
     lastName: '',
     company: '',
     email: '',
+    phone: '',
     interest: '',
     message: '',
   });
@@ -74,6 +76,11 @@ export default function Contact() {
       newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!/^[+]?[0-9\s\-().]{7,20}$/.test(formData.phone.trim())) {
+      newErrors.phone = 'Please enter a valid phone number';
     }
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
@@ -103,7 +110,7 @@ export default function Contact() {
       }
 
       setSubmitted(true);
-      setFormData({ firstName: '', lastName: '', company: '', email: '', interest: '', message: '' });
+      setFormData({ firstName: '', lastName: '', company: '', email: '', phone: '', interest: '', message: '' });
       setErrors({});
       setTimeout(() => setSubmitted(false), 5000);
     } catch (error) {
@@ -235,6 +242,23 @@ export default function Contact() {
                   />
                   {errors.email && (
                     <p className="text-red-400 text-xs mt-1.5 flex items-center gap-1"><AlertCircle size={12} />{errors.email}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label htmlFor="contact-phone" className="block text-[0.8rem] text-[#64748b] mb-2">Phone Number <span className="text-red-400">*</span></label>
+                  <input
+                    type="tel"
+                    id="contact-phone"
+                    name="phone"
+                    placeholder="+91 98765 43210"
+                    required
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className={`${inputBaseClass} ${errors.phone ? inputErrorClass : ''}`}
+                  />
+                  {errors.phone && (
+                    <p className="text-red-400 text-xs mt-1.5 flex items-center gap-1"><AlertCircle size={12} />{errors.phone}</p>
                   )}
                 </div>
 

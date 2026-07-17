@@ -16,31 +16,31 @@ const keyFeatures = [
   {
     icon: Radio,
     title: 'Sub-GHz LoRa Technology',
-    desc: 'Long-range, low-power sub-GHz LoRa radio for reliable communication without traditional networks — up to 15 km in open terrain.',
+    desc: 'Long-range, low-power sub-GHz LoRa radio. Connects via Bluetooth without any internet or cellular network — works entirely off-grid.',
     color: 'rgba(20,184,166,0.08)',
     border: 'rgba(20,184,166,0.15)',
     iconColor: '#14b8a6',
   },
   {
     icon: Smartphone,
-    title: 'Smartphone-Enabled Messaging',
-    desc: 'Familiar chat-style interface on your phone, connected via Bluetooth or USB to the LoRa node. No special hardware knowledge needed.',
+    title: 'Bluetooth Connected',
+    desc: 'Smartphone connects to the LoRa node via Bluetooth — 1.5 to 2 km direct peer-to-peer range. No SIM, no Wi-Fi, no infrastructure needed.',
     color: 'rgba(99,102,241,0.08)',
     border: 'rgba(99,102,241,0.15)',
     iconColor: '#6366f1',
   },
   {
     icon: Wifi,
-    title: 'Infrastructure-Free Operation',
-    desc: 'Operates without cellular, satellite, or Wi-Fi. Designed for disaster zones, remote areas, and rural operations where no networks exist.',
+    title: 'Multi-Hop Mesh to 12–13 km',
+    desc: 'Messages hop through relay nodes in a MeshStatic topology, extending total network range to 12–13 km across any terrain.',
     color: 'rgba(232,48,122,0.08)',
     border: 'rgba(232,48,122,0.15)',
     iconColor: '#E8307A',
   },
   {
     icon: Zap,
-    title: 'Multi-Hop Mesh Networking',
-    desc: 'Supports peer-to-peer, gateway-assisted, and multi-hop mesh topologies. Extend coverage by simply adding nodes — no bandwidth penalty.',
+    title: '3–4 Week Battery Life',
+    desc: 'Ultra-low-power design enables 3 to 4 weeks of field operation on a single charge — ideal for prolonged deployment in remote areas.',
     color: 'rgba(234,179,8,0.08)',
     border: 'rgba(234,179,8,0.15)',
     iconColor: '#eab308',
@@ -50,31 +50,31 @@ const keyFeatures = [
 const deploymentModels = [
   {
     icon: Mountain,
-    title: 'Open & Mountain Terrain',
-    desc: '10–15 km line-of-sight range. Relay nodes on ridgelines overcome terrain shadows.',
+    title: 'Army & Defence',
+    desc: 'Secure off-grid messaging for army units and defence personnel operating in border areas, forests, and remote terrains.',
     color: '#14b8a6',
   },
   {
     icon: Building2,
-    title: 'Urban & Disaster Zones',
-    desc: 'Portable relay nodes bypass obstructions in dense urban environments and disaster areas.',
+    title: 'NDRF, HDRF & Disaster Management',
+    desc: 'First responders can communicate during floods, earthquakes, and disaster scenarios where all infrastructure has failed.',
     color: '#6366f1',
   },
   {
     icon: Trees,
-    title: 'Forests & Industrial Corridors',
-    desc: 'Multi-hop mesh enables messages to traverse forests, mining corridors, and border areas.',
+    title: 'Emergency & Rural Areas',
+    desc: 'MeshStatic network enables communication in forests, mining corridors, remote villages, and industrial sites with zero connectivity.',
     color: '#E8307A',
   },
 ];
 
 const highlights = [
-  'No internet, cellular, or satellite required',
-  'Low-power design for long unattended operation',
-  'Chirp Spread Spectrum (CSS) modulation',
-  'Latency optimised for safety-critical alerts',
-  'Scalable by adding nodes — no infrastructure change',
-  'Ideal for emergency, rural, and industrial use',
+  'Bluetooth connected — no internet or cellular required',
+  '1.5 to 2 km direct Bluetooth range per node',
+  'Mesh hopping extends total range to 12–13 km',
+  '3–4 week battery life per device',
+  'MeshStatic network topology — self-healing',
+  'Army, NDRF, HDRF, Disaster Management ready',
 ];
 
 export default function OffGrid() {
@@ -130,15 +130,15 @@ export default function OffGrid() {
                 <span className="w-3 h-3 rounded-full bg-[#14b8a6] animate-pulse" />
                 <div>
                   <div className="text-[0.72rem] text-[#64748b] font-medium uppercase tracking-wide">
-                    Range
+                    BT Range
                   </div>
-                  <div className="text-[1rem] font-bold text-[#1a1a2e]">Up to 15 km</div>
+                  <div className="text-[1rem] font-bold text-[#1a1a2e]">1.5–2 km</div>
                 </div>
                 <div className="ml-4 border-l border-[#f1f5f9] pl-4">
                   <div className="text-[0.72rem] text-[#64748b] font-medium uppercase tracking-wide">
-                    Network
+                    Mesh Range
                   </div>
-                  <div className="text-[1rem] font-bold text-[#1a1a2e]">Zero Infrastructure</div>
+                  <div className="text-[1rem] font-bold text-[#1a1a2e]">12–13 km</div>
                 </div>
               </div>
             </div>
@@ -254,9 +254,9 @@ export default function OffGrid() {
           {/* Stats bar */}
           <div className="mt-8 pt-6 border-t border-[#e2e8f0] grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
             {[
-              { value: '15 km', label: 'Open Range' },
-              { value: 'Sub-GHz', label: 'LoRa Band' },
-              { value: 'Multi-hop', label: 'Mesh Support' },
+              { value: '2 km', label: 'BT Direct Range' },
+              { value: '12–13 km', label: 'Mesh Range' },
+              { value: '3–4 wks', label: 'Battery Life' },
               { value: '0 infra', label: 'Dependency' },
             ].map((stat, i) => (
               <div key={i}>

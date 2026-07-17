@@ -4,6 +4,7 @@ import WhyExist from '../sections/WhyExist';
 import Competencies from '../sections/Competencies';
 import Products from '../sections/Products';
 import Flagship from '../sections/Flagship';
+import OffGrid from '../sections/OffGrid';
 import Services from '../sections/Services';
 import Partners from '../sections/Partners';
 
@@ -17,6 +18,7 @@ export default function Home() {
       <Navigation />
       <Hero />
       <Flagship />
+      <OffGrid />
       <Competencies />
       <Products />
       <Services />

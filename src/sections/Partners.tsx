@@ -45,6 +45,18 @@ const partners = [
     logo: '/edx.png',
     darkBg: true,
   },
+  {
+    name: 'QU Wireless',
+    desc: 'Wireless Solutions',
+    url: 'https://www.quwireless.com/',
+    logo: '/quwireless.png',
+  },
+  {
+    name: 'NoMachine',
+    desc: 'Remote Access & Desktop',
+    url: 'https://www.nomachine.com/',
+    logo: '/nomachine.png',
+  },
 ];
 
 export default function Partners() {

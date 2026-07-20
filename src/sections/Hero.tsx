@@ -12,6 +12,7 @@ const slides = [
     cta: 'Learn More',
     ctaHref: '#flagship',
     image: '/communicationbox.jpg',
+    mobileImage: '/comm_mob.jpg',
   },
   {
     id: 'offgrid',
@@ -22,6 +23,7 @@ const slides = [
     cta: 'Explore Off Grid',
     ctaHref: '#products',
     image: '/offgridhero_pc.jpg',
+    mobileImage: '/offgrid_mobile.jpg',
   },
   {
     id: 'remote',
@@ -32,12 +34,21 @@ const slides = [
     cta: 'Discover How',
     ctaHref: '#remote-connectivity',
     image: '/remotehero_pc.jpg',
+    mobileImage: '/remote-mobile.png',
   },
 ];
 
 export default function Hero() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const goTo = useCallback((index: number) => {
     setDirection(index > current ? 1 : -1);
@@ -109,16 +120,18 @@ export default function Hero() {
           <div
             className="absolute inset-0"
             style={{
-              backgroundImage: `url(${slide.image})`,
+              backgroundImage: `url(${isMobile ? slide.mobileImage : slide.image})`,
               backgroundSize: 'cover',
-              backgroundPosition: 'center right',
+              backgroundPosition: isMobile ? 'center bottom' : 'center right',
             }}
           />
-          {/* Solid white backing for text area */}
+          {/* Overlay for text readability */}
           <div
             className="absolute inset-0"
             style={{
-              background: 'linear-gradient(to right, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.90) 25%, rgba(255,255,255,0.65) 42%, rgba(255,255,255,0.20) 58%, transparent 70%)',
+              background: isMobile
+                ? 'linear-gradient(to bottom, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.88) 35%, rgba(255,255,255,0.45) 60%, transparent 80%)'
+                : 'linear-gradient(to right, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.90) 25%, rgba(255,255,255,0.65) 42%, rgba(255,255,255,0.20) 58%, transparent 70%)',
             }}
           />
 
@@ -133,7 +146,7 @@ export default function Hero() {
       </AnimatePresence>
 
       {/* Content */}
-      <div className="absolute inset-0 z-10 flex items-center">
+      <div className="absolute inset-0 z-10 flex items-start md:items-center pt-8 md:pt-0">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10 w-full">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div

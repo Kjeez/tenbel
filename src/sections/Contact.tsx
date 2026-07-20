@@ -17,12 +17,12 @@ const contactInfo = [
   },
   {
     icon: MapPin,
-    label: 'Delhi NCR Office',
+    label: 'Corporate Office',
     val: 'K-19, South Extension 2\nNew Delhi – 110049',
   },
   {
     icon: Mountain,
-    label: 'Uttarakhand Office',
+    label: 'Himalayan Innovation Centre',
     val: '55, Pleasant Valley, Rajpur Road\nDehradun – 248009',
   },
 ];

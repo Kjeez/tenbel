@@ -69,12 +69,10 @@ const deploymentModels = [
 ];
 
 const highlights = [
-  'Bluetooth connected — no internet or cellular required',
-  '1.5 to 2 km direct Bluetooth range per node',
+  'Smartphone first interface — no internet or cellular required',
+  '1.5 to 2 km direct stand alone range per node',
   'Mesh hopping extends total range to 12–13 km',
   '3–4 week battery life per device',
-  'MeshStatic network topology — self-healing',
-  'Army, NDRF, HDRF, Disaster Management ready',
 ];
 
 export default function OffGrid() {
@@ -121,7 +119,7 @@ export default function OffGrid() {
           <div className="relative">
             <div className="relative rounded-3xl overflow-hidden shadow-[0_24px_64px_rgba(0,0,0,0.12)]">
               <img
-                src="/offgrid-product.png"
+                src="/offgrid-product.jpg"
                 alt="Tenbel OffGrid LoRa device with smartphone in remote mountain terrain"
                 className="w-full h-[420px] object-cover"
               />
@@ -130,7 +128,7 @@ export default function OffGrid() {
                 <span className="w-3 h-3 rounded-full bg-[#14b8a6] animate-pulse" />
                 <div>
                   <div className="text-[0.72rem] text-[#64748b] font-medium uppercase tracking-wide">
-                    BT Range
+                    Stand Alone Range
                   </div>
                   <div className="text-[1rem] font-bold text-[#1a1a2e]">1.5–2 km</div>
                 </div>
@@ -254,7 +252,7 @@ export default function OffGrid() {
           {/* Stats bar */}
           <div className="mt-8 pt-6 border-t border-[#e2e8f0] grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
             {[
-              { value: '2 km', label: 'BT Direct Range' },
+              { value: '2 km', label: 'Stand Alone Range' },
               { value: '12–13 km', label: 'Mesh Range' },
               { value: '3–4 wks', label: 'Battery Life' },
               { value: '0 infra', label: 'Dependency' },

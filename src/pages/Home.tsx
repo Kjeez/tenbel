@@ -11,6 +11,7 @@ import Partners from '../sections/Partners';
 import Contact from '../sections/Contact';
 import Footer from '../sections/Footer';
 import RemoteConnectivity from '../sections/RemoteConnectivity';
+import BusinessContinuity from '../sections/BusinessContinuity';
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
       <Products />
       <Services />
       <RemoteConnectivity />
+      <BusinessContinuity />
       <Partners />
       <WhyExist />
       <Contact />

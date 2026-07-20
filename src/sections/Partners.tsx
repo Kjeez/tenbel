@@ -82,14 +82,14 @@ export default function Partners() {
             >
               {/* Logo image */}
               <div
-                className={`flex items-center justify-center mb-4 h-16 w-full rounded-lg px-4 ${
+                className={`flex items-center justify-center mb-4 h-20 w-full rounded-lg px-4 ${
                   partner.darkBg ? 'bg-[#1a1a2e]' : ''
                 }`}
               >
                 <img
                   src={partner.logo}
                   alt={`${partner.name} logo`}
-                  className="max-h-12 max-w-[140px] object-contain transition-transform duration-300 group-hover:scale-105"
+                  className="max-h-16 max-w-[160px] object-contain transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
 

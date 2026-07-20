@@ -54,11 +54,11 @@ const features = [
 
 const antennaSpecs = [
   { label: 'Frequency Range', value: '600 – 6000 MHz' },
-  { label: 'Technology', value: '5G / 4G LTE / 3G' },
-  { label: 'MIMO', value: '2×2' },
-  { label: 'Connector', value: '2× SMA Male' },
-  { label: 'Cable Length', value: '5 m or 10 m' },
-  { label: 'Application', value: 'Global Multi-band' },
+  { label: 'Technology', value: '5G / 4G LTE / Wi-Fi 6E / GPS' },
+  { label: 'Form Factor', value: 'All-in-One Enclosure' },
+  { label: 'Compatibility', value: 'RUTC50 / RUTC42 / RUTC40' },
+  { label: 'Rating', value: 'IP67' },
+  { label: 'Application', value: 'Outdoor / Mobile / Marine' },
 ];
 
 export default function RemoteConnectivity() {
@@ -94,14 +94,14 @@ export default function RemoteConnectivity() {
           })}
         </div>
 
-        {/* QuOmni Featured Product */}
+        {/* QuSpot Featured Product */}
         <div className="bg-white border border-[#f1f5f9] rounded-3xl overflow-hidden shadow-soft">
           <div className="grid lg:grid-cols-2 gap-0">
             {/* Left: image */}
             <div className="relative bg-gradient-to-br from-[#f8fafc] to-[#f1f5f9] flex items-center justify-center p-10 min-h-[300px]">
               <img
-                src="/quomni-antenna.png"
-                alt="QuOmni 5G LTE Global MIMO 2x2 Antenna"
+                src="/2v2_QuSpot-for-Teltonika-RUTC50_1156-1400.webp"
+                alt="QuSpot for Teltonika RUTC50 integrated outdoor antenna"
                 className="max-h-[280px] w-auto object-contain drop-shadow-xl"
               />
               <div className="absolute top-5 left-5 inline-flex items-center gap-2 bg-[rgba(99,102,241,0.08)] border border-[rgba(99,102,241,0.2)] text-[#6366f1] text-[0.7rem] font-bold tracking-[0.08em] uppercase px-3 py-1.5 rounded-full">
@@ -112,13 +112,13 @@ export default function RemoteConnectivity() {
             {/* Right: specs */}
             <div className="p-8 lg:p-10">
               <div className="flex items-center gap-3 mb-3">
-                <img src="/quwireless.png" alt="QU Wireless" className="h-7 w-auto object-contain" />
+                <img src="/quwireless.png" alt="QU Wireless" className="h-10 w-auto object-contain" />
               </div>
               <h3 className="text-[1.4rem] font-bold text-[#1a1a2e] leading-tight mb-2">
-                QuOmni 5G/LTE Global MIMO 2×2
+                QuSpot for Teltonika RUTC50
               </h3>
               <p className="text-[#64748b] text-sm leading-[1.75] mb-6">
-                Wide-band 600–6000 MHz omnidirectional antenna with 2×2 MIMO configuration and dual SMA connectors. Ideal for CCTV monitoring, remote sites, RV, and anywhere improved 5G signal coverage is needed. Works with all industrial and domestic 5G modems and routers.
+                Integrated multi-band LTE & 5G omni antenna + Wi-Fi 6E omni antenna + GPS active antenna — designed to install directly on Teltonika RUTC50/RUTC42/RUTC40 routers in a single IP67 enclosure. Ideal for outdoor wireless connectivity in transportation, yachting, boats, camping, and city centres with high signal density.
               </p>
 
               <div className="grid grid-cols-2 gap-3 mb-6">
@@ -131,7 +131,7 @@ export default function RemoteConnectivity() {
               </div>
 
               <a
-                href="https://www.quwireless.com/product/quomni-5glte-global-mimo-2x2"
+                href="https://www.quwireless.com/product/quspot-for-rutc50"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#6366f1] text-white text-[0.82rem] font-semibold px-6 py-3 rounded-full hover:bg-[#4f46e5] transition-colors no-underline"

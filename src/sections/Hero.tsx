@@ -11,27 +11,27 @@ const slides = [
     subtitle: 'Deploy a secure wireless network anywhere — no infrastructure needed. IP67-rated, multi-connectivity, mission-critical.',
     cta: 'Learn More',
     ctaHref: '#flagship',
-    image: '/hero-commsbox.png',
+    image: '/communicationbox.jpg',
   },
   {
     id: 'offgrid',
     tag: 'Sustainable Solutions',
     icon: Sun,
-    title: 'Off Grid\nPower & Connectivity',
+    title: 'Offgrid',
     subtitle: 'Reliable, sustainable power and connectivity solutions designed for mission-critical operations in remote and off-grid locations.',
     cta: 'Explore Off Grid',
     ctaHref: '#products',
-    image: '/hero-offgrid.png',
+    image: '/offgridhero_pc.jpg',
   },
   {
     id: 'remote',
     tag: 'Specialized Solutions',
     icon: Wifi,
-    title: 'Remote\nConnectivity',
+    title: 'Remote Connectivity\nand Failover',
     subtitle: 'Enhancing connectivity in underserved areas using multi-SIM cellular routers and high-gain antennas — resilient, future-ready communications anywhere.',
     cta: 'Discover How',
     ctaHref: '#remote-connectivity',
-    image: '/hero-remote.png',
+    image: '/remotehero_pc.jpg',
   },
 ];
 
@@ -93,7 +93,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative h-screen overflow-hidden bg-white">
+    <section className="relative h-[calc(100vh-72px)] mt-[72px] overflow-hidden bg-white">
       {/* Background Image */}
       <AnimatePresence mode="wait" custom={direction}>
         <motion.div
@@ -121,13 +121,7 @@ export default function Hero() {
               background: 'linear-gradient(to right, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.90) 25%, rgba(255,255,255,0.65) 42%, rgba(255,255,255,0.20) 58%, transparent 70%)',
             }}
           />
-          {/* Top edge softener for nav readability */}
-          <div
-            className="absolute inset-x-0 top-0 h-20"
-            style={{
-              background: 'linear-gradient(to bottom, rgba(255,255,255,0.85) 0%, transparent 100%)',
-            }}
-          />
+
           {/* Subtle bottom vignette for polish */}
           <div
             className="absolute inset-0"
@@ -140,56 +134,56 @@ export default function Hero() {
 
       {/* Content */}
       <div className="absolute inset-0 z-10 flex items-center">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 w-full pt-16">
-        <AnimatePresence mode="wait" custom={direction}>
-          <motion.div
-            key={slide.id}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="max-w-[560px]"
-          >
-            {/* Tag */}
-            <div className="inline-flex items-center gap-2 bg-[rgba(232,48,122,0.08)] border border-[rgba(232,48,122,0.2)] text-[#E8307A] text-[0.72rem] font-semibold tracking-[0.1em] uppercase px-4 py-2 rounded-full mb-5">
-              <SlideIcon size={14} />
-              {slide.tag}
-            </div>
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 w-full">
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={slide.id}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className="max-w-[560px]"
+            >
+              {/* Tag */}
+              <div className="inline-flex items-center gap-2 bg-[rgba(232,48,122,0.08)] border border-[rgba(232,48,122,0.2)] text-[#E8307A] text-[0.72rem] font-semibold tracking-[0.1em] uppercase px-4 py-2 rounded-full mb-5">
+                <SlideIcon size={14} />
+                {slide.tag}
+              </div>
 
-            {/* Title */}
-            <h1 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-extrabold leading-[1.08] tracking-tight mb-4 whitespace-pre-line text-[#1a1a2e]">
-              {slide.title}
-            </h1>
+              {/* Title */}
+              <h1 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-extrabold leading-[1.08] tracking-tight mb-4 whitespace-pre-line text-[#1a1a2e]">
+                {slide.title}
+              </h1>
 
-            {/* Subtitle */}
-            <p className="text-[#475569] text-[1.05rem] leading-[1.7] mb-7 max-w-[480px]">
-              {slide.subtitle}
-            </p>
+              {/* Subtitle */}
+              <p className="text-[#475569] text-[1.05rem] leading-[1.7] mb-7 max-w-[480px]">
+                {slide.subtitle}
+              </p>
 
-            {/* CTAs */}
-            <div className="flex flex-wrap gap-3">
-              <button
-                onClick={() => scrollToSection(slide.ctaHref)}
-                aria-label={slide.cta}
-                className="btn-primary text-[0.85rem] tracking-[0.04em] px-7 py-3.5"
-              >
-                {slide.cta}
-                <ChevronRight size={16} />
-              </button>
-              <button
-                onClick={scrollToContact}
-                aria-label="Talk to an expert"
-                className="btn-outline text-[0.85rem] tracking-[0.04em] px-7 py-3.5"
-              >
-                <Phone size={16} />
-                Talk to an Expert
-              </button>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
+              {/* CTAs */}
+              <div className="flex flex-wrap gap-3">
+                <button
+                  onClick={() => scrollToSection(slide.ctaHref)}
+                  aria-label={slide.cta}
+                  className="btn-primary text-[0.85rem] tracking-[0.04em] px-7 py-3.5"
+                >
+                  {slide.cta}
+                  <ChevronRight size={16} />
+                </button>
+                <button
+                  onClick={scrollToContact}
+                  aria-label="Talk to an expert"
+                  className="btn-outline text-[0.85rem] tracking-[0.04em] px-7 py-3.5"
+                >
+                  <Phone size={16} />
+                  Talk to an Expert
+                </button>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
 
       {/* Carousel Controls — absolutely positioned at bottom */}
@@ -221,11 +215,10 @@ export default function Hero() {
                   key={s.id}
                   onClick={() => goTo(i)}
                   aria-label={`Go to slide ${i + 1}`}
-                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer border-none ${
-                    i === current
+                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer border-none ${i === current
                       ? 'w-8 bg-gradient-to-r from-[#E8307A] to-[#c026d3]'
                       : 'w-2 bg-[#cbd5e1] hover:bg-[#94a3b8]'
-                  }`}
+                    }`}
                 />
               ))}
             </div>

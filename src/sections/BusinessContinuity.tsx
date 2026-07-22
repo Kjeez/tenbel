@@ -81,7 +81,7 @@ export default function BusinessContinuity() {
   };
 
   return (
-    <section id="business-continuity" className="relative z-10 bg-white overflow-hidden">
+    <section id="remote-failover" className="relative z-10 bg-white overflow-hidden">
       {/* Background accents */}
       <div
         className="absolute top-0 right-0 w-[600px] h-[600px] pointer-events-none"
@@ -102,8 +102,8 @@ export default function BusinessContinuity() {
         {/* Hero banner */}
         <div className="bc-animate relative rounded-3xl overflow-hidden mb-20 shadow-[0_24px_64px_rgba(0,0,0,0.10)]">
           <img
-            src="/network-resilience-hero.png"
-            alt="Enterprise data center with network infrastructure"
+            src="/remotehero_pc.jpg"
+            alt="Remote connectivity infrastructure and network resilience"
             className="w-full h-[400px] lg:h-[460px] object-cover"
           />
           {/* Overlay */}
@@ -119,10 +119,10 @@ export default function BusinessContinuity() {
             <div className="max-w-[680px] px-8 lg:px-12">
               <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-[0.72rem] font-semibold tracking-[0.1em] uppercase px-4 py-2 rounded-full mb-5 backdrop-blur-sm">
                 <ShieldCheck size={14} />
-                Business Continuity
+                Remote Connectivity
               </div>
               <h2 className="text-[clamp(1.8rem,3.5vw,2.8rem)] font-extrabold text-white leading-[1.12] mb-4">
-                Business Continuity &<br />Network Resilience
+                Remote Connectivity &<br />Failover Solutions
               </h2>
               <p className="text-white/80 text-[1.05rem] leading-[1.75] mb-7 max-w-[560px]">
                 Network outages can bring critical business operations to a standstill. Every minute

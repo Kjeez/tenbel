@@ -67,7 +67,7 @@ export default function Hero() {
 
   // Auto-advance
   useEffect(() => {
-    const timer = setInterval(next, 6000);
+    const timer = setInterval(next, 5000);
     return () => clearInterval(timer);
   }, [next]);
 

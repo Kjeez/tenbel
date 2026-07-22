@@ -56,7 +56,7 @@ const deploymentModels = [
   },
   {
     icon: Building2,
-    title: 'NDRF, HDRF & Disaster Management',
+    title: 'NDRF, SDRF & Disaster Management',
     desc: 'First responders can communicate during floods, earthquakes, and disaster scenarios where all infrastructure has failed.',
     color: '#6366f1',
   },

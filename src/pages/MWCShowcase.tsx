@@ -2,8 +2,6 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   Radio,
-  Wifi,
-  Zap,
   Train,
   Factory,
   Globe,
@@ -14,9 +12,6 @@ import {
   Tractor,
   Hospital,
   Shield,
-  Antenna,
-  Cpu,
-  X,
   Layers,
   Eye,
 } from 'lucide-react';

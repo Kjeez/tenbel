@@ -1332,8 +1332,9 @@ ${globalAnimStyles}
 }
 
 .mwc-choose-logo {
+  display: block;
+  margin: 0 auto 24px auto;
   height: 48px;
-  margin-bottom: 24px;
   filter: brightness(1.1);
 }
 

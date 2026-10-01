@@ -455,6 +455,7 @@ export default function MWCShowcase() {
   const goToProducts = useCallback(() => setView('products'), []);
   const goToUseCases = useCallback(() => setView('usecases'), []);
   const goToChoose = useCallback(() => setView('choose'), []);
+  const goToIntro = useCallback(() => setView('intro'), []);
 
   const openProduct = useCallback((i: number) => {
     setSelectedProduct(i);
@@ -484,6 +485,7 @@ export default function MWCShowcase() {
             key="choose"
             onProducts={goToProducts}
             onUseCases={goToUseCases}
+            onBack={goToIntro}
           />
         )}
         {view === 'products' && (
@@ -748,7 +750,7 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
 
 /* ─── CHOOSE SCREEN ─────────────────────────────────────────────────── */
 
-function ChooseScreen({ onProducts, onUseCases }: { onProducts: () => void; onUseCases: () => void }) {
+function ChooseScreen({ onProducts, onUseCases, onBack }: { onProducts: () => void; onUseCases: () => void; onBack: () => void }) {
   return (
     <motion.div
       className="mwc-screen"
@@ -758,6 +760,12 @@ function ChooseScreen({ onProducts, onUseCases }: { onProducts: () => void; onUs
       transition={{ duration: 0.5 }}
     >
       <ParticleBackground />
+
+      <div className="mwc-nav-bar" style={{ background: 'transparent', borderBottom: 'none', position: 'absolute' }}>
+        <button onClick={onBack} className="mwc-back-btn">
+          <ArrowLeft size={16} /> Back
+        </button>
+      </div>
 
       <div className="mwc-choose-content">
         <motion.div

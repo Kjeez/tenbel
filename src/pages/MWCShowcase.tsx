@@ -201,12 +201,6 @@ const useCases = [
         media: '/videos/Rescue_teams_setting_up_communic._20261001173529.mp4',
         title: 'The Solution: Instant Network',
         text: 'Tenbel OffGrid and Emergency CommsBox deploy in under 3 minutes. A fully secure, offline mesh network that works without power or towers.',
-      },
-      {
-        type: 'animation',
-        component: 'disaster',
-        title: 'How It Works: Technical Architecture',
-        text: 'Nodes relay signals across miles of terrain, routing automatically to the central CommsBox for satellite or external uplink.',
       }
     ]
   },
@@ -2577,7 +2571,7 @@ ${globalAnimStyles}
 /* ── Narrative Story Mode ───────────────────────────────── */
 
 .mwc-detail-hero--story {
-  height: 60vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }

@@ -1134,115 +1134,7 @@ function UseCaseDetail({ useCase, index, total, onBack, onNext, onPrev }: UseCas
   const [isMuted, setIsMuted] = useState(true);
   const [storyStep, setStoryStep] = useState(0);
 
-  // If this use case has a "Story Mode"
-  if (useCase.story && useCase.story.length > 0) {
-    const step = useCase.story[storyStep];
-    return (
-      <motion.div
-        className="mwc-screen mwc-story-screen"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.4 }}
-      >
-        <div className="mwc-overlay-bg" />
 
-        {/* Nav */}
-        <div className="mwc-nav-bar mwc-nav-bar--story">
-          <button onClick={onBack} className="mwc-back-btn">
-            <ArrowLeft size={16} /> Exit Story
-          </button>
-          <img src="/logo-new.png" alt="Tenbel" className="mwc-nav-logo" />
-          <div className="mwc-nav-counter">
-            {index > 0 && (
-              <button onClick={onPrev} className="mwc-arrow-btn"><ArrowLeft size={16} /></button>
-            )}
-            <span>{String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
-            {index < total - 1 && (
-              <button onClick={onNext} className="mwc-arrow-btn"><ArrowRight size={16} /></button>
-            )}
-          </div>
-        </div>
-
-        {/* Story Content Area */}
-        <div className="mwc-story-content">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={storyStep}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
-              className="mwc-story-media-container"
-            >
-              {step.type === 'video' ? (
-                <>
-                  <video className="mwc-story-media" autoPlay loop muted={isMuted} playsInline>
-                    <source src={step.media} type="video/mp4" />
-                  </video>
-                  <button className="mwc-sound-btn mwc-sound-btn--story" onClick={() => setIsMuted(!isMuted)}>
-                    {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-                  </button>
-                </>
-              ) : (
-                <div className="mwc-story-animation-wrap">
-                  {step.component === 'disaster' && <DisasterScene />}
-                  {step.component === 'railway' && <RailwayScene />}
-                  {step.component === 'agriculture' && <AgricultureScene />}
-                  {step.component === 'remote-connectivity' && <RemoteConnectivityScene />}
-                  {step.component === 'factory' && <FactoryScene />}
-                  {step.component === 'hiking' && <HikingScene />}
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
-          
-          {/* Dark gradient overlay for text readability */}
-          <div className="mwc-story-gradient-overlay" />
-
-          {/* Text Content */}
-          <div className="mwc-story-text-overlay">
-            <motion.div
-              key={`text-${storyStep}`}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              <div className="mwc-story-step-badge">Phase {storyStep + 1}</div>
-              <h2 className="mwc-story-title">{step.title}</h2>
-              <p className="mwc-story-desc">{step.text}</p>
-            </motion.div>
-          </div>
-
-          {/* Story Navigation Controls */}
-          <div className="mwc-story-controls">
-            <button 
-              className={`mwc-story-nav-btn ${storyStep === 0 ? 'disabled' : ''}`}
-              onClick={() => setStoryStep(s => Math.max(0, s - 1))}
-            >
-              <ArrowLeft size={24} />
-            </button>
-            <div className="mwc-story-dots">
-              {useCase.story.map((_, i) => (
-                <div 
-                  key={i} 
-                  className={`mwc-story-dot ${i === storyStep ? 'active' : ''}`}
-                  onClick={() => setStoryStep(i)}
-                  style={{ backgroundColor: i === storyStep ? useCase.color : 'rgba(255,255,255,0.3)' }}
-                />
-              ))}
-            </div>
-            <button 
-              className={`mwc-story-nav-btn ${storyStep === useCase.story.length - 1 ? 'disabled' : ''}`}
-              onClick={() => setStoryStep(s => Math.min(useCase.story.length - 1, s + 1))}
-            >
-              <ArrowRight size={24} />
-            </button>
-          </div>
-        </div>
-      </motion.div>
-    );
-  }
 
   // Fallback to standard scroll layout
   return (
@@ -1272,46 +1164,126 @@ function UseCaseDetail({ useCase, index, total, onBack, onNext, onPrev }: UseCas
         </div>
       </div>
 
-      {/* Hero image/video pulled outside container for full width */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        className="mwc-detail-hero mwc-detail-hero--wide"
-      >
-        {useCase.videos && useCase.videos.length > 0 ? (
-          <>
-            <video key={useCase.videos[videoIndex]} className="mwc-detail-hero-img" autoPlay loop muted={isMuted} playsInline>
-              <source src={useCase.videos[videoIndex]} type="video/mp4" />
-            </video>
-            <button className="mwc-sound-btn" onClick={() => setIsMuted(!isMuted)}>
-              {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-            </button>
-            {useCase.videos.length > 1 && (
-              <div className="mwc-video-stepper">
-                {useCase.videos.map((_, i) => (
-                  <button
-                    key={i}
-                    className={`mwc-video-step-btn ${i === videoIndex ? 'active' : ''}`}
-                    onClick={() => setVideoIndex(i)}
-                    style={{ backgroundColor: i === videoIndex ? useCase.color : 'rgba(255,255,255,0.3)' }}
-                  />
-                ))}
-              </div>
-            )}
-          </>
-        ) : (
-          <img src={useCase.image} alt={useCase.title} className="mwc-detail-hero-img" />
-        )}
-        <div className="mwc-detail-hero-overlay" />
-        <div className="mwc-detail-hero-content">
-          <div className="mwc-detail-icon" style={{ background: `${useCase.color}30`, borderColor: `${useCase.color}60` }}>
-            <Icon size={28} style={{ color: useCase.color }} />
+      {/* Conditional Hero: Story Mode OR Standard Video Mode */}
+      {useCase.story && useCase.story.length > 0 ? (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mwc-detail-hero mwc-detail-hero--wide mwc-detail-hero--story"
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={storyStep}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mwc-story-media-container"
+            >
+              {useCase.story[storyStep].type === 'video' ? (
+                <>
+                  <video className="mwc-story-media" autoPlay loop muted={isMuted} playsInline>
+                    <source src={useCase.story[storyStep].media} type="video/mp4" />
+                  </video>
+                  <button className="mwc-sound-btn" onClick={() => setIsMuted(!isMuted)}>
+                    {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                  </button>
+                </>
+              ) : (
+                <div className="mwc-story-animation-wrap">
+                  {useCase.story[storyStep].component === 'disaster' && <DisasterScene />}
+                  {useCase.story[storyStep].component === 'railway' && <RailwayScene />}
+                  {useCase.story[storyStep].component === 'agriculture' && <AgricultureScene />}
+                  {useCase.story[storyStep].component === 'remote-connectivity' && <RemoteConnectivityScene />}
+                  {useCase.story[storyStep].component === 'factory' && <FactoryScene />}
+                  {useCase.story[storyStep].component === 'hiking' && <HikingScene />}
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+          
+          <div className="mwc-story-gradient-overlay" />
+
+          <div className="mwc-story-text-overlay">
+            <motion.div
+              key={`text-${storyStep}`}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              <div className="mwc-story-step-badge">Phase {storyStep + 1}</div>
+              <h2 className="mwc-story-title">{useCase.story[storyStep].title}</h2>
+              <p className="mwc-story-desc">{useCase.story[storyStep].text}</p>
+            </motion.div>
           </div>
-          <h1 className="mwc-detail-title">{useCase.title}</h1>
-          <p className="mwc-detail-tagline">{useCase.tagline}</p>
-        </div>
-      </motion.div>
+
+          <div className="mwc-story-controls">
+            <button 
+              className={`mwc-story-nav-btn ${storyStep === 0 ? 'disabled' : ''}`}
+              onClick={() => setStoryStep(s => Math.max(0, s - 1))}
+            >
+              <ArrowLeft size={20} />
+            </button>
+            <div className="mwc-story-dots">
+              {useCase.story.map((_, i) => (
+                <div 
+                  key={i} 
+                  className={`mwc-story-dot ${i === storyStep ? 'active' : ''}`}
+                  onClick={() => setStoryStep(i)}
+                  style={{ backgroundColor: i === storyStep ? useCase.color : 'rgba(255,255,255,0.3)' }}
+                />
+              ))}
+            </div>
+            <button 
+              className={`mwc-story-nav-btn ${storyStep === useCase.story.length - 1 ? 'disabled' : ''}`}
+              onClick={() => setStoryStep(s => Math.min(useCase.story.length - 1, s + 1))}
+            >
+              <ArrowRight size={20} />
+            </button>
+          </div>
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mwc-detail-hero mwc-detail-hero--wide"
+        >
+          {useCase.videos && useCase.videos.length > 0 ? (
+            <>
+              <video key={useCase.videos[videoIndex]} className="mwc-detail-hero-img" autoPlay loop muted={isMuted} playsInline>
+                <source src={useCase.videos[videoIndex]} type="video/mp4" />
+              </video>
+              <button className="mwc-sound-btn" onClick={() => setIsMuted(!isMuted)}>
+                {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+              </button>
+              {useCase.videos.length > 1 && (
+                <div className="mwc-video-stepper">
+                  {useCase.videos.map((_, i) => (
+                    <button
+                      key={i}
+                      className={`mwc-video-step-btn ${i === videoIndex ? 'active' : ''}`}
+                      onClick={() => setVideoIndex(i)}
+                      style={{ backgroundColor: i === videoIndex ? useCase.color : 'rgba(255,255,255,0.3)' }}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
+          ) : (
+            <img src={useCase.image} alt={useCase.title} className="mwc-detail-hero-img" />
+          )}
+          <div className="mwc-detail-hero-overlay" />
+          <div className="mwc-detail-hero-content">
+            <div className="mwc-detail-icon" style={{ background: `${useCase.color}30`, borderColor: `${useCase.color}60` }}>
+              <Icon size={28} style={{ color: useCase.color }} />
+            </div>
+            <h1 className="mwc-detail-title">{useCase.title}</h1>
+            <p className="mwc-detail-tagline">{useCase.tagline}</p>
+          </div>
+        </motion.div>
+      )}
 
       <div className="mwc-detail-container">
 
@@ -2604,23 +2576,8 @@ ${globalAnimStyles}
 
 /* ── Narrative Story Mode ───────────────────────────────── */
 
-.mwc-story-screen {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden; /* No scrolling in story mode! */
-  position: relative;
-  background: #060612;
-}
-
-.mwc-nav-bar--story {
-  z-index: 50;
-  background: transparent;
-  border-bottom: none;
-}
-
-.mwc-story-content {
-  position: absolute;
-  inset: 0;
+.mwc-detail-hero--story {
+  height: 60vh;
   display: flex;
   flex-direction: column;
 }
@@ -2663,13 +2620,10 @@ ${globalAnimStyles}
 
 .mwc-story-text-overlay {
   position: absolute;
-  bottom: 120px;
-  left: 0;
-  right: 0;
+  bottom: 80px;
+  left: max(24px, calc((100% - 900px) / 2 + 24px));
+  right: max(24px, calc((100% - 900px) / 2 + 24px));
   z-index: 20;
-  padding: 0 40px;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .mwc-story-step-badge {
@@ -2705,19 +2659,18 @@ ${globalAnimStyles}
 
 .mwc-story-controls {
   position: absolute;
-  bottom: 40px;
-  left: 0;
-  right: 0;
+  bottom: 24px;
+  right: 24px;
   z-index: 30;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 32px;
+  gap: 16px;
 }
 
 .mwc-story-nav-btn {
-  width: 56px;
-  height: 56px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid rgba(255,255,255,0.2);
   background: rgba(255,255,255,0.05);

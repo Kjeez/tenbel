@@ -2571,7 +2571,7 @@ ${globalAnimStyles}
 /* ── Narrative Story Mode ───────────────────────────────── */
 
 .mwc-detail-hero--story {
-  height: 100vh;
+  height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
 }

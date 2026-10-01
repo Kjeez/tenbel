@@ -34,6 +34,10 @@ const products = [
     tagline: 'Communicate When Nothing Else Works',
     desc: 'Sub-GHz LoRa mesh communication — no SIM, no Wi-Fi, no infrastructure. Peer-to-peer range of 1.5–2 km, mesh range up to 12–13 km. 3–4 week battery life. Zero network charges.',
     image: '/mwc-offgrid.jpg',
+    videos: [
+      '/videos/LoRa_devices_communicating_on_rocks_20261001173513.mp4',
+      '/videos/Hikers_connecting_via_mesh_network_20261001173508.mp4'
+    ],
     icon: Radio,
     color: '#14b8a6',
     highlights: [
@@ -57,6 +61,10 @@ const products = [
     tagline: 'Deploy a Secure Network — Anywhere, Instantly',
     desc: 'IP67-rated, deployable communications system. Open it and instantly create a secure wireless network. Multi-connectivity: 4G, 5G, Satellite, WiFi Mesh, Offline Mesh. Available in Briefcase & Cylinder (Candy Box) form factors.',
     image: '/mwc-commsbox.jpg',
+    videos: [
+      '/videos/Rescue_teams_setting_up_communic._20261001173529.mp4',
+      '/videos/Rescue_teams_setting_up_communic._20261001173531.mp4'
+    ],
     icon: Shield,
     color: '#E8307A',
     highlights: [
@@ -80,6 +88,9 @@ const products = [
     tagline: 'Antennas, Routers, Cables & Accessories',
     desc: 'Complete railway communication infrastructure — high-gain antennas, industrial routers, ruggedized cables and accessories. CCTV, Wi-Fi, satellite connectivity all integrated from a central router for safe and connected rail operations.',
     image: '/mwc-railway.jpg',
+    videos: [
+      '/videos/Train_moving_along_railway_tracks_20261001173524.mp4'
+    ],
     icon: Train,
     color: '#a855f7',
     highlights: [
@@ -103,6 +114,10 @@ const products = [
     tagline: 'Smart, Connected, Automated',
     desc: 'RFID readers and tags, IoT sensors, industrial networking equipment for factory automation, vehicle tracking, medical use cases, and supply chain management. Connected intelligence for modern enterprises.',
     image: '/mwc-enterprise.jpg',
+    videos: [
+      '/videos/RFID_scanner_reading_product_tag_20261001173449.mp4',
+      '/videos/Smart_factory_production_line_in._20261001173455.mp4'
+    ],
     icon: Factory,
     color: '#6366f1',
     highlights: [
@@ -126,6 +141,10 @@ const products = [
     tagline: 'Reliable Links Where Others Fail',
     desc: 'Multi-SIM cellular routers with high-gain antennas for remote locations. Automatic failover, policy-based routing, continuous monitoring. Resorts, hospitals, warehouses — leak-proof, always-on connectivity.',
     image: '/mwc-remote.jpg',
+    videos: [
+      '/videos/Doctor_performing_remote_medical._1080p_20261001173444.mp4',
+      '/videos/Hospital_switches_to_backup_conn._20261001173501.mp4'
+    ],
     icon: Globe,
     color: '#eab308',
     highlights: [
@@ -152,6 +171,10 @@ const useCases = [
     tagline: 'When Towers Fall, Communication Survives',
     desc: 'Nepal\'s recent disasters and ongoing landslides across the Himalayas, Tibet, and India prove one thing: when towers break, people need a way to communicate. With OffGrid and the Emergency Communications BoX, teams stay connected even when all infrastructure is destroyed. No network, no power, no problem.',
     image: '/mwc-disaster.jpg',
+    videos: [
+      '/videos/Rescue_teams_setting_up_communic._20261001173531.mp4',
+      '/videos/Rescue_teams_setting_up_communic._20261001173529.mp4'
+    ],
     icon: Mountain,
     color: '#ef4444',
     products: ['OffGrid', 'Emergency Communications BoX'],
@@ -171,6 +194,10 @@ const useCases = [
     tagline: 'Stay Connected Beyond Cell Coverage',
     desc: 'Hikers, trekkers, and wilderness explorers venture where no network reaches. OffGrid gives them peer-to-peer messaging via LoRa — just a smartphone and a compact node. Perfect for mountain trails, dense forests, and remote expeditions.',
     image: '/mwc-hiking.jpg',
+    videos: [
+      '/videos/Hikers_connecting_via_mesh_network_20261001173508.mp4',
+      '/videos/LoRa_devices_communicating_on_rocks_20261001173513.mp4'
+    ],
     icon: Mountain,
     color: '#14b8a6',
     products: ['OffGrid'],
@@ -190,6 +217,9 @@ const useCases = [
     tagline: 'Stopping Collisions, Connecting Every Track',
     desc: 'Complete railway communication infrastructure powered by Tenbel. Antennas, routers, cables, satellite, CCTV, and Wi-Fi — all connected from a central router. Automatic collision prevention systems using real-time sensor data and AI monitoring.',
     image: '/mwc-railway.jpg',
+    videos: [
+      '/videos/Train_moving_along_railway_tracks_20261001173524.mp4'
+    ],
     icon: Train,
     color: '#a855f7',
     products: ['Railway Solutions', 'Enterprise IoT'],
@@ -209,6 +239,10 @@ const useCases = [
     tagline: 'IoT-Enabled Precision Farming',
     desc: 'Harvester combines equipped with antennas, cameras, and IoT sensors. RFID-enabled autonomous operations with collision avoidance. AI checks RFID sensors in farms connected to OffGrid for network-free monitoring.',
     image: '/mwc-agriculture.jpg',
+    videos: [
+      '/videos/Autonomous_harvester_in_wheat_field_20261001173521.mp4',
+      '/videos/RFID_sensor_scanning_crop_row_20261001173514.mp4'
+    ],
     icon: Tractor,
     color: '#22c55e',
     products: ['Enterprise IoT', 'OffGrid', 'RFID Systems'],
@@ -228,6 +262,10 @@ const useCases = [
     tagline: 'Connected Intelligence for Manufacturing',
     desc: 'Smart factory connectivity for date & batch coding, quality filtering, waste detection, and automated sorting. RFID-powered production line monitoring with real-time data analytics.',
     image: '/mwc-enterprise.jpg',
+    videos: [
+      '/videos/Smart_factory_production_line_in._20261001173455.mp4',
+      '/videos/RFID_scanner_reading_product_tag_20261001173449.mp4'
+    ],
     icon: Factory,
     color: '#6366f1',
     products: ['Enterprise IoT', 'RFID Systems'],
@@ -247,6 +285,10 @@ const useCases = [
     tagline: 'Always-On, Everywhere',
     desc: 'Remote island hospitals where doctors diagnose patients remotely with help from junior staff. If the network disconnects, the system automatically restores connectivity. Resorts, hospitals, remote warehouses — leak-proof, resilient connectivity.',
     image: '/mwc-remote.jpg',
+    videos: [
+      '/videos/Hospital_switches_to_backup_conn._20261001173501.mp4',
+      '/videos/Doctor_performing_remote_medical._1080p_20261001173444.mp4'
+    ],
     icon: Hospital,
     color: '#eab308',
     products: ['Remote Connectivity Solution', 'OffGrid'],
@@ -905,6 +947,7 @@ interface ProductDetailProps {
 
 function ProductDetail({ product, index, total, onBack, onNext, onPrev }: ProductDetailProps) {
   const Icon = product.icon;
+  const [videoIndex, setVideoIndex] = useState(0);
 
   return (
     <motion.div
@@ -934,14 +977,34 @@ function ProductDetail({ product, index, total, onBack, onNext, onPrev }: Produc
       </div>
 
       <div className="mwc-detail-container">
-        {/* Hero image */}
+        {/* Hero image/video */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className="mwc-detail-hero"
         >
-          <img src={product.image} alt={product.title} className="mwc-detail-hero-img" />
+          {product.videos && product.videos.length > 0 ? (
+            <>
+              <video key={product.videos[videoIndex]} className="mwc-detail-hero-img" autoPlay loop muted playsInline>
+                <source src={product.videos[videoIndex]} type="video/mp4" />
+              </video>
+              {product.videos.length > 1 && (
+                <div className="mwc-video-stepper">
+                  {product.videos.map((_, i) => (
+                    <button
+                      key={i}
+                      className={`mwc-video-step-btn ${i === videoIndex ? 'active' : ''}`}
+                      onClick={() => setVideoIndex(i)}
+                      style={{ backgroundColor: i === videoIndex ? product.color : 'rgba(255,255,255,0.3)' }}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
+          ) : (
+            <img src={product.image} alt={product.title} className="mwc-detail-hero-img" />
+          )}
           <div className="mwc-detail-hero-overlay" />
           <div className="mwc-detail-hero-content">
             <div className="mwc-detail-icon" style={{ background: `${product.color}30`, borderColor: `${product.color}60` }}>
@@ -1040,6 +1103,7 @@ interface UseCaseDetailProps {
 
 function UseCaseDetail({ useCase, index, total, onBack, onNext, onPrev }: UseCaseDetailProps) {
   const Icon = useCase.icon;
+  const [videoIndex, setVideoIndex] = useState(0);
 
   return (
     <motion.div
@@ -1069,14 +1133,34 @@ function UseCaseDetail({ useCase, index, total, onBack, onNext, onPrev }: UseCas
       </div>
 
       <div className="mwc-detail-container">
-        {/* Hero image */}
+        {/* Hero image/video */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className="mwc-detail-hero mwc-detail-hero--wide"
         >
-          <img src={useCase.image} alt={useCase.title} className="mwc-detail-hero-img" />
+          {useCase.videos && useCase.videos.length > 0 ? (
+            <>
+              <video key={useCase.videos[videoIndex]} className="mwc-detail-hero-img" autoPlay loop muted playsInline>
+                <source src={useCase.videos[videoIndex]} type="video/mp4" />
+              </video>
+              {useCase.videos.length > 1 && (
+                <div className="mwc-video-stepper">
+                  {useCase.videos.map((_, i) => (
+                    <button
+                      key={i}
+                      className={`mwc-video-step-btn ${i === videoIndex ? 'active' : ''}`}
+                      onClick={() => setVideoIndex(i)}
+                      style={{ backgroundColor: i === videoIndex ? useCase.color : 'rgba(255,255,255,0.3)' }}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
+          ) : (
+            <img src={useCase.image} alt={useCase.title} className="mwc-detail-hero-img" />
+          )}
           <div className="mwc-detail-hero-overlay" />
           <div className="mwc-detail-hero-content">
             <div className="mwc-detail-icon" style={{ background: `${useCase.color}30`, borderColor: `${useCase.color}60` }}>
@@ -2061,6 +2145,32 @@ ${globalAnimStyles}
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(6,6,18,0.9) 0%, rgba(6,6,18,0.3) 50%, transparent 100%);
+}
+.mwc-video-stepper {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  gap: 12px;
+  z-index: 20;
+}
+
+.mwc-video-step-btn {
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mwc-video-step-btn:hover {
+  background-color: rgba(255,255,255,0.7) !important;
+}
+
+.mwc-video-step-btn.active {
+  width: 60px;
+  box-shadow: 0 0 10px currentColor;
 }
 
 .mwc-detail-hero-content {

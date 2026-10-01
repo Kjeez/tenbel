@@ -13,9 +13,7 @@
 export function RailwayScene() {
   return (
     <div className="anim-scene-wrap">
-      <video className="anim-scene-video" autoPlay loop muted playsInline>
-        <source src="/videos/Train_moving_along_railway_tracks_20261001173524.mp4" type="video/mp4" />
-      </video>
+
       <div className="anim-scene-overlay" />
       <svg viewBox="0 0 800 400" className="anim-scene-svg" preserveAspectRatio="xMidYMid meet">
         <defs>
@@ -279,9 +277,7 @@ const railwayAnimStyles = `
 export function DisasterScene() {
   return (
     <div className="anim-scene-wrap">
-      <video className="anim-scene-video" autoPlay loop muted playsInline>
-        <source src="/videos/Rescue_teams_setting_up_communic._20261001173529.mp4" type="video/mp4" />
-      </video>
+
       <div className="anim-scene-overlay" />
       <svg viewBox="0 0 800 400" className="anim-scene-svg" preserveAspectRatio="xMidYMid meet">
         <defs>
@@ -414,9 +410,7 @@ export function DisasterScene() {
 export function AgricultureScene() {
   return (
     <div className="anim-scene-wrap">
-      <video className="anim-scene-video" autoPlay loop muted playsInline>
-        <source src="/videos/Autonomous_harvester_in_wheat_field_20261001173521.mp4" type="video/mp4" />
-      </video>
+
       <div className="anim-scene-overlay" />
       <svg viewBox="0 0 800 400" className="anim-scene-svg" preserveAspectRatio="xMidYMid meet">
         <defs>
@@ -550,9 +544,7 @@ const agricultureAnimStyles = `
 export function RemoteConnectivityScene() {
   return (
     <div className="anim-scene-wrap">
-      <video className="anim-scene-video" autoPlay loop muted playsInline>
-        <source src="/videos/Hospital_switches_to_backup_conn._20261001173501.mp4" type="video/mp4" />
-      </video>
+
       <div className="anim-scene-overlay" />
       <svg viewBox="0 0 800 400" className="anim-scene-svg" preserveAspectRatio="xMidYMid meet">
         <defs>
@@ -688,9 +680,7 @@ const remoteAnimStyles = `
 export function FactoryScene() {
   return (
     <div className="anim-scene-wrap">
-      <video className="anim-scene-video" autoPlay loop muted playsInline>
-        <source src="/videos/Smart_factory_production_line_in._20261001173455.mp4" type="video/mp4" />
-      </video>
+
       <div className="anim-scene-overlay" />
       <svg viewBox="0 0 800 400" className="anim-scene-svg" preserveAspectRatio="xMidYMid meet">
         <defs>
@@ -951,9 +941,7 @@ export const globalAnimStyles = `
 export function HikingScene() {
   return (
     <div className="anim-scene-wrap">
-      <video className="anim-scene-video" autoPlay loop muted playsInline>
-        <source src="/videos/Hikers_connecting_via_mesh_network_20261001173508.mp4" type="video/mp4" />
-      </video>
+
       <div className="anim-scene-overlay" />
       <svg viewBox="0 0 800 400" className="anim-scene-svg" preserveAspectRatio="xMidYMid meet">
         <defs>

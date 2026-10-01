@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+﻿import { useState, useEffect, useCallback, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   Radio,
@@ -25,36 +25,36 @@ import {
   globalAnimStyles,
 } from '../components/AnimatedScenes';
 
-/* ─── DATA ───────────────────────────────────────────────────────────── */
+/* ΓöÇΓöÇΓöÇ DATA ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
 const products = [
   {
     id: 'offgrid',
     title: 'OffGrid',
     tagline: 'Communicate When Nothing Else Works',
-    desc: 'Sub-GHz LoRa mesh communication — no SIM, no Wi-Fi, no infrastructure. Peer-to-peer range of 1.5–2 km, mesh range up to 12–13 km. 3–4 week battery life. Zero network charges.',
+    desc: 'Sub-GHz LoRa mesh communication ΓÇö no SIM, no Wi-Fi, no infrastructure. Peer-to-peer range of 1.5ΓÇô2 km, mesh range up to 12ΓÇô13 km. 3ΓÇô4 week battery life. Zero network charges.',
     image: '/mwc-offgrid.jpg',
     icon: Radio,
     color: '#14b8a6',
     highlights: [
       'Sub-GHz LoRa Technology',
-      'Bluetooth Connected — No SIM Required',
-      'Multi-Hop Mesh extends to 12–13 km',
-      '3–4 Week Battery Life',
+      'Bluetooth Connected ΓÇö No SIM Required',
+      'Multi-Hop Mesh extends to 12ΓÇô13 km',
+      '3ΓÇô4 Week Battery Life',
       'Zero Infrastructure Dependency',
       'No Network Charges',
     ],
     specs: [
-      { label: 'Range', value: '1.5–2 km (standalone)' },
-      { label: 'Mesh Range', value: '12–13 km' },
-      { label: 'Battery', value: '3–4 weeks' },
+      { label: 'Range', value: '1.5ΓÇô2 km (standalone)' },
+      { label: 'Mesh Range', value: '12ΓÇô13 km' },
+      { label: 'Battery', value: '3ΓÇô4 weeks' },
       { label: 'Connectivity', value: 'Bluetooth + LoRa' },
     ],
   },
   {
     id: 'commsbox',
     title: 'Emergency Communications BoX',
-    tagline: 'Deploy a Secure Network — Anywhere, Instantly',
+    tagline: 'Deploy a Secure Network ΓÇö Anywhere, Instantly',
     desc: 'IP67-rated, deployable communications system. Open it and instantly create a secure wireless network. Multi-connectivity: 4G, 5G, Satellite, WiFi Mesh, Offline Mesh. Available in Briefcase & Cylinder (Candy Box) form factors.',
     image: '/mwc-commsbox.jpg',
     icon: Shield,
@@ -78,7 +78,7 @@ const products = [
     id: 'railway',
     title: 'Railway Solutions',
     tagline: 'Antennas, Routers, Cables & Accessories',
-    desc: 'Complete railway communication infrastructure — high-gain antennas, industrial routers, ruggedized cables and accessories. CCTV, Wi-Fi, satellite connectivity all integrated from a central router for safe and connected rail operations.',
+    desc: 'Complete railway communication infrastructure ΓÇö high-gain antennas, industrial routers, ruggedized cables and accessories. CCTV, Wi-Fi, satellite connectivity all integrated from a central router for safe and connected rail operations.',
     image: '/mwc-railway.jpg',
     icon: Train,
     color: '#a855f7',
@@ -91,7 +91,7 @@ const products = [
       'Central Router Management',
     ],
     specs: [
-      { label: 'Frequency', value: '600–6000 MHz' },
+      { label: 'Frequency', value: '600ΓÇô6000 MHz' },
       { label: 'Rating', value: 'IP67' },
       { label: 'Tech', value: '5G/4G/Wi-Fi 6E/GPS' },
       { label: 'Integration', value: 'CCTV + WiFi + Sat' },
@@ -124,7 +124,7 @@ const products = [
     id: 'remote',
     title: 'Remote Connectivity Solution',
     tagline: 'Reliable Links Where Others Fail',
-    desc: 'Multi-SIM cellular routers with high-gain antennas for remote locations. Automatic failover, policy-based routing, continuous monitoring. Resorts, hospitals, warehouses — leak-proof, always-on connectivity.',
+    desc: 'Multi-SIM cellular routers with high-gain antennas for remote locations. Automatic failover, policy-based routing, continuous monitoring. Resorts, hospitals, warehouses ΓÇö leak-proof, always-on connectivity.',
     image: '/mwc-remote.jpg',
     icon: Globe,
     color: '#eab308',
@@ -157,19 +157,19 @@ const useCases = [
     products: ['OffGrid', 'Emergency Communications BoX'],
     benefits: [
       'Works when all cell towers are destroyed',
-      'Instant deployment — no infrastructure setup',
+      'Instant deployment ΓÇö no infrastructure setup',
       'Mesh network enables team coordination',
       'Critical for NDRF, SDRF, and first responders',
       'Proven need: Nepal earthquakes, Himalayan landslides',
-      'IP67 rated — works in rain, mud, debris',
+      'IP67 rated ΓÇö works in rain, mud, debris',
     ],
-    realWorld: 'In Nepal\'s recent disasters, broken cell towers left entire regions disconnected. With Tenbel OffGrid, rescue teams could still communicate peer-to-peer across 12–13 km using mesh relays — no cell network needed.',
+    realWorld: 'In Nepal\'s recent disasters, broken cell towers left entire regions disconnected. With Tenbel OffGrid, rescue teams could still communicate peer-to-peer across 12ΓÇô13 km using mesh relays ΓÇö no cell network needed.',
   },
   {
     id: 'hiking',
     title: 'Hiking & Wilderness',
     tagline: 'Stay Connected Beyond Cell Coverage',
-    desc: 'Hikers, trekkers, and wilderness explorers venture where no network reaches. OffGrid gives them peer-to-peer messaging via LoRa — just a smartphone and a compact node. Perfect for mountain trails, dense forests, and remote expeditions.',
+    desc: 'Hikers, trekkers, and wilderness explorers venture where no network reaches. OffGrid gives them peer-to-peer messaging via LoRa ΓÇö just a smartphone and a compact node. Perfect for mountain trails, dense forests, and remote expeditions.',
     image: '/mwc-hiking.jpg',
     icon: Mountain,
     color: '#14b8a6',
@@ -178,9 +178,9 @@ const useCases = [
       'No SIM, no data charges, no network required',
       'Compact and lightweight for backpacks',
       'Group messaging via mesh relay nodes',
-      '3–4 week battery for extended treks',
+      '3ΓÇô4 week battery for extended treks',
       'SOS and location sharing capabilities',
-      'Works in any terrain — mountains, forests, valleys',
+      'Works in any terrain ΓÇö mountains, forests, valleys',
     ],
     realWorld: 'Trekkers in the Indian Himalayas use OffGrid to stay connected across valleys and peaks where no cell tower reaches, ensuring safety and coordination during multi-day expeditions.',
   },
@@ -188,7 +188,7 @@ const useCases = [
     id: 'railway',
     title: 'Railway Connectivity',
     tagline: 'Stopping Collisions, Connecting Every Track',
-    desc: 'Complete railway communication infrastructure powered by Tenbel. Antennas, routers, cables, satellite, CCTV, and Wi-Fi — all connected from a central router. Automatic collision prevention systems using real-time sensor data and AI monitoring.',
+    desc: 'Complete railway communication infrastructure powered by Tenbel. Antennas, routers, cables, satellite, CCTV, and Wi-Fi ΓÇö all connected from a central router. Automatic collision prevention systems using real-time sensor data and AI monitoring.',
     image: '/mwc-railway.jpg',
     icon: Train,
     color: '#a855f7',
@@ -201,7 +201,7 @@ const useCases = [
       'High-gain antennas for trackside coverage',
       'Ruggedized for outdoor railway environments',
     ],
-    realWorld: 'Tenbel\'s integrated railway system connects CCTV cameras, collision sensors, passenger Wi-Fi, and satellite links through a single enterprise router — enabling automatic emergency braking when obstacles are detected.',
+    realWorld: 'Tenbel\'s integrated railway system connects CCTV cameras, collision sensors, passenger Wi-Fi, and satellite links through a single enterprise router ΓÇö enabling automatic emergency braking when obstacles are detected.',
   },
   {
     id: 'agriculture',
@@ -217,10 +217,10 @@ const useCases = [
       'RFID sensors for crop and equipment tracking',
       'Camera & sensor-equipped combines',
       'AI-powered monitoring via OffGrid',
-      'No network charges — OffGrid connectivity',
+      'No network charges ΓÇö OffGrid connectivity',
       'Auto-harvest and quality sorting',
     ],
-    realWorld: 'Smart harvesters with Tenbel IoT sensors automatically navigate fields, avoid collisions, and sort harvest quality — all connected through OffGrid mesh networks where cellular coverage doesn\'t exist.',
+    realWorld: 'Smart harvesters with Tenbel IoT sensors automatically navigate fields, avoid collisions, and sort harvest quality ΓÇö all connected through OffGrid mesh networks where cellular coverage doesn\'t exist.',
   },
   {
     id: 'factory',
@@ -239,13 +239,13 @@ const useCases = [
       'RFID-powered production tracking',
       'Full traceability from line to shelf',
     ],
-    realWorld: 'Tenbel\'s RFID and IoT systems enable factory floors to automatically code, filter, and sort products by quality — reducing waste by 40% and ensuring complete batch traceability.',
+    realWorld: 'Tenbel\'s RFID and IoT systems enable factory floors to automatically code, filter, and sort products by quality ΓÇö reducing waste by 40% and ensuring complete batch traceability.',
   },
   {
     id: 'remote-connectivity',
     title: 'Remote Connectivity',
     tagline: 'Always-On, Everywhere',
-    desc: 'Remote island hospitals where doctors diagnose patients remotely with help from junior staff. If the network disconnects, the system automatically restores connectivity. Resorts, hospitals, remote warehouses — leak-proof, resilient connectivity.',
+    desc: 'Remote island hospitals where doctors diagnose patients remotely with help from junior staff. If the network disconnects, the system automatically restores connectivity. Resorts, hospitals, remote warehouses ΓÇö leak-proof, resilient connectivity.',
     image: '/mwc-remote.jpg',
     icon: Hospital,
     color: '#eab308',
@@ -258,11 +258,11 @@ const useCases = [
       'Warehouse monitoring & management',
       'Leak-proof, weather-resistant deployment',
     ],
-    realWorld: 'On a remote island, a doctor diagnoses patients via telemedicine with junior nurses on-site. When the satellite link drops, Tenbel\'s failover system automatically switches to cellular backup — zero downtime.',
+    realWorld: 'On a remote island, a doctor diagnoses patients via telemedicine with junior nurses on-site. When the satellite link drops, Tenbel\'s failover system automatically switches to cellular backup ΓÇö zero downtime.',
   },
 ];
 
-/* ─── PARTICLES CANVAS ─────────────────────────────────────────────── */
+/* ΓöÇΓöÇΓöÇ PARTICLES CANVAS ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
 function ParticleBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -344,7 +344,7 @@ function ParticleBackground() {
   return <canvas ref={canvasRef} className="absolute inset-0 z-0" />;
 }
 
-/* ─── ANIMATED COUNTER ───────────────────────────────────────────── */
+/* ΓöÇΓöÇΓöÇ ANIMATED COUNTER ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
 function AnimatedCounter({ value, suffix = '' }: { value: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -370,7 +370,7 @@ function AnimatedCounter({ value, suffix = '' }: { value: number; suffix?: strin
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
-/* ─── MAIN COMPONENT ──────────────────────────────────────────────── */
+/* ΓöÇΓöÇΓöÇ MAIN COMPONENT ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
 type View = 'intro' | 'choose' | 'products' | 'usecases' | 'product-detail' | 'usecase-detail';
 
@@ -417,8 +417,6 @@ export default function MWCShowcase() {
             step={introStep}
             onSkip={skipIntro}
             onEnter={skipIntro}
-            onSelectProduct={openProduct}
-            onSelectUseCase={openUseCase}
           />
         )}
         {view === 'choose' && (
@@ -487,12 +485,9 @@ export default function MWCShowcase() {
   );
 }
 
-/* ─── INTRO SCREEN ──────────────────────────────────────────────────── */
+/* ΓöÇΓöÇΓöÇ INTRO SCREEN ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
-function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }: { step: number; onSkip: () => void; onEnter: () => void; onSelectProduct: (i: number) => void; onSelectUseCase: (i: number) => void }) {
-  const prodArray = [...products, ...products, ...products, ...products];
-  const useCaseArray = [...useCases, ...useCases, ...useCases, ...useCases];
-
+function IntroScreen({ step, onSkip, onEnter }: { step: number; onSkip: () => void; onEnter: () => void }) {
   return (
     <motion.div
       className="mwc-screen"
@@ -500,7 +495,6 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.6 }}
-      style={{ overflow: 'hidden' }}
     >
       <ParticleBackground />
 
@@ -509,7 +503,7 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
         Skip Intro <ChevronRight size={14} />
       </button>
 
-      <div className="mwc-intro-content" style={{ marginTop: '60px' }}>
+      <div className="mwc-intro-content">
         {/* Logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.5, y: 20 }}
@@ -530,10 +524,21 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
           Empowering a Sustainably Connected Future
         </motion.p>
 
-        {/* Stats row */}
+        {/* MWC Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={step >= 2 ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="mwc-intro-badge"
+        >
+          <span className="mwc-badge-pulse" />
+          <span>Ericsson Mobile World Congress 2026</span>
+        </motion.div>
+
+        {/* Stats row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={step >= 3 ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mwc-intro-stats"
         >
@@ -561,73 +566,20 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
         {/* Enter button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={step >= 3 ? { opacity: 1, y: 0 } : {}}
+          animate={step >= 4 ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          style={{ marginBottom: '60px' }}
         >
           <button onClick={onEnter} className="mwc-enter-btn">
             <span>Enter Showcase</span>
             <ArrowRight size={18} />
           </button>
         </motion.div>
-        
-        {/* Carousels */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={step >= 4 ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          style={{ width: '100%', maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '20px' }}
-        >
-          {/* Product Carousel (Left to Right) */}
-          <div className="mwc-carousel-wrapper" style={{ padding: '0 40px' }}>
-            <div className="mwc-carousel-track-container" style={{ height: '240px' }}>
-              <div className="mwc-carousel-track mwc-carousel-track--right">
-                {prodArray.map((p, i) => {
-                  const originalIndex = i % products.length;
-                  const Icon = p.icon;
-                  return (
-                    <div key={`p-${i}`} className="mwc-carousel-item" onClick={() => onSelectProduct(originalIndex)}>
-                      <img src={p.image} alt={p.title} className="mwc-carousel-item-img" />
-                      <div className="mwc-carousel-item-overlay" style={{ background: `linear-gradient(to top, ${p.color}dd, transparent)` }} />
-                      <div className="mwc-carousel-item-content">
-                        <Icon size={24} style={{ color: '#fff', marginBottom: '8px' }} />
-                        <h4>{p.title}</h4>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Use Case Carousel (Right to Left) */}
-          <div className="mwc-carousel-wrapper" style={{ padding: '0 40px' }}>
-            <div className="mwc-carousel-track-container" style={{ height: '240px' }}>
-              <div className="mwc-carousel-track mwc-carousel-track--left">
-                {useCaseArray.map((u, i) => {
-                  const originalIndex = i % useCases.length;
-                  const Icon = u.icon;
-                  return (
-                    <div key={`u-${i}`} className="mwc-carousel-item" onClick={() => onSelectUseCase(originalIndex)}>
-                      <img src={u.image} alt={u.title} className="mwc-carousel-item-img" />
-                      <div className="mwc-carousel-item-overlay" style={{ background: `linear-gradient(to top, ${u.color}dd, transparent)` }} />
-                      <div className="mwc-carousel-item-content">
-                        <Icon size={24} style={{ color: '#fff', marginBottom: '8px' }} />
-                        <h4>{u.title}</h4>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </motion.div>
   );
 }
 
-/* ─── CHOOSE SCREEN ─────────────────────────────────────────────────── */
+/* ΓöÇΓöÇΓöÇ CHOOSE SCREEN ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
 function ChooseScreen({ onProducts, onUseCases }: { onProducts: () => void; onUseCases: () => void }) {
   return (
@@ -665,7 +617,7 @@ function ChooseScreen({ onProducts, onUseCases }: { onProducts: () => void; onUs
               <Layers size={40} />
             </div>
             <h3>Our Products</h3>
-            <p>Explore our 5 product lines — OffGrid, CommsBox, Railway, Enterprise IoT & Remote Connectivity</p>
+            <p>Explore our 5 product lines ΓÇö OffGrid, CommsBox, Railway, Enterprise IoT & Remote Connectivity</p>
             <span className="mwc-choose-card-cta">
               Browse Products <ArrowRight size={16} />
             </span>
@@ -683,7 +635,7 @@ function ChooseScreen({ onProducts, onUseCases }: { onProducts: () => void; onUs
               <Eye size={40} />
             </div>
             <h3>Use Cases</h3>
-            <p>See real-world applications — Disaster Relief, Railways, Agriculture, Smart Factory & more</p>
+            <p>See real-world applications ΓÇö Disaster Relief, Railways, Agriculture, Smart Factory & more</p>
             <span className="mwc-choose-card-cta mwc-choose-card-cta--alt">
               View Use Cases <ArrowRight size={16} />
             </span>
@@ -694,7 +646,7 @@ function ChooseScreen({ onProducts, onUseCases }: { onProducts: () => void; onUs
   );
 }
 
-/* ─── PRODUCTS OVERVIEW ──────────────────────────────────────────── */
+/* ΓöÇΓöÇΓöÇ PRODUCTS OVERVIEW ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
 function ProductsOverview({ onBack, onSelect }: { onBack: () => void; onSelect: (i: number) => void }) {
   return (
@@ -761,7 +713,7 @@ function ProductsOverview({ onBack, onSelect }: { onBack: () => void; onSelect: 
   );
 }
 
-/* ─── USE CASES OVERVIEW ─────────────────────────────────────────── */
+/* ΓöÇΓöÇΓöÇ USE CASES OVERVIEW ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
 function UseCasesOverview({ onBack, onSelect }: { onBack: () => void; onSelect: (i: number) => void }) {
   return (
@@ -831,7 +783,7 @@ function UseCasesOverview({ onBack, onSelect }: { onBack: () => void; onSelect: 
   );
 }
 
-/* ─── PRODUCT DETAIL ─────────────────────────────────────────────── */
+/* ΓöÇΓöÇΓöÇ PRODUCT DETAIL ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
 interface ProductDetailProps {
   product: typeof products[0];
@@ -966,7 +918,7 @@ function ProductDetail({ product, index, total, onBack, onNext, onPrev }: Produc
   );
 }
 
-/* ─── USE CASE DETAIL ──────────────────────────────────────────────── */
+/* ΓöÇΓöÇΓöÇ USE CASE DETAIL ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
 interface UseCaseDetailProps {
   useCase: typeof useCases[0];
@@ -1131,12 +1083,12 @@ function UseCaseDetail({ useCase, index, total, onBack, onNext, onPrev }: UseCas
   );
 }
 
-/* ─── STYLES ──────────────────────────────────────────────────────── */
+/* ΓöÇΓöÇΓöÇ STYLES ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
 const mwcStyles = `
 ${globalAnimStyles}
 
-/* ── Root ───────────────────────────────────────────────── */
+/* ΓöÇΓöÇ Root ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 .mwc-root {
   position: relative;
   width: 100%;
@@ -1173,7 +1125,7 @@ ${globalAnimStyles}
   z-index: 0;
 }
 
-/* ── Intro ──────────────────────────────────────────────── */
+/* ΓöÇΓöÇ Intro ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 .mwc-intro-content {
   position: relative;
   z-index: 10;
@@ -1314,7 +1266,7 @@ ${globalAnimStyles}
   box-shadow: 0 8px 32px rgba(20,184,166,0.5);
 }
 
-/* ── Choose Screen ──────────────────────────────────────── */
+/* ΓöÇΓöÇ Choose Screen ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 .mwc-choose-content {
   position: relative;
   z-index: 10;
@@ -1451,126 +1403,7 @@ ${globalAnimStyles}
   color: #E8307A;
 }
 
-/* ── Carousel Marquee ────────────────────────────────────── */
-.mwc-choose-content-new {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 0;
-  z-index: 10;
-}
-
-.mwc-choose-header--new {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.mwc-carousel-wrapper {
-  width: 100%;
-  margin-bottom: 32px;
-}
-
-.mwc-carousel-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-left: 5%;
-  margin-bottom: 16px;
-  color: #f8fafc;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.mwc-carousel-track-container {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-}
-
-.mwc-carousel-track {
-  display: flex;
-  width: max-content;
-}
-
-.mwc-carousel-track--left {
-  animation: marquee-left 40s linear infinite;
-}
-.mwc-carousel-track--right {
-  animation: marquee-right 40s linear infinite;
-}
-
-.mwc-carousel-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes marquee-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-@keyframes marquee-right {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-}
-
-.mwc-carousel-item {
-  position: relative;
-  width: 280px;
-  height: 180px;
-  border-radius: 12px;
-  margin: 0 10px;
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-  border: 1px solid rgba(255,255,255,0.08);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.mwc-carousel-item:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: rgba(255,255,255,0.3);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.6);
-  z-index: 20;
-}
-
-.mwc-carousel-item-img {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.mwc-carousel-item:hover .mwc-carousel-item-img {
-  transform: scale(1.1);
-}
-
-.mwc-carousel-item-overlay {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  transition: opacity 0.3s ease;
-}
-
-.mwc-carousel-item-content {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 16px;
-  color: white;
-  z-index: 2;
-}
-
-.mwc-carousel-item-content h4 {
-  font-size: 1rem;
-  font-weight: 700;
-  margin: 0;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-}
-
-/* ── Nav Bar ────────────────────────────────────────────── */
+/* ΓöÇΓöÇ Nav Bar ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 .mwc-nav-bar {
   position: fixed;
   top: 0;
@@ -1660,7 +1493,7 @@ ${globalAnimStyles}
   border-color: rgba(255,255,255,0.2);
 }
 
-/* ── Grid Containers ────────────────────────────────────── */
+/* ΓöÇΓöÇ Grid Containers ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 .mwc-grid-container {
   position: relative;
   z-index: 10;
@@ -1702,7 +1535,7 @@ ${globalAnimStyles}
   font-size: 1rem;
 }
 
-/* ── Product Cards Grid ─────────────────────────────────── */
+/* ΓöÇΓöÇ Product Cards Grid ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 .mwc-products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -1795,7 +1628,7 @@ ${globalAnimStyles}
   letter-spacing: 0.02em;
 }
 
-/* ── Use Case Cards Grid ────────────────────────────────── */
+/* ΓöÇΓöÇ Use Case Cards Grid ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 .mwc-usecases-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -1890,7 +1723,7 @@ ${globalAnimStyles}
   letter-spacing: 0.04em;
 }
 
-/* ── Detail View ────────────────────────────────────────── */
+/* ΓöÇΓöÇ Detail View ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 .mwc-detail-container {
   position: relative;
   z-index: 10;
@@ -2057,7 +1890,7 @@ ${globalAnimStyles}
   flex-shrink: 0;
 }
 
-/* ── Use Case Specific ──────────────────────────────────── */
+/* ΓöÇΓöÇ Use Case Specific ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 .mwc-uc-products-used {
   display: flex;
   align-items: center;
@@ -2121,7 +1954,7 @@ ${globalAnimStyles}
   line-height: 1.7;
 }
 
-/* ── Nav Card Buttons ───────────────────────────────────── */
+/* ΓöÇΓöÇ Nav Card Buttons ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 .mwc-detail-nav-btns {
   display: flex;
   gap: 12px;
@@ -2155,7 +1988,7 @@ ${globalAnimStyles}
   margin-left: auto;
 }
 
-/* ── Responsive ─────────────────────────────────────────── */
+/* ΓöÇΓöÇ Responsive ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 @media (max-width: 480px) {
   .mwc-intro-stats {
     flex-wrap: wrap;

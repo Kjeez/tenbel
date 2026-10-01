@@ -633,7 +633,7 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
           animate={step >= 1 ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mwc-intro-tagline"
-          style={{ fontSize: 'clamp(1.6rem, 4vw, 3rem)', fontWeight: 700, textShadow: '0 4px 30px rgba(0,0,0,0.6)' }}
+          style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2.2rem)', fontWeight: 700, textShadow: '0 4px 30px rgba(0,0,0,0.6)', maxWidth: '800px', textAlign: 'center' }}
         >
           Empowering a Sustainably Connected Future
         </motion.p>
@@ -682,7 +682,7 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
           initial={{ opacity: 0, y: 20 }}
           animate={step >= 3 ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          style={{ marginBottom: '60px' }}
+          style={{ marginTop: '16px', marginBottom: '120px' }}
         >
           <button onClick={onEnter} className="mwc-enter-btn" style={{ fontSize: '1.1rem', padding: '18px 48px', boxShadow: '0 0 40px rgba(20,184,166,0.4)' }}>
             <span>Enter Showcase</span>

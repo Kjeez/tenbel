@@ -394,8 +394,6 @@ export default function MWCShowcase() {
     setView('choose');
   }, []);
 
-  const goToProducts = useCallback(() => setView('products'), []);
-  const goToUseCases = useCallback(() => setView('usecases'), []);
   const goToChoose = useCallback(() => setView('choose'), []);
 
   const openProduct = useCallback((i: number) => {
@@ -422,8 +420,8 @@ export default function MWCShowcase() {
         {view === 'choose' && (
           <ChooseScreen
             key="choose"
-            onProducts={goToProducts}
-            onUseCases={goToUseCases}
+            onSelectProduct={openProduct}
+            onSelectUseCase={openUseCase}
           />
         )}
         {view === 'products' && (
@@ -581,7 +579,10 @@ function IntroScreen({ step, onSkip, onEnter }: { step: number; onSkip: () => vo
 
 /* ─── CHOOSE SCREEN ─────────────────────────────────────────────────── */
 
-function ChooseScreen({ onProducts, onUseCases }: { onProducts: () => void; onUseCases: () => void }) {
+function ChooseScreen({ onSelectProduct, onSelectUseCase }: { onSelectProduct: (i: number) => void; onSelectUseCase: (i: number) => void }) {
+  const prodArray = [...products, ...products, ...products, ...products];
+  const useCaseArray = [...useCases, ...useCases, ...useCases, ...useCases];
+
   return (
     <motion.div
       className="mwc-screen"
@@ -589,57 +590,66 @@ function ChooseScreen({ onProducts, onUseCases }: { onProducts: () => void; onUs
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
+      style={{ overflow: 'hidden' }}
     >
       <ParticleBackground />
 
-      <div className="mwc-choose-content">
+      <div className="mwc-choose-content-new">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="mwc-choose-header"
+          className="mwc-choose-header mwc-choose-header--new"
         >
-          <img src="/logo-new.png" alt="Tenbel" className="mwc-choose-logo" />
-          <h2 className="mwc-choose-title">What would you like to explore?</h2>
-          <p className="mwc-choose-subtitle">Choose a path to discover Tenbel's solutions</p>
+          <img src="/logo-new.png" alt="Tenbel" className="mwc-choose-logo" style={{ marginBottom: '16px' }} />
+          <h2 className="mwc-choose-title">Explore Tenbel's Solutions</h2>
+          <p className="mwc-choose-subtitle">Select a product or use case to dive deeper</p>
         </motion.div>
 
-        <div className="mwc-choose-cards">
-          <motion.button
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, type: 'spring', stiffness: 100 }}
-            onClick={onProducts}
-            className="mwc-choose-card mwc-choose-card--products"
-          >
-            <div className="mwc-choose-card-glow" />
-            <div className="mwc-choose-card-icon">
-              <Layers size={40} />
+        {/* Product Carousel (Left to Right) */}
+        <div className="mwc-carousel-wrapper">
+          <h3 className="mwc-carousel-title"><Layers size={24} color="#14b8a6" /> Our Products</h3>
+          <div className="mwc-carousel-track-container">
+            <div className="mwc-carousel-track mwc-carousel-track--right">
+              {prodArray.map((p, i) => {
+                const originalIndex = i % products.length;
+                const Icon = p.icon;
+                return (
+                  <div key={`p-${i}`} className="mwc-carousel-item" onClick={() => onSelectProduct(originalIndex)}>
+                    <img src={p.image} alt={p.title} className="mwc-carousel-item-img" />
+                    <div className="mwc-carousel-item-overlay" style={{ background: `linear-gradient(to top, ${p.color}dd, transparent)` }} />
+                    <div className="mwc-carousel-item-content">
+                      <Icon size={24} style={{ color: '#fff', marginBottom: '8px' }} />
+                      <h4>{p.title}</h4>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-            <h3>Our Products</h3>
-            <p>Explore our 5 product lines — OffGrid, CommsBox, Railway, Enterprise IoT & Remote Connectivity</p>
-            <span className="mwc-choose-card-cta">
-              Browse Products <ArrowRight size={16} />
-            </span>
-          </motion.button>
+          </div>
+        </div>
 
-          <motion.button
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, type: 'spring', stiffness: 100 }}
-            onClick={onUseCases}
-            className="mwc-choose-card mwc-choose-card--usecases"
-          >
-            <div className="mwc-choose-card-glow mwc-choose-card-glow--alt" />
-            <div className="mwc-choose-card-icon mwc-choose-card-icon--alt">
-              <Eye size={40} />
+        {/* Use Case Carousel (Right to Left) */}
+        <div className="mwc-carousel-wrapper">
+          <h3 className="mwc-carousel-title"><Eye size={24} color="#E8307A" /> Use Cases</h3>
+          <div className="mwc-carousel-track-container">
+            <div className="mwc-carousel-track mwc-carousel-track--left">
+              {useCaseArray.map((u, i) => {
+                const originalIndex = i % useCases.length;
+                const Icon = u.icon;
+                return (
+                  <div key={`u-${i}`} className="mwc-carousel-item" onClick={() => onSelectUseCase(originalIndex)}>
+                    <img src={u.image} alt={u.title} className="mwc-carousel-item-img" />
+                    <div className="mwc-carousel-item-overlay" style={{ background: `linear-gradient(to top, ${u.color}dd, transparent)` }} />
+                    <div className="mwc-carousel-item-content">
+                      <Icon size={24} style={{ color: '#fff', marginBottom: '8px' }} />
+                      <h4>{u.title}</h4>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-            <h3>Use Cases</h3>
-            <p>See real-world applications — Disaster Relief, Railways, Agriculture, Smart Factory & more</p>
-            <span className="mwc-choose-card-cta mwc-choose-card-cta--alt">
-              View Use Cases <ArrowRight size={16} />
-            </span>
-          </motion.button>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -1401,6 +1411,125 @@ ${globalAnimStyles}
 
 .mwc-choose-card-cta--alt {
   color: #E8307A;
+}
+
+/* ── Carousel Marquee ────────────────────────────────────── */
+.mwc-choose-content-new {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+  z-index: 10;
+}
+
+.mwc-choose-header--new {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.mwc-carousel-wrapper {
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.mwc-carousel-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-left: 5%;
+  margin-bottom: 16px;
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mwc-carousel-track-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.mwc-carousel-track {
+  display: flex;
+  width: max-content;
+}
+
+.mwc-carousel-track--left {
+  animation: marquee-left 40s linear infinite;
+}
+.mwc-carousel-track--right {
+  animation: marquee-right 40s linear infinite;
+}
+
+.mwc-carousel-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.mwc-carousel-item {
+  position: relative;
+  width: 280px;
+  height: 180px;
+  border-radius: 12px;
+  margin: 0 10px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mwc-carousel-item:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(255,255,255,0.3);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+  z-index: 20;
+}
+
+.mwc-carousel-item-img {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.mwc-carousel-item:hover .mwc-carousel-item-img {
+  transform: scale(1.1);
+}
+
+.mwc-carousel-item-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  transition: opacity 0.3s ease;
+}
+
+.mwc-carousel-item-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 16px;
+  color: white;
+  z-index: 2;
+}
+
+.mwc-carousel-item-content h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
 /* ── Nav Bar ────────────────────────────────────────────── */

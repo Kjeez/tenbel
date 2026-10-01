@@ -2,6 +2,16 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Radio, Train, Factory, Globe, Mountain, Shield, X, ChevronRight, Check } from 'lucide-react';
 
+/* ─── VIDEO MAP ──────────────────────────────────────────────────────── */
+const videoMap: Record<string, string> = {
+  offgrid: '/videos/LoRa_devices_communicating_on_rocks_20261001173513.mp4',
+  commsbox: '/videos/Rescue_teams_setting_up_communic._20261001173531.mp4',
+  railway: '/videos/Train_moving_along_railway_tracks_20261001173524.mp4',
+  enterprise: '/videos/Smart_factory_production_line_in._20261001173455.mp4',
+  remote: '/videos/Hospital_switches_to_backup_conn._20261001173501.mp4',
+  hiking: '/videos/Hikers_connecting_via_mesh_network_20261001173508.mp4',
+};
+
 /* ─── DATA ───────────────────────────────────────────────────────────── */
 
 const dataPoints = [
@@ -210,6 +220,14 @@ export default function MWCShowcaseV2() {
   return (
     <div className="iso-root">
       
+      {/* Full-screen ambient video background */}
+      <div className="iso-bg-video-container">
+        <video className="iso-bg-video" autoPlay loop muted playsInline>
+          <source src="/videos/Data_flowing_through_city_infras._20261001173450.mp4" type="video/mp4" />
+        </video>
+        <div className="iso-bg-video-overlay" />
+      </div>
+
       {/* Header */}
       <header className="iso-header">
         <img src="/logo-new.png" alt="Tenbel" className="iso-logo" />
@@ -357,7 +375,13 @@ export default function MWCShowcaseV2() {
             <p className="iso-detail-desc">{activeData.desc}</p>
             
             <div className="iso-detail-image-container">
-              <img src={activeData.image} alt={activeData.title} className="iso-detail-image" />
+              {videoMap[activeData.id] ? (
+                <video className="iso-detail-video" autoPlay loop muted playsInline key={activeData.id}>
+                  <source src={videoMap[activeData.id]} type="video/mp4" />
+                </video>
+              ) : (
+                <img src={activeData.image} alt={activeData.title} className="iso-detail-image" />
+              )}
               <div className="iso-detail-image-overlay" />
             </div>
 
@@ -397,6 +421,29 @@ export default function MWCShowcaseV2() {
           font-family: 'Inter', sans-serif;
           overflow: hidden;
           user-select: none;
+        }
+
+        .iso-bg-video-container {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          overflow: hidden;
+        }
+
+        .iso-bg-video {
+          position: absolute;
+          top: 50%; left: 50%;
+          min-width: 100%; min-height: 100%;
+          width: auto; height: auto;
+          transform: translate(-50%, -50%);
+          object-fit: cover;
+          opacity: 0.25;
+        }
+
+        .iso-bg-video-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(11,15,25,0.85) 0%, rgba(11,15,25,0.6) 40%, rgba(11,15,25,0.85) 100%);
         }
 
         .iso-header {
@@ -682,6 +729,12 @@ export default function MWCShowcaseV2() {
         }
 
         .iso-detail-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .iso-detail-video {
           width: 100%;
           height: 100%;
           object-fit: cover;

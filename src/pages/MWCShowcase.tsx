@@ -489,9 +489,28 @@ export default function MWCShowcase() {
 
 /* ─── INTRO SCREEN ──────────────────────────────────────────────────── */
 
+const heroVideos = [
+  '/videos/Data_flowing_through_city_infras._20261001173450.mp4',
+  '/videos/Train_moving_along_railway_tracks_20261001173524.mp4',
+  '/videos/Smart_factory_production_line_in._20261001173455.mp4',
+  '/videos/Autonomous_harvester_in_wheat_field_20261001173521.mp4',
+  '/videos/Rescue_teams_setting_up_communic._20261001173529.mp4',
+  '/videos/Hikers_connecting_via_mesh_network_20261001173508.mp4',
+  '/videos/Hospital_switches_to_backup_conn._20261001173501.mp4',
+  '/videos/Tenbel_logo_materializes_on_network_20261001173455.mp4',
+];
+
 function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }: { step: number; onSkip: () => void; onEnter: () => void; onSelectProduct: (i: number) => void; onSelectUseCase: (i: number) => void }) {
   const prodArray = [...products, ...products, ...products, ...products];
   const useCaseArray = [...useCases, ...useCases, ...useCases, ...useCases];
+  const [activeVideo, setActiveVideo] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveVideo(prev => (prev + 1) % heroVideos.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <motion.div
@@ -500,8 +519,27 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.6 }}
-      style={{ overflow: 'hidden' }}
+      style={{ overflow: 'hidden auto', position: 'relative' }}
     >
+      {/* Full-screen video backgrounds with crossfade */}
+      <div className="mwc-hero-video-container">
+        {heroVideos.map((src, i) => (
+          <video
+            key={src}
+            className={`mwc-hero-video ${i === activeVideo ? 'mwc-hero-video--active' : ''}`}
+            autoPlay
+            loop
+            muted
+            playsInline
+          >
+            <source src={src} type="video/mp4" />
+          </video>
+        ))}
+        <div className="mwc-hero-video-overlay" />
+        <div className="mwc-hero-video-gradient" />
+      </div>
+
+      {/* Floating particles on top of video */}
       <ParticleBackground />
 
       {/* Skip button */}
@@ -509,7 +547,18 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
         Skip Intro <ChevronRight size={14} />
       </button>
 
-      <div className="mwc-intro-content" style={{ marginTop: '60px' }}>
+      {/* Video indicator dots */}
+      <div className="mwc-hero-dots">
+        {heroVideos.map((_, i) => (
+          <button
+            key={i}
+            className={`mwc-hero-dot ${i === activeVideo ? 'mwc-hero-dot--active' : ''}`}
+            onClick={() => setActiveVideo(i)}
+          />
+        ))}
+      </div>
+
+      <div className="mwc-intro-content" style={{ paddingTop: '80px', paddingBottom: '40px' }}>
         {/* Logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.5, y: 20 }}
@@ -526,16 +575,28 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
           animate={step >= 1 ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mwc-intro-tagline"
+          style={{ fontSize: 'clamp(1.6rem, 4vw, 3rem)', fontWeight: 700, textShadow: '0 4px 30px rgba(0,0,0,0.6)' }}
         >
           Empowering a Sustainably Connected Future
         </motion.p>
 
-        {/* Stats row */}
+        {/* Subtitle */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={step >= 1 ? { opacity: 0.8, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+          style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.1rem', marginBottom: '32px', letterSpacing: '0.05em' }}
+        >
+          Off-Grid Connectivity • Mesh Networks • IoT Solutions
+        </motion.p>
+
+        {/* Stats row with glassmorphism */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={step >= 2 ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mwc-intro-stats"
+          style={{ background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.15)' }}
         >
           <div className="mwc-stat">
             <div className="mwc-stat-value"><AnimatedCounter value={5} /></div>
@@ -565,7 +626,7 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
           transition={{ duration: 0.6, ease: 'easeOut' }}
           style={{ marginBottom: '60px' }}
         >
-          <button onClick={onEnter} className="mwc-enter-btn">
+          <button onClick={onEnter} className="mwc-enter-btn" style={{ fontSize: '1.1rem', padding: '18px 48px', boxShadow: '0 0 40px rgba(20,184,166,0.4)' }}>
             <span>Enter Showcase</span>
             <ArrowRight size={18} />
           </button>
@@ -1171,6 +1232,71 @@ ${globalAnimStyles}
               radial-gradient(ellipse at 80% 80%, rgba(232,48,122,0.04) 0%, transparent 50%),
               #060612;
   z-index: 0;
+}
+
+/* ── Hero Video System ────────────────────────────────── */
+.mwc-hero-video-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.mwc-hero-video {
+  position: absolute;
+  top: 50%; left: 50%;
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto;
+  transform: translate(-50%, -50%) scale(1.05);
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.mwc-hero-video--active {
+  opacity: 0.65;
+}
+
+.mwc-hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(6,6,18,0.35) 0%, rgba(6,6,18,0.75) 100%);
+  z-index: 1;
+}
+
+.mwc-hero-video-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6,6,18,0.6) 0%, transparent 30%, transparent 60%, rgba(6,6,18,0.85) 100%);
+  z-index: 2;
+}
+
+.mwc-hero-dots {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 50;
+}
+
+.mwc-hero-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.4);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  padding: 0;
+}
+
+.mwc-hero-dot--active {
+  background: #14b8a6;
+  border-color: #14b8a6;
+  box-shadow: 0 0 12px rgba(20,184,166,0.6);
+  transform: scale(1.3);
 }
 
 /* ── Intro ──────────────────────────────────────────────── */

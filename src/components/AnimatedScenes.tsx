@@ -851,12 +851,12 @@ export const globalAnimStyles = `
     top: 0; left: 0; width: 100%; height: 100%;
     object-fit: cover;
     z-index: 0;
-    opacity: 0.35;
+    opacity: 0.7;
   }
   .anim-scene-overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at center, rgba(6,6,18,0.3) 0%, rgba(6,6,18,0.8) 100%);
+    background: radial-gradient(circle at center, rgba(6,6,18,0.15) 0%, rgba(6,6,18,0.55) 100%);
     z-index: 1;
   }
   .anim-scene-svg {

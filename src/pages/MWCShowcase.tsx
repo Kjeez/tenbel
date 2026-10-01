@@ -14,6 +14,8 @@ import {
   Shield,
   Layers,
   Eye,
+  Volume2,
+  VolumeX,
 } from 'lucide-react';
 import {
   RailwayScene,
@@ -948,6 +950,7 @@ interface ProductDetailProps {
 function ProductDetail({ product, index, total, onBack, onNext, onPrev }: ProductDetailProps) {
   const Icon = product.icon;
   const [videoIndex, setVideoIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
 
   return (
     <motion.div
@@ -976,44 +979,48 @@ function ProductDetail({ product, index, total, onBack, onNext, onPrev }: Produc
         </div>
       </div>
 
-      <div className="mwc-detail-container">
-        {/* Hero image/video */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mwc-detail-hero"
-        >
-          {product.videos && product.videos.length > 0 ? (
-            <>
-              <video key={product.videos[videoIndex]} className="mwc-detail-hero-img" autoPlay loop muted playsInline>
-                <source src={product.videos[videoIndex]} type="video/mp4" />
-              </video>
-              {product.videos.length > 1 && (
-                <div className="mwc-video-stepper">
-                  {product.videos.map((_, i) => (
-                    <button
-                      key={i}
-                      className={`mwc-video-step-btn ${i === videoIndex ? 'active' : ''}`}
-                      onClick={() => setVideoIndex(i)}
-                      style={{ backgroundColor: i === videoIndex ? product.color : 'rgba(255,255,255,0.3)' }}
-                    />
-                  ))}
-                </div>
-              )}
-            </>
-          ) : (
-            <img src={product.image} alt={product.title} className="mwc-detail-hero-img" />
-          )}
-          <div className="mwc-detail-hero-overlay" />
-          <div className="mwc-detail-hero-content">
-            <div className="mwc-detail-icon" style={{ background: `${product.color}30`, borderColor: `${product.color}60` }}>
-              <Icon size={28} style={{ color: product.color }} />
-            </div>
-            <h1 className="mwc-detail-title">{product.title}</h1>
-            <p className="mwc-detail-tagline">{product.tagline}</p>
+      {/* Hero image/video pulled outside container for full width */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="mwc-detail-hero"
+      >
+        {product.videos && product.videos.length > 0 ? (
+          <>
+            <video key={product.videos[videoIndex]} className="mwc-detail-hero-img" autoPlay loop muted={isMuted} playsInline>
+              <source src={product.videos[videoIndex]} type="video/mp4" />
+            </video>
+            <button className="mwc-sound-btn" onClick={() => setIsMuted(!isMuted)}>
+              {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+            </button>
+            {product.videos.length > 1 && (
+              <div className="mwc-video-stepper">
+                {product.videos.map((_, i) => (
+                  <button
+                    key={i}
+                    className={`mwc-video-step-btn ${i === videoIndex ? 'active' : ''}`}
+                    onClick={() => setVideoIndex(i)}
+                    style={{ backgroundColor: i === videoIndex ? product.color : 'rgba(255,255,255,0.3)' }}
+                  />
+                ))}
+              </div>
+            )}
+          </>
+        ) : (
+          <img src={product.image} alt={product.title} className="mwc-detail-hero-img" />
+        )}
+        <div className="mwc-detail-hero-overlay" />
+        <div className="mwc-detail-hero-content">
+          <div className="mwc-detail-icon" style={{ background: `${product.color}30`, borderColor: `${product.color}60` }}>
+            <Icon size={28} style={{ color: product.color }} />
           </div>
-        </motion.div>
+          <h1 className="mwc-detail-title">{product.title}</h1>
+          <p className="mwc-detail-tagline">{product.tagline}</p>
+        </div>
+      </motion.div>
+
+      <div className="mwc-detail-container">
 
         {/* Description */}
         <motion.div
@@ -1104,6 +1111,7 @@ interface UseCaseDetailProps {
 function UseCaseDetail({ useCase, index, total, onBack, onNext, onPrev }: UseCaseDetailProps) {
   const Icon = useCase.icon;
   const [videoIndex, setVideoIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
 
   return (
     <motion.div
@@ -1132,44 +1140,48 @@ function UseCaseDetail({ useCase, index, total, onBack, onNext, onPrev }: UseCas
         </div>
       </div>
 
-      <div className="mwc-detail-container">
-        {/* Hero image/video */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mwc-detail-hero mwc-detail-hero--wide"
-        >
-          {useCase.videos && useCase.videos.length > 0 ? (
-            <>
-              <video key={useCase.videos[videoIndex]} className="mwc-detail-hero-img" autoPlay loop muted playsInline>
-                <source src={useCase.videos[videoIndex]} type="video/mp4" />
-              </video>
-              {useCase.videos.length > 1 && (
-                <div className="mwc-video-stepper">
-                  {useCase.videos.map((_, i) => (
-                    <button
-                      key={i}
-                      className={`mwc-video-step-btn ${i === videoIndex ? 'active' : ''}`}
-                      onClick={() => setVideoIndex(i)}
-                      style={{ backgroundColor: i === videoIndex ? useCase.color : 'rgba(255,255,255,0.3)' }}
-                    />
-                  ))}
-                </div>
-              )}
-            </>
-          ) : (
-            <img src={useCase.image} alt={useCase.title} className="mwc-detail-hero-img" />
-          )}
-          <div className="mwc-detail-hero-overlay" />
-          <div className="mwc-detail-hero-content">
-            <div className="mwc-detail-icon" style={{ background: `${useCase.color}30`, borderColor: `${useCase.color}60` }}>
-              <Icon size={28} style={{ color: useCase.color }} />
-            </div>
-            <h1 className="mwc-detail-title">{useCase.title}</h1>
-            <p className="mwc-detail-tagline">{useCase.tagline}</p>
+      {/* Hero image/video pulled outside container for full width */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="mwc-detail-hero mwc-detail-hero--wide"
+      >
+        {useCase.videos && useCase.videos.length > 0 ? (
+          <>
+            <video key={useCase.videos[videoIndex]} className="mwc-detail-hero-img" autoPlay loop muted={isMuted} playsInline>
+              <source src={useCase.videos[videoIndex]} type="video/mp4" />
+            </video>
+            <button className="mwc-sound-btn" onClick={() => setIsMuted(!isMuted)}>
+              {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+            </button>
+            {useCase.videos.length > 1 && (
+              <div className="mwc-video-stepper">
+                {useCase.videos.map((_, i) => (
+                  <button
+                    key={i}
+                    className={`mwc-video-step-btn ${i === videoIndex ? 'active' : ''}`}
+                    onClick={() => setVideoIndex(i)}
+                    style={{ backgroundColor: i === videoIndex ? useCase.color : 'rgba(255,255,255,0.3)' }}
+                  />
+                ))}
+              </div>
+            )}
+          </>
+        ) : (
+          <img src={useCase.image} alt={useCase.title} className="mwc-detail-hero-img" />
+        )}
+        <div className="mwc-detail-hero-overlay" />
+        <div className="mwc-detail-hero-content">
+          <div className="mwc-detail-icon" style={{ background: `${useCase.color}30`, borderColor: `${useCase.color}60` }}>
+            <Icon size={28} style={{ color: useCase.color }} />
           </div>
-        </motion.div>
+          <h1 className="mwc-detail-title">{useCase.title}</h1>
+          <p className="mwc-detail-tagline">{useCase.tagline}</p>
+        </div>
+      </motion.div>
+
+      <div className="mwc-detail-container">
 
         {/* Products used */}
         <motion.div
@@ -1818,7 +1830,7 @@ ${globalAnimStyles}
 }
 
 .mwc-nav-logo {
-  height: 32px;
+  height: 48px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -2114,15 +2126,39 @@ ${globalAnimStyles}
 .mwc-detail-hero {
   position: relative;
   width: 100%;
-  border-radius: 24px;
-  overflow: hidden;
   margin-bottom: 28px;
+  background: #000;
+}
+
+.mwc-sound-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.2s;
+}
+
+.mwc-sound-btn:hover {
+  background: rgba(0, 0, 0, 0.6);
+  transform: scale(1.05);
 }
 
 .mwc-detail-hero-img {
   width: 100%;
-  height: 340px;
+  height: 60vh;
   object-fit: cover;
+  display: block;
 }
 
 @media (max-width: 640px) {
@@ -2132,7 +2168,7 @@ ${globalAnimStyles}
 }
 
 .mwc-detail-hero--wide .mwc-detail-hero-img {
-  height: 380px;
+  height: 60vh;
 }
 
 @media (max-width: 640px) {
@@ -2175,9 +2211,9 @@ ${globalAnimStyles}
 
 .mwc-detail-hero-content {
   position: absolute;
-  bottom: 24px;
-  left: 24px;
-  right: 24px;
+  bottom: 40px;
+  left: max(24px, calc((100% - 900px) / 2 + 24px));
+  right: max(24px, calc((100% - 900px) / 2 + 24px));
 }
 
 .mwc-detail-icon {

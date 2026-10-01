@@ -189,6 +189,26 @@ const useCases = [
       'IP67 rated — works in rain, mud, debris',
     ],
     realWorld: 'In Nepal\'s recent disasters, broken cell towers left entire regions disconnected. With Tenbel OffGrid, rescue teams could still communicate peer-to-peer across 12–13 km using mesh relays — no cell network needed.',
+    story: [
+      {
+        type: 'video',
+        media: '/videos/Rescue_teams_setting_up_communic._20261001173531.mp4',
+        title: 'The Problem: Broken Infrastructure',
+        text: 'In extreme disasters, traditional cell towers fall. First responders are left completely disconnected when they need coordination the most.',
+      },
+      {
+        type: 'video',
+        media: '/videos/Rescue_teams_setting_up_communic._20261001173529.mp4',
+        title: 'The Solution: Instant Network',
+        text: 'Tenbel OffGrid and Emergency CommsBox deploy in under 3 minutes. A fully secure, offline mesh network that works without power or towers.',
+      },
+      {
+        type: 'animation',
+        component: 'disaster',
+        title: 'How It Works: Technical Architecture',
+        text: 'Nodes relay signals across miles of terrain, routing automatically to the central CommsBox for satellite or external uplink.',
+      }
+    ]
   },
   {
     id: 'hiking',
@@ -1112,7 +1132,119 @@ function UseCaseDetail({ useCase, index, total, onBack, onNext, onPrev }: UseCas
   const Icon = useCase.icon;
   const [videoIndex, setVideoIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
+  const [storyStep, setStoryStep] = useState(0);
 
+  // If this use case has a "Story Mode"
+  if (useCase.story && useCase.story.length > 0) {
+    const step = useCase.story[storyStep];
+    return (
+      <motion.div
+        className="mwc-screen mwc-story-screen"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="mwc-overlay-bg" />
+
+        {/* Nav */}
+        <div className="mwc-nav-bar mwc-nav-bar--story">
+          <button onClick={onBack} className="mwc-back-btn">
+            <ArrowLeft size={16} /> Exit Story
+          </button>
+          <img src="/logo-new.png" alt="Tenbel" className="mwc-nav-logo" />
+          <div className="mwc-nav-counter">
+            {index > 0 && (
+              <button onClick={onPrev} className="mwc-arrow-btn"><ArrowLeft size={16} /></button>
+            )}
+            <span>{String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
+            {index < total - 1 && (
+              <button onClick={onNext} className="mwc-arrow-btn"><ArrowRight size={16} /></button>
+            )}
+          </div>
+        </div>
+
+        {/* Story Content Area */}
+        <div className="mwc-story-content">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={storyStep}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mwc-story-media-container"
+            >
+              {step.type === 'video' ? (
+                <>
+                  <video className="mwc-story-media" autoPlay loop muted={isMuted} playsInline>
+                    <source src={step.media} type="video/mp4" />
+                  </video>
+                  <button className="mwc-sound-btn mwc-sound-btn--story" onClick={() => setIsMuted(!isMuted)}>
+                    {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                  </button>
+                </>
+              ) : (
+                <div className="mwc-story-animation-wrap">
+                  {step.component === 'disaster' && <DisasterScene />}
+                  {step.component === 'railway' && <RailwayScene />}
+                  {step.component === 'agriculture' && <AgricultureScene />}
+                  {step.component === 'remote-connectivity' && <RemoteConnectivityScene />}
+                  {step.component === 'factory' && <FactoryScene />}
+                  {step.component === 'hiking' && <HikingScene />}
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+          
+          {/* Dark gradient overlay for text readability */}
+          <div className="mwc-story-gradient-overlay" />
+
+          {/* Text Content */}
+          <div className="mwc-story-text-overlay">
+            <motion.div
+              key={`text-${storyStep}`}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              <div className="mwc-story-step-badge">Phase {storyStep + 1}</div>
+              <h2 className="mwc-story-title">{step.title}</h2>
+              <p className="mwc-story-desc">{step.text}</p>
+            </motion.div>
+          </div>
+
+          {/* Story Navigation Controls */}
+          <div className="mwc-story-controls">
+            <button 
+              className={`mwc-story-nav-btn ${storyStep === 0 ? 'disabled' : ''}`}
+              onClick={() => setStoryStep(s => Math.max(0, s - 1))}
+            >
+              <ArrowLeft size={24} />
+            </button>
+            <div className="mwc-story-dots">
+              {useCase.story.map((_, i) => (
+                <div 
+                  key={i} 
+                  className={`mwc-story-dot ${i === storyStep ? 'active' : ''}`}
+                  onClick={() => setStoryStep(i)}
+                  style={{ backgroundColor: i === storyStep ? useCase.color : 'rgba(255,255,255,0.3)' }}
+                />
+              ))}
+            </div>
+            <button 
+              className={`mwc-story-nav-btn ${storyStep === useCase.story.length - 1 ? 'disabled' : ''}`}
+              onClick={() => setStoryStep(s => Math.min(useCase.story.length - 1, s + 1))}
+            >
+              <ArrowRight size={24} />
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  // Fallback to standard scroll layout
   return (
     <motion.div
       className="mwc-screen mwc-scroll-screen"
@@ -2149,6 +2281,10 @@ ${globalAnimStyles}
   transition: all 0.2s;
 }
 
+.mwc-sound-btn--story {
+  top: 100px;
+}
+
 .mwc-sound-btn:hover {
   background: rgba(0, 0, 0, 0.6);
   transform: scale(1.05);
@@ -2466,7 +2602,171 @@ ${globalAnimStyles}
   }
 }
 
+/* ── Narrative Story Mode ───────────────────────────────── */
+
+.mwc-story-screen {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* No scrolling in story mode! */
+  position: relative;
+  background: #060612;
+}
+
+.mwc-nav-bar--story {
+  z-index: 50;
+  background: transparent;
+  border-bottom: none;
+}
+
+.mwc-story-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mwc-story-media-container {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+
+.mwc-story-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mwc-story-animation-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 40px 180px;
+}
+
+.mwc-story-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  background: linear-gradient(
+    to bottom,
+    rgba(6,6,18,0.7) 0%,
+    rgba(6,6,18,0) 25%,
+    rgba(6,6,18,0) 50%,
+    rgba(6,6,18,0.8) 80%,
+    rgba(6,6,18,1) 100%
+  );
+  pointer-events: none;
+}
+
+.mwc-story-text-overlay {
+  position: absolute;
+  bottom: 120px;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: 0 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mwc-story-step-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 4px 12px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+}
+
+.mwc-story-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  line-height: 1.1;
+}
+
+.mwc-story-desc {
+  font-size: 1.25rem;
+  color: rgba(255,255,255,0.85);
+  max-width: 800px;
+  line-height: 1.6;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.mwc-story-controls {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+
+.mwc-story-nav-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  backdrop-filter: blur(10px);
+}
+
+.mwc-story-nav-btn:hover:not(.disabled) {
+  background: rgba(255,255,255,0.15);
+  transform: scale(1.05);
+}
+
+.mwc-story-nav-btn.disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.mwc-story-dots {
+  display: flex;
+  gap: 16px;
+}
+
+.mwc-story-dot {
+  width: 48px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.mwc-story-dot.active {
+  background: #fff;
+  box-shadow: 0 0 10px currentColor;
+}
+
 @media (max-width: 768px) {
+  .mwc-story-title { font-size: 2rem; }
+  .mwc-story-desc { font-size: 1rem; }
+  .mwc-story-text-overlay { padding: 0 24px; bottom: 100px; }
+  .mwc-story-controls { bottom: 24px; gap: 16px; }
+  .mwc-story-nav-btn { width: 44px; height: 44px; }
+  .mwc-story-dot { width: 32px; }
+
   .mwc-detail-specs {
     grid-template-columns: repeat(2, 1fr);
   }

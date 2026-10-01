@@ -964,7 +964,7 @@ interface ProductDetailProps {
 function ProductDetail({ product, index, total, onBack, onNext, onPrev }: ProductDetailProps) {
   const Icon = product.icon;
   const [videoIndex, setVideoIndex] = useState(0);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
 
   return (
     <motion.div
@@ -1125,7 +1125,7 @@ interface UseCaseDetailProps {
 function UseCaseDetail({ useCase, index, total, onBack, onNext, onPrev }: UseCaseDetailProps) {
   const Icon = useCase.icon;
   const [videoIndex, setVideoIndex] = useState(0);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const [storyStep, setStoryStep] = useState(0);
 
 
@@ -1177,7 +1177,13 @@ function UseCaseDetail({ useCase, index, total, onBack, onNext, onPrev }: UseCas
             >
               {useCase.story[storyStep].type === 'video' ? (
                 <>
-                  <video className="mwc-story-media" autoPlay loop muted={isMuted} playsInline>
+                  <video 
+                    className="mwc-story-media" 
+                    autoPlay 
+                    muted={isMuted} 
+                    playsInline
+                    onEnded={() => setStoryStep(s => (s + 1) % useCase.story.length)}
+                  >
                     <source src={useCase.story[storyStep].media} type="video/mp4" />
                   </video>
                   <button className="mwc-sound-btn" onClick={() => setIsMuted(!isMuted)}>
@@ -1199,42 +1205,44 @@ function UseCaseDetail({ useCase, index, total, onBack, onNext, onPrev }: UseCas
           
           <div className="mwc-story-gradient-overlay" />
 
-          <div className="mwc-story-text-overlay">
-            <motion.div
-              key={`text-${storyStep}`}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              <div className="mwc-story-step-badge">Phase {storyStep + 1}</div>
-              <h2 className="mwc-story-title">{useCase.story[storyStep].title}</h2>
-              <p className="mwc-story-desc">{useCase.story[storyStep].text}</p>
-            </motion.div>
-          </div>
-
-          <div className="mwc-story-controls">
-            <button 
-              className={`mwc-story-nav-btn ${storyStep === 0 ? 'disabled' : ''}`}
-              onClick={() => setStoryStep(s => Math.max(0, s - 1))}
-            >
-              <ArrowLeft size={20} />
-            </button>
-            <div className="mwc-story-dots">
-              {useCase.story.map((_, i) => (
-                <div 
-                  key={i} 
-                  className={`mwc-story-dot ${i === storyStep ? 'active' : ''}`}
-                  onClick={() => setStoryStep(i)}
-                  style={{ backgroundColor: i === storyStep ? useCase.color : 'rgba(255,255,255,0.3)' }}
-                />
-              ))}
+          <div className="mwc-story-bottom-bar">
+            <div className="mwc-story-text-overlay">
+              <motion.div
+                key={`text-${storyStep}`}
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+              >
+                <div className="mwc-story-step-badge">Phase {storyStep + 1}</div>
+                <h2 className="mwc-story-title">{useCase.story[storyStep].title}</h2>
+                <p className="mwc-story-desc">{useCase.story[storyStep].text}</p>
+              </motion.div>
             </div>
-            <button 
-              className={`mwc-story-nav-btn ${storyStep === useCase.story.length - 1 ? 'disabled' : ''}`}
-              onClick={() => setStoryStep(s => Math.min(useCase.story.length - 1, s + 1))}
-            >
-              <ArrowRight size={20} />
-            </button>
+
+            <div className="mwc-story-controls">
+              <button 
+                className={`mwc-story-nav-btn ${storyStep === 0 ? 'disabled' : ''}`}
+                onClick={() => setStoryStep(s => Math.max(0, s - 1))}
+              >
+                <ArrowLeft size={20} />
+              </button>
+              <div className="mwc-story-dots">
+                {useCase.story.map((_, i) => (
+                  <div 
+                    key={i} 
+                    className={`mwc-story-dot ${i === storyStep ? 'active' : ''}`}
+                    onClick={() => setStoryStep(i)}
+                    style={{ backgroundColor: i === storyStep ? useCase.color : 'rgba(255,255,255,0.3)' }}
+                  />
+                ))}
+              </div>
+              <button 
+                className={`mwc-story-nav-btn ${storyStep === useCase.story.length - 1 ? 'disabled' : ''}`}
+                onClick={() => setStoryStep(s => Math.min(useCase.story.length - 1, s + 1))}
+              >
+                <ArrowRight size={20} />
+              </button>
+            </div>
           </div>
         </motion.div>
       ) : (
@@ -2612,12 +2620,20 @@ ${globalAnimStyles}
   pointer-events: none;
 }
 
-.mwc-story-text-overlay {
+.mwc-story-bottom-bar {
   position: absolute;
-  bottom: 80px;
-  left: max(24px, calc((100% - 900px) / 2 + 24px));
-  right: max(24px, calc((100% - 900px) / 2 + 24px));
-  z-index: 20;
+  bottom: 40px;
+  left: 40px;
+  right: 40px;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.mwc-story-text-overlay {
+  flex: 1;
+  max-width: 800px;
 }
 
 .mwc-story-step-badge {
@@ -2646,18 +2662,13 @@ ${globalAnimStyles}
 .mwc-story-desc {
   font-size: 1.25rem;
   color: rgba(255,255,255,0.85);
-  max-width: 800px;
+  max-width: 700px;
   line-height: 1.6;
   text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 .mwc-story-controls {
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
-  z-index: 30;
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 16px;
 }
@@ -2709,8 +2720,17 @@ ${globalAnimStyles}
 @media (max-width: 768px) {
   .mwc-story-title { font-size: 2rem; }
   .mwc-story-desc { font-size: 1rem; }
-  .mwc-story-text-overlay { padding: 0 24px; bottom: 100px; }
-  .mwc-story-controls { bottom: 24px; gap: 16px; }
+  .mwc-story-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    gap: 24px;
+  }
+  .mwc-story-controls {
+    align-self: center;
+  }
   .mwc-story-nav-btn { width: 44px; height: 44px; }
   .mwc-story-dot { width: 32px; }
 

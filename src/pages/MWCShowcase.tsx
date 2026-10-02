@@ -12,12 +12,10 @@ import {
   Tractor,
   Hospital,
   Shield,
-  Shield,
   Layers,
   Eye,
   Hexagon,
   ChevronDown,
-  Volume2,
   Volume2,
   VolumeX,
   Play,
@@ -638,6 +636,7 @@ export default function MWCShowcase() {
             key="products"
             onBack={goToChoose}
             onSelect={openProduct}
+            onNavigateToUseCases={goToUseCases}
           />
         )}
         {view === 'usecases' && (
@@ -645,6 +644,7 @@ export default function MWCShowcase() {
             key="usecases"
             onBack={goToChoose}
             onSelect={openUseCase}
+            onNavigateToProducts={goToProducts}
           />
         )}
         {view === 'product-detail' && (
@@ -1048,7 +1048,7 @@ function ChooseScreen({ onProducts, onUseCases, onBack }: { onProducts: () => vo
             onClick={onProducts}
             className="mwc-explore-card mwc-explore-card--products"
           >
-            <div className="mwc-explore-card-bg" style={{ backgroundImage: 'url(/product-commsbox.jpg)' }} />
+            <div className="mwc-explore-card-bg" style={{ backgroundImage: 'url(/mwc-commsbox.jpg)' }} />
             <div className="mwc-explore-card-overlay" />
             
             <div className="mwc-explore-card-inner">
@@ -1084,7 +1084,7 @@ function ChooseScreen({ onProducts, onUseCases, onBack }: { onProducts: () => vo
             onClick={onUseCases}
             className="mwc-explore-card mwc-explore-card--usecases"
           >
-            <div className="mwc-explore-card-bg" style={{ backgroundImage: 'url(/usecase-disaster.jpg)' }} />
+            <div className="mwc-explore-card-bg" style={{ backgroundImage: 'url(/mwc-disaster.jpg)' }} />
             <div className="mwc-explore-card-overlay mwc-explore-card-overlay--alt" />
             
             <div className="mwc-explore-card-inner">
@@ -1129,137 +1129,241 @@ function ChooseScreen({ onProducts, onUseCases, onBack }: { onProducts: () => vo
 }
 
 /* ─── PRODUCTS OVERVIEW ──────────────────────────────────────────── */
+function ProductsOverview({ onBack, onSelect, onNavigateToUseCases }: { onBack: () => void; onSelect: (i: number) => void; onNavigateToUseCases: () => void }) {
+  const featureTags: Record<string, string[]> = {
+    'offgrid': ['Satellite Ready', 'Rugged', 'Mesh Networking'],
+    'commsbox': ['Rapid Deployment', 'Portable', 'Mission Critical'],
+    'railway': ['Rail Networks', 'Stations', 'Trackside'],
+    'enterprise': ['Industrial IoT', 'Campus Networks', 'Scalable'],
+    'remote': ['Remote Uplinks', 'Multi-site', 'Island Connectivity']
+  };
 
-function ProductsOverview({ onBack, onSelect }: { onBack: () => void; onSelect: (i: number) => void }) {
   return (
     <motion.div
-      className="mwc-screen mwc-scroll-screen"
+      className="mwc-screen mwc-portfolio-screen"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="mwc-overlay-bg" />
-
-      <div className="mwc-nav-bar">
-        <button onClick={onBack} className="mwc-back-btn">
-          <ArrowLeft size={16} /> Back
-        </button>
-        <img src="/logo-new.png" alt="Tenbel" className="mwc-nav-logo" />
-        <span className="mwc-nav-badge">Products</span>
+      <div className="mwc-portfolio-bg">
+        <div className="mwc-portfolio-bg-image" style={{ backgroundImage: 'url(/mwc-home-bg.jpg)' }} />
+        <div className="mwc-portfolio-bg-overlay" />
+        <ParticleBackground />
       </div>
 
-      <div className="mwc-grid-container">
+      <div className="mwc-portfolio-header">
+        <button onClick={onBack} className="mwc-portfolio-btn mwc-portfolio-btn--back">
+          <ArrowLeft size={16} /> Back
+        </button>
+        <img src="/logo-new.png" alt="Tenbel" className="mwc-portfolio-logo" />
+        <button onClick={onNavigateToUseCases} className="mwc-portfolio-btn mwc-portfolio-btn--next">
+          USE CASES <ArrowRight size={16} />
+        </button>
+      </div>
+
+      <div className="mwc-portfolio-content">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mwc-section-header"
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+          className="mwc-portfolio-intro"
         >
-          <span className="mwc-section-tag">Product Portfolio</span>
-          <h2 className="mwc-section-title">Our Product Lines</h2>
-          <p className="mwc-section-desc">Click any product to explore in detail</p>
+          <div className="mwc-portfolio-eyebrow">
+            PRODUCT PORTFOLIO
+          </div>
+          <h2 className="mwc-portfolio-title">
+            Our <span className="mwc-portfolio-title-highlight">Product Lines</span>
+          </h2>
+          <p className="mwc-portfolio-subtitle">
+            Rugged, reliable and easy-to-deploy solutions designed to keep people, devices and operations connected — anywhere, anytime.
+          </p>
+          <div className="mwc-portfolio-metadata">
+            05 PRODUCT LINES <span className="mwc-portfolio-sep">|</span> MISSION-READY <span className="mwc-portfolio-sep">|</span> CONNECTED ANYWHERE
+          </div>
         </motion.div>
 
-        <div className="mwc-products-grid">
+        <div className="mwc-portfolio-grid">
           {products.map((p, i) => {
             const Icon = p.icon;
+            const tags = featureTags[p.id] || [];
             return (
               <motion.button
                 key={p.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + i * 0.1, type: 'spring', stiffness: 100 }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 + i * 0.06 }}
                 onClick={() => onSelect(i)}
-                className="mwc-product-card"
+                className="mwc-portfolio-card"
+                style={{ '--accent': p.color } as React.CSSProperties}
               >
-                <div className="mwc-product-card-img" style={{ backgroundImage: `url(${p.image})` }}>
-                  <div className="mwc-product-card-overlay" />
+                <div className="mwc-portfolio-card-img" style={{ backgroundImage: `url(${p.image})` }}>
+                  <div className="mwc-portfolio-card-gradient" />
+                  <span className="mwc-portfolio-card-num">0{i + 1} / 05</span>
                 </div>
-                <div className="mwc-product-card-body">
-                  <div className="mwc-product-card-icon" style={{ background: `${p.color}20`, borderColor: `${p.color}40` }}>
-                    <Icon size={22} style={{ color: p.color }} />
+                
+                <div className="mwc-portfolio-card-body">
+                  <div className="mwc-portfolio-card-header">
+                    <div className="mwc-portfolio-card-icon" style={{ background: `${p.color}25`, borderColor: `${p.color}50`, color: p.color }}>
+                      <Icon size={24} />
+                    </div>
+                    <h3>{p.title}</h3>
+                    <p>{p.tagline}</p>
                   </div>
-                  <h3 className="mwc-product-card-title">{p.title}</h3>
-                  <p className="mwc-product-card-tagline">{p.tagline}</p>
-                  <span className="mwc-product-card-cta" style={{ color: p.color }}>
-                    Explore <ChevronRight size={14} />
-                  </span>
+                  
+                  <div className="mwc-portfolio-card-tags">
+                    {tags.map((t, j) => (
+                      <span key={j}>{t}</span>
+                    ))}
+                  </div>
+
+                  <div className="mwc-portfolio-card-footer">
+                    <span className="mwc-portfolio-card-cta" style={{ color: p.color }}>
+                      Explore <ArrowRight size={16} className="mwc-portfolio-card-arrow" />
+                    </span>
+                  </div>
                 </div>
               </motion.button>
             );
           })}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="mwc-portfolio-progress"
+        >
+          <div className="mwc-portfolio-progress-text">01 / 05</div>
+          <div className="mwc-portfolio-progress-bar">
+            <div className="mwc-portfolio-progress-fill" />
+          </div>
+          <div className="mwc-portfolio-progress-text">EXPLORE PRODUCT LINES</div>
+        </motion.div>
       </div>
     </motion.div>
   );
 }
 
-/* ─── USE CASES OVERVIEW ─────────────────────────────────────────── */
+/* ─── USE CASES OVERVIEW ──────────────────────────────────────────── */
 
-function UseCasesOverview({ onBack, onSelect }: { onBack: () => void; onSelect: (i: number) => void }) {
+function UseCasesOverview({ onBack, onSelect, onNavigateToProducts }: { onBack: () => void; onSelect: (i: number) => void; onNavigateToProducts: () => void }) {
+  const relatedProductsTags: Record<string, string[]> = {
+    'disaster': ['OffGrid', 'Emergency Communications BoX'],
+    'hiking': ['OffGrid', 'Satellite', 'Rugged Devices'],
+    'railway': ['Railway Solutions', 'Enterprise IoT'],
+    'agriculture': ['Enterprise IoT'],
+    'smart-cities': ['Enterprise IoT', 'Mesh Networking'],
+    'industrial': ['Enterprise IoT', 'Railway Solutions']
+  };
+
   return (
     <motion.div
-      className="mwc-screen mwc-scroll-screen"
+      className="mwc-screen mwc-portfolio-screen"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="mwc-overlay-bg" />
-
-      <div className="mwc-nav-bar">
-        <button onClick={onBack} className="mwc-back-btn">
-          <ArrowLeft size={16} /> Back
-        </button>
-        <img src="/logo-new.png" alt="Tenbel" className="mwc-nav-logo" />
-        <span className="mwc-nav-badge mwc-nav-badge--alt">Use Cases</span>
+      <div className="mwc-portfolio-bg">
+        <div className="mwc-portfolio-bg-image" style={{ backgroundImage: 'url(/mwc-home-bg.jpg)' }} />
+        <div className="mwc-portfolio-bg-overlay mwc-portfolio-bg-overlay--alt" />
+        <ParticleBackground />
       </div>
 
-      <div className="mwc-grid-container">
+      <div className="mwc-portfolio-header">
+        <button onClick={onBack} className="mwc-portfolio-btn mwc-portfolio-btn--back">
+          <ArrowLeft size={16} /> Back
+        </button>
+        <img src="/logo-new.png" alt="Tenbel" className="mwc-portfolio-logo" />
+        <button onClick={onNavigateToProducts} className="mwc-portfolio-btn mwc-portfolio-btn--next mwc-portfolio-btn--next-alt">
+          PRODUCTS <ArrowRight size={16} />
+        </button>
+      </div>
+
+      <div className="mwc-portfolio-content">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mwc-section-header"
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+          className="mwc-portfolio-intro"
         >
-          <span className="mwc-section-tag mwc-section-tag--alt">Real-World Applications</span>
-          <h2 className="mwc-section-title">Use Cases</h2>
-          <p className="mwc-section-desc">See how Tenbel products transform industries</p>
+          <div className="mwc-portfolio-eyebrow mwc-portfolio-eyebrow--alt">
+            REAL-WORLD APPLICATIONS
+          </div>
+          <h2 className="mwc-portfolio-title">
+            Use <span className="mwc-portfolio-title-highlight mwc-portfolio-title-highlight--alt">Cases</span>
+          </h2>
+          <p className="mwc-portfolio-subtitle">
+            See how TENBEL products transform industries and communities with reliable connectivity where it matters most.
+          </p>
+          <div className="mwc-portfolio-metadata">
+            06 APPLICATION AREAS <span className="mwc-portfolio-sep">|</span> REMOTE + CRITICAL <span className="mwc-portfolio-sep">|</span> ALWAYS CONNECTED
+          </div>
         </motion.div>
 
-        <div className="mwc-usecases-grid">
+        <div className="mwc-portfolio-grid mwc-portfolio-grid--usecases">
           {useCases.map((uc, i) => {
             const Icon = uc.icon;
+            const tags = relatedProductsTags[uc.id] || uc.products || [];
+            const row = Math.floor(i / 3);
+            const col = i % 3;
+            const delay = 0.1 + (row * 0.15) + (col * 0.06);
+
             return (
               <motion.button
                 key={uc.id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + i * 0.08, type: 'spring', stiffness: 100 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay }}
                 onClick={() => onSelect(i)}
-                className="mwc-usecase-card"
+                className="mwc-portfolio-card mwc-portfolio-card--usecase"
+                style={{ '--accent': uc.color } as React.CSSProperties}
               >
-                <div className="mwc-usecase-card-img" style={{ backgroundImage: `url(${uc.image})` }}>
-                  <div className="mwc-usecase-card-overlay" />
-                  <div className="mwc-usecase-card-badge" style={{ background: `${uc.color}cc` }}>
-                    <Icon size={14} />
-                    {uc.title}
+                <div className="mwc-portfolio-card-img" style={{ backgroundImage: `url(${uc.image})` }}>
+                  <div className="mwc-portfolio-card-gradient" />
+                  <span className="mwc-portfolio-card-num">0{i + 1} / 06</span>
+                  
+                  <div className="mwc-portfolio-card-badge" style={{ background: `${uc.color}30`, borderColor: `${uc.color}50`, color: uc.color }}>
+                    <Icon size={14} /> {uc.title.toUpperCase()}
                   </div>
                 </div>
-                <div className="mwc-usecase-card-body">
-                  <h3>{uc.title}</h3>
-                  <p>{uc.tagline}</p>
-                  <div className="mwc-usecase-card-products">
-                    {uc.products.map((pr, j) => (
-                      <span key={j} className="mwc-usecase-product-tag">{pr}</span>
+                
+                <div className="mwc-portfolio-card-body">
+                  <div className="mwc-portfolio-card-header">
+                    <h3>{uc.title}</h3>
+                    <p>{uc.tagline}</p>
+                  </div>
+                  
+                  <div className="mwc-portfolio-card-tags">
+                    {tags.map((t, j) => (
+                      <span key={j}>{t}</span>
                     ))}
+                  </div>
+
+                  <div className="mwc-portfolio-card-footer">
+                    <div className="mwc-portfolio-card-arrow-btn" style={{ borderColor: `${uc.color}50`, color: uc.color }}>
+                      <ArrowRight size={16} />
+                    </div>
                   </div>
                 </div>
               </motion.button>
             );
           })}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.7 }}
+          className="mwc-portfolio-progress mwc-portfolio-progress--alt"
+        >
+          <div className="mwc-portfolio-progress-text">01 / 06</div>
+          <div className="mwc-portfolio-progress-bar">
+            <div className="mwc-portfolio-progress-fill mwc-portfolio-progress-fill--alt" />
+          </div>
+          <div className="mwc-portfolio-progress-text">EXPLORE REAL-WORLD APPLICATIONS</div>
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -2442,7 +2546,8 @@ ${globalAnimStyles}
 }
 
 .mwc-explore-logo {
-  height: 38px;
+  width: 140px;
+  height: auto;
   filter: drop-shadow(0 0 8px rgba(0, 190, 255, 0.3));
 }
 
@@ -3165,234 +3270,441 @@ ${globalAnimStyles}
   border-color: rgba(255,255,255,0.2);
 }
 
-/* ── Grid Containers ────────────────────────────────────── */
-.mwc-grid-container {
+/* ── PORTFOLIO & USE CASES REDESIGN ─────────────────────────────────────────── */
+
+.mwc-portfolio-screen {
   position: relative;
-  z-index: 10;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px 24px;
-}
-
-.mwc-section-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.mwc-section-tag {
-  display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #14b8a6;
-  margin-bottom: 10px;
-}
-
-.mwc-section-tag--alt {
-  color: #E8307A;
-}
-
-.mwc-section-title {
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.02em;
-  margin-bottom: 8px;
-}
-
-.mwc-section-desc {
-  color: #64748b;
-  font-size: 1rem;
-}
-
-/* ── Product Cards Grid ─────────────────────────────────── */
-.mwc-products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-}
-
-@media (min-width: 1024px) {
-  .mwc-products-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 1280px) {
-  .mwc-products-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
-.mwc-product-card {
   display: flex;
   flex-direction: column;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 20px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-align: left;
+  min-height: 100svh;
+  background: #030816;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-.mwc-product-card:hover {
-  border-color: rgba(255,255,255,0.15);
-  transform: translateY(-6px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+.mwc-portfolio-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
 }
 
-.mwc-product-card-img {
-  height: 160px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.mwc-product-card-overlay {
+.mwc-portfolio-bg-image {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 30%, rgba(6,6,18,0.8) 100%);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;
+  filter: saturate(0.8) contrast(1.1);
 }
 
-.mwc-product-card-body {
-  padding: 20px;
+.mwc-portfolio-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(20, 184, 166, 0.05), transparent 40%),
+              radial-gradient(circle at 100% 50%, rgba(122, 77, 255, 0.05), transparent 50%),
+              linear-gradient(to bottom, transparent 30%, #030816 80%, #030816 100%);
+}
+
+.mwc-portfolio-bg-overlay--alt {
+  background: radial-gradient(circle at 50% 0%, rgba(255, 25, 212, 0.05), transparent 40%),
+              radial-gradient(circle at 100% 50%, rgba(25, 198, 200, 0.05), transparent 50%),
+              linear-gradient(to bottom, transparent 30%, #030816 80%, #030816 100%);
+}
+
+.mwc-portfolio-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  padding: 0 40px;
+  background: rgba(3, 8, 20, 0.72);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mwc-portfolio-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.mwc-portfolio-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.mwc-portfolio-btn--next {
+  color: #19D3FF;
+  border-color: rgba(25, 211, 255, 0.2);
+}
+.mwc-portfolio-btn--next:hover {
+  background: rgba(25, 211, 255, 0.1);
+  border-color: rgba(25, 211, 255, 0.4);
+}
+.mwc-portfolio-btn--next-alt {
+  color: #FF19D4;
+  border-color: rgba(255, 25, 212, 0.2);
+}
+.mwc-portfolio-btn--next-alt:hover {
+  background: rgba(255, 25, 212, 0.1);
+  border-color: rgba(255, 25, 212, 0.4);
+}
+
+.mwc-portfolio-logo {
+  height: 34px;
+}
+
+.mwc-portfolio-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 60px 40px 100px;
+}
+
+.mwc-portfolio-intro {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.mwc-portfolio-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: #19D3FF;
+  margin-bottom: 16px;
+}
+.mwc-portfolio-eyebrow--alt {
+  color: #FF19D4;
+}
+
+.mwc-portfolio-title {
+  font-size: clamp(40px, 4.5vw, 64px);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -1.5px;
+  margin: 0 0 16px 0;
+  line-height: 1.1;
+}
+
+.mwc-portfolio-title-highlight {
+  background: linear-gradient(90deg, #19D3FF, #7A4DFF, #FF19D4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.mwc-portfolio-title-highlight--alt {
+  background: linear-gradient(90deg, #FF19D4, #7A4DFF, #19D3FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mwc-portfolio-subtitle {
+  font-size: clamp(15px, 1.5vw, 18px);
+  color: rgba(220, 230, 245, 0.7);
+  max-width: 700px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+}
+
+.mwc-portfolio-metadata {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.mwc-portfolio-sep {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+.mwc-portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+.mwc-portfolio-grid--usecases {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.mwc-portfolio-card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(8, 15, 30, 0.75);
+  backdrop-filter: blur(16px);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  height: 420px;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: all 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mwc-portfolio-card--usecase {
+  height: 380px;
+}
+
+.mwc-portfolio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  border-color: var(--accent, rgba(255, 255, 255, 0.3));
+}
+
+.mwc-portfolio-card-img {
+  position: relative;
+  width: 100%;
+  height: 48%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mwc-portfolio-card--usecase .mwc-portfolio-card-img {
+  height: 55%;
+}
+
+.mwc-portfolio-card:hover .mwc-portfolio-card-img {
+  transform: scale(1.04);
+}
+
+.mwc-portfolio-card-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(3, 8, 20, 0.92) 100%);
+  z-index: 1;
+}
+
+.mwc-portfolio-card-num {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.65);
+  z-index: 2;
+}
+
+.mwc-portfolio-card-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.1);
+  z-index: 2;
+  transition: all 400ms ease;
+}
+
+.mwc-portfolio-card:hover .mwc-portfolio-card-badge {
+  box-shadow: 0 0 15px var(--accent, transparent);
+}
+
+.mwc-portfolio-card-body {
+  position: relative;
+  z-index: 2;
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding: 20px;
+  background: rgba(3, 8, 20, 0.92);
 }
 
-.mwc-product-card-icon {
-  width: 44px;
-  height: 44px;
+.mwc-portfolio-card-header {
+  margin-bottom: auto;
+}
+
+.mwc-portfolio-card-icon {
+  width: 48px;
+  height: 48px;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  border: 1px solid transparent;
+  transition: all 400ms ease;
 }
 
-.mwc-product-card-title {
-  font-size: 1rem;
+.mwc-portfolio-card:hover .mwc-portfolio-card-icon {
+  box-shadow: 0 0 20px var(--accent, transparent);
+  transform: scale(1.05);
+}
+
+.mwc-portfolio-card-body h3 {
+  font-size: 19px;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 6px;
+  margin: 0 0 8px 0;
   line-height: 1.3;
 }
 
-.mwc-product-card-tagline {
-  font-size: 0.78rem;
-  color: #64748b;
+.mwc-portfolio-card-body p {
+  font-size: 14px;
+  color: rgba(180, 195, 220, 0.7);
+  margin: 0;
   line-height: 1.5;
-  flex: 1;
-  margin-bottom: 12px;
 }
 
-.mwc-product-card-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-/* ── Use Case Cards Grid ────────────────────────────────── */
-.mwc-usecases-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
-}
-
-@media (min-width: 1024px) {
-  .mwc-usecases-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.mwc-usecase-card {
-  display: flex;
-  flex-direction: column;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 20px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-align: left;
-}
-
-.mwc-usecase-card:hover {
-  border-color: rgba(255,255,255,0.15);
-  transform: translateY(-6px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
-}
-
-.mwc-usecase-card-img {
-  height: 180px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.mwc-usecase-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, transparent 40%, rgba(6,6,18,0.85) 100%);
-}
-
-.mwc-usecase-card-badge {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 12px;
-  border-radius: 50px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.mwc-usecase-card-body {
-  padding: 20px;
-}
-
-.mwc-usecase-card-body h3 {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 6px;
-}
-
-.mwc-usecase-card-body p {
-  font-size: 0.82rem;
-  color: #64748b;
-  line-height: 1.5;
-  margin-bottom: 12px;
-}
-
-.mwc-usecase-card-products {
+.mwc-portfolio-card-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-top: 16px;
+  margin-bottom: 20px;
 }
 
-.mwc-usecase-product-tag {
-  font-size: 0.65rem;
+.mwc-portfolio-card-tags span {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.mwc-portfolio-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mwc-portfolio-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
   font-weight: 600;
-  color: #94a3b8;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 3px 10px;
-  border-radius: 50px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.5px;
+}
+
+.mwc-portfolio-card-arrow {
+  transition: transform 300ms ease;
+}
+.mwc-portfolio-card:hover .mwc-portfolio-card-arrow {
+  transform: translateX(4px);
+}
+
+.mwc-portfolio-card-arrow-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 400ms ease;
+  margin-left: auto;
+}
+.mwc-portfolio-card:hover .mwc-portfolio-card-arrow-btn {
+  transform: translateX(4px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mwc-portfolio-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 60px;
+}
+
+.mwc-portfolio-progress-text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.mwc-portfolio-progress-bar {
+  width: 120px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.mwc-portfolio-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 20%;
+  background: linear-gradient(90deg, #19D3FF, #7A4DFF);
+}
+.mwc-portfolio-progress-fill--alt {
+  width: 16%;
+  background: linear-gradient(90deg, #FF19D4, #7A4DFF);
+}
+
+@media (max-width: 1280px) {
+  .mwc-portfolio-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .mwc-portfolio-grid--usecases {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mwc-portfolio-card {
+    height: 430px;
+  }
+}
+
+@media (max-width: 900px) {
+  .mwc-portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .mwc-portfolio-header {
+    padding: 0 20px;
+  }
+  .mwc-portfolio-grid,
+  .mwc-portfolio-grid--usecases {
+    grid-template-columns: 1fr;
+  }
+  .mwc-portfolio-card {
+    width: 100%;
+    max-width: 100%;
+    height: 430px;
+  }
+  .mwc-portfolio-title {
+    font-size: 32px;
+  }
 }
 
 /* ── Detail View ────────────────────────────────────────── */

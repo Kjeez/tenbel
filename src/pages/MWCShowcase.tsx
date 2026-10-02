@@ -837,50 +837,145 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
         {/* Carousels */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
-          animate={step >= 4 ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          style={{ width: '100%', maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '20px' }}
+          animate={step >= 0 ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.4 }}
+          className="mwc-showcase-section"
         >
-          {/* Product Carousel (Left to Right) */}
-          <div className="mwc-carousel-wrapper" style={{ padding: '0 40px' }}>
-            <div className="mwc-carousel-track-container" style={{ height: '240px' }}>
-              <div className="mwc-carousel-track mwc-carousel-track--right">
+          {/* Products Slider */}
+          <div className="mwc-slider-container">
+            <div className="mwc-slider-header">
+              <div className="mwc-slider-header-left">
+                <div className="mwc-slider-eyebrow">
+                  <span className="mwc-slider-eyebrow-line"></span> OUR PRODUCTS
+                </div>
+                <h2 className="mwc-slider-title">
+                  Connectivity Solutions <span className="mwc-slider-title-highlight">Built for Real-World</span> Challenges
+                </h2>
+              </div>
+              <div className="mwc-slider-header-right">
+                <p>Rugged, reliable and easy-to-deploy solutions designed to keep people, devices and operations connected &mdash; anywhere, anytime.</p>
+                <div className="mwc-slider-nav">
+                  <button className="mwc-slider-nav-btn"><ArrowLeft size={16} /></button>
+                  <button className="mwc-slider-nav-btn"><ArrowRight size={16} /></button>
+                </div>
+              </div>
+            </div>
+
+            <div className="mwc-slider-track-wrapper">
+              <div className="mwc-slider-track mwc-slider-track--products">
                 {prodArray.map((p, i) => {
                   const originalIndex = i % products.length;
                   const Icon = p.icon;
+                  const desc = [
+                    'Independent, sustainable connectivity for off-grid locations.',
+                    'Flexible, rugged and deployment-ready solutions for reliable connectivity.',
+                    'Secure and reliable connectivity for rail networks, stations and remote tracks.',
+                    'Scalable networks for smart industries, campuses and cities.',
+                    'High-performance networks for remote and challenging areas.',
+                  ][originalIndex] || 'High-performance reliable connectivity.';
+                  const color = ['#14b8a6', '#E8307A', '#8b5cf6', '#06b6d4', '#eab308'][originalIndex] || p.color;
+
                   return (
-                    <div key={`p-${i}`} className="mwc-carousel-item" onClick={() => onSelectProduct(originalIndex)}>
-                      <img src={p.image} alt={p.title} className="mwc-carousel-item-img" />
-                      <div className="mwc-carousel-item-overlay" style={{ background: `linear-gradient(to top, ${p.color}dd, transparent)` }} />
-                      <div className="mwc-carousel-item-content">
-                        <Icon size={24} style={{ color: '#fff', marginBottom: '8px' }} />
-                        <h4>{p.title}</h4>
+                    <div key={`p-${i}`} className="mwc-showcase-card" onClick={() => onSelectProduct(originalIndex)} style={{ '--accent': color } as React.CSSProperties}>
+                      <div className="mwc-showcase-card-img-wrap">
+                        <img src={p.image} alt={p.title} className="mwc-showcase-card-img" />
+                        <div className="mwc-showcase-card-overlay" />
+                      </div>
+                      <div className="mwc-showcase-card-content">
+                        <div className="mwc-showcase-card-top">
+                          <span className="mwc-showcase-card-num">{String(originalIndex + 1).padStart(2, '0')}</span>
+                          <div className="mwc-showcase-card-icon" style={{ color: color }}>
+                            <Icon size={20} />
+                          </div>
+                        </div>
+                        <h4 className="mwc-showcase-card-title">{p.title}</h4>
+                        <p className="mwc-showcase-card-desc">{desc}</p>
+                        <button className="mwc-showcase-card-arrow" style={{ borderColor: color, color: color }}>
+                          <ArrowRight size={14} />
+                        </button>
                       </div>
                     </div>
                   );
                 })}
               </div>
             </div>
+            <div className="mwc-slider-progress-wrap">
+              <div className="mwc-slider-progress-bar">
+                <div className="mwc-slider-progress-fill" style={{ background: '#06b6d4' }} />
+              </div>
+              <div className="mwc-slider-progress-info">
+                <span className="mwc-slider-auto-label">Auto sliding <ArrowRight size={12} style={{ display: 'inline-flex', verticalAlign: 'middle', marginLeft: 4 }} /></span>
+                <span className="mwc-slider-count">01 / 05</span>
+              </div>
+            </div>
           </div>
 
-          {/* Use Case Carousel (Right to Left) */}
-          <div className="mwc-carousel-wrapper" style={{ padding: '0 40px' }}>
-            <div className="mwc-carousel-track-container" style={{ height: '240px' }}>
-              <div className="mwc-carousel-track mwc-carousel-track--left">
+          {/* Use Cases Slider */}
+          <div className="mwc-slider-container" style={{ marginTop: '80px' }}>
+            <div className="mwc-slider-header">
+              <div className="mwc-slider-header-left">
+                <div className="mwc-slider-eyebrow">
+                  <span className="mwc-slider-eyebrow-line" style={{ background: '#E8307A' }}></span> USE CASES
+                </div>
+                <h2 className="mwc-slider-title">
+                  Real Impact <span className="mwc-slider-title-highlight-alt" style={{ color: '#E8307A', WebkitTextFillColor: 'initial', background: 'none' }}>Across Diverse Environments</span>
+                </h2>
+              </div>
+              <div className="mwc-slider-header-right">
+                <p>From mountains and rural communities to critical infrastructure and industrial operations, our solutions power connectivity where it matters most.</p>
+                <div className="mwc-slider-nav">
+                  <button className="mwc-slider-nav-btn"><ArrowLeft size={16} /></button>
+                  <button className="mwc-slider-nav-btn"><ArrowRight size={16} /></button>
+                </div>
+              </div>
+            </div>
+
+            <div className="mwc-slider-track-wrapper">
+              <div className="mwc-slider-track mwc-slider-track--usecases">
                 {useCaseArray.map((u, i) => {
                   const originalIndex = i % useCases.length;
                   const Icon = u.icon;
+                  const desc = [
+                    'Rapid deployment connectivity for emergencies and critical operations.',
+                    'Rugged networks for demanding environments.',
+                    'Intelligent connectivity for smarter, more resilient cities.',
+                    'Bringing reliable connectivity to underserved regions.',
+                    'Stay connected in the most remote and rugged terrains.',
+                    'Precision farming with reliable IoT connectivity.',
+                  ][originalIndex] || 'Reliable connectivity in all environments.';
+                  const color = ['#ef4444', '#E8307A', '#8b5cf6', '#eab308', '#14b8a6', '#22c55e'][originalIndex] || u.color;
+
                   return (
-                    <div key={`u-${i}`} className="mwc-carousel-item" onClick={() => onSelectUseCase(originalIndex)}>
-                      <img src={u.image} alt={u.title} className="mwc-carousel-item-img" />
-                      <div className="mwc-carousel-item-overlay" style={{ background: `linear-gradient(to top, ${u.color}dd, transparent)` }} />
-                      <div className="mwc-carousel-item-content">
-                        <Icon size={24} style={{ color: '#fff', marginBottom: '8px' }} />
-                        <h4>{u.title}</h4>
+                    <div key={`u-${i}`} className="mwc-showcase-card" onClick={() => onSelectUseCase(originalIndex)} style={{ '--accent': color } as React.CSSProperties}>
+                      <div className="mwc-showcase-card-img-wrap">
+                        <img src={u.image} alt={u.title} className="mwc-showcase-card-img" />
+                        <div className="mwc-showcase-card-overlay" />
+                      </div>
+                      <div className="mwc-showcase-card-content">
+                        <div className="mwc-showcase-card-top">
+                          <span className="mwc-showcase-card-num">{String(originalIndex + 1).padStart(2, '0')}</span>
+                          <div className="mwc-showcase-card-icon" style={{ color: color }}>
+                            <Icon size={20} />
+                          </div>
+                        </div>
+                        <h4 className="mwc-showcase-card-title">{u.title}</h4>
+                        <p className="mwc-showcase-card-desc">{desc}</p>
+                        <button className="mwc-showcase-card-arrow" style={{ borderColor: color, color: color }}>
+                          <ArrowRight size={14} />
+                        </button>
                       </div>
                     </div>
                   );
                 })}
+              </div>
+            </div>
+            <div className="mwc-slider-progress-wrap">
+              <div className="mwc-slider-progress-bar">
+                <div className="mwc-slider-progress-fill" style={{ background: '#E8307A' }} />
+              </div>
+              <div className="mwc-slider-progress-info">
+                <span className="mwc-slider-auto-label"><ArrowLeft size={12} style={{ display: 'inline-flex', verticalAlign: 'middle', marginRight: 4 }} /> Auto sliding</span>
+                <span className="mwc-slider-count">01 / 06</span>
               </div>
             </div>
           </div>
@@ -2342,106 +2437,351 @@ ${globalAnimStyles}
   margin-bottom: 24px;
 }
 
-.mwc-carousel-wrapper {
+/* ── Cinematic Showcase Carousels ────────────────────────────── */
+
+.mwc-showcase-section {
   width: 100%;
+  padding: 80px 0 120px 0;
+  position: relative;
+  background: radial-gradient(circle at 20% 20%, rgba(0, 160, 255, 0.05), transparent 35%),
+              radial-gradient(circle at 80% 70%, rgba(180, 0, 255, 0.05), transparent 35%);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.mwc-slider-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.mwc-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 40px;
   margin-bottom: 32px;
 }
 
-.mwc-carousel-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-left: 5%;
-  margin-bottom: 16px;
-  color: #f8fafc;
+.mwc-slider-header-left {
+  max-width: 600px;
+}
+
+.mwc-slider-eyebrow {
   display: flex;
   align-items: center;
   gap: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #94a3b8;
+  margin-bottom: 12px;
 }
 
-.mwc-carousel-track-container {
+.mwc-slider-eyebrow-line {
+  width: 24px;
+  height: 2px;
+  background: #06b6d4;
+}
+
+.mwc-slider-title {
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.mwc-slider-title-highlight {
+  background: linear-gradient(90deg, #19D3FF, #7A4DFF, #FF19D4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.mwc-slider-title-highlight-alt {
+  color: #E8307A;
+}
+
+.mwc-slider-header-right {
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.mwc-slider-header-right p {
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.mwc-slider-nav {
+  display: flex;
+  gap: 12px;
+}
+
+.mwc-slider-nav-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.03);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.mwc-slider-nav-btn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.mwc-slider-track-wrapper {
   width: 100%;
   overflow: hidden;
   position: relative;
-  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
 }
 
-.mwc-carousel-track {
+.mwc-slider-track {
   display: flex;
   width: max-content;
+  padding: 10px 40px;
 }
 
-.mwc-carousel-track--left {
-  animation: marquee-left 40s linear infinite;
-}
-.mwc-carousel-track--right {
-  animation: marquee-right 40s linear infinite;
+.mwc-slider-track--products {
+  animation: scroll-left-to-right 40s linear infinite;
 }
 
-.mwc-carousel-track:hover {
+.mwc-slider-track--usecases {
+  animation: scroll-right-to-left 40s linear infinite;
+}
+
+.mwc-slider-track:hover {
   animation-play-state: paused;
 }
 
-@keyframes marquee-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+@keyframes scroll-left-to-right {
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
-@keyframes marquee-right {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+@keyframes scroll-right-to-left {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 
-.mwc-carousel-item {
+.mwc-showcase-card {
+  width: 320px;
+  height: 260px;
+  border-radius: 20px;
+  margin-right: 24px;
   position: relative;
-  width: 280px;
-  height: 180px;
-  border-radius: 12px;
-  margin: 0 10px;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
   border: 1px solid rgba(255,255,255,0.08);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  background: #0a1122;
+  display: flex;
+  flex-direction: column;
 }
 
-.mwc-carousel-item:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: rgba(255,255,255,0.3);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+.mwc-showcase-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: var(--accent);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 20px rgba(0,0,0, 0.2);
   z-index: 20;
 }
 
-.mwc-carousel-item-img {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+.mwc-showcase-card-img-wrap {
+  width: 100%;
+  height: 55%;
+  position: relative;
+  overflow: hidden;
+}
+
+.mwc-showcase-card-img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.mwc-carousel-item:hover .mwc-carousel-item-img {
-  transform: scale(1.1);
+.mwc-showcase-card:hover .mwc-showcase-card-img {
+  transform: scale(1.06);
 }
 
-.mwc-carousel-item-overlay {
+.mwc-showcase-card-overlay {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  transition: opacity 0.3s ease;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 0%, #0a1122 100%);
 }
 
-.mwc-carousel-item-content {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 16px;
-  color: white;
+.mwc-showcase-card-content {
+  padding: 0 20px 20px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: #0a1122;
+}
+
+.mwc-showcase-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -15px;
+  margin-bottom: 12px;
+  position: relative;
   z-index: 2;
 }
 
-.mwc-carousel-item-content h4 {
-  font-size: 1rem;
+.mwc-showcase-card-num {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 1px;
+}
+
+.mwc-showcase-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mwc-showcase-card-title {
+  font-size: 16px;
   font-weight: 700;
+  color: #fff;
+  margin: 0 0 6px 0;
+}
+
+.mwc-showcase-card-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.4;
   margin: 0;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mwc-showcase-card-arrow {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.mwc-showcase-card:hover .mwc-showcase-card-arrow {
+  opacity: 1;
+  transform: translateX(3px);
+  background: rgba(255,255,255,0.05);
+}
+
+.mwc-slider-progress-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  margin-top: 16px;
+}
+
+.mwc-slider-progress-bar {
+  flex: 1;
+  height: 2px;
+  background: rgba(255,255,255,0.1);
+  margin-right: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mwc-slider-progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 20%;
+  border-radius: 2px;
+}
+
+.mwc-slider-progress-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mwc-slider-auto-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.mwc-slider-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .mwc-slider-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 20px;
+  }
+  .mwc-slider-header-right {
+    margin-top: 20px;
+  }
+  .mwc-slider-track-wrapper {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .mwc-slider-progress-wrap {
+    padding: 0 20px;
+  }
+  .mwc-showcase-card {
+    width: 290px;
+  }
+  .mwc-slider-track--products {
+    animation: scroll-left-to-right 55s linear infinite;
+  }
+  .mwc-slider-track--usecases {
+    animation: scroll-right-to-left 55s linear infinite;
+  }
 }
 
 /* ── Nav Bar ────────────────────────────────────────────── */

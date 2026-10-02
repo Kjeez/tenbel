@@ -709,7 +709,7 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveVideo(prev => (prev + 1) % heroVideos.length);
-    }, 6000);
+    }, 7000); // 7 seconds per slide
     return () => clearInterval(interval);
   }, []);
 
@@ -722,116 +722,117 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
       transition={{ duration: 0.6 }}
       style={{ overflow: 'hidden auto', position: 'relative' }}
     >
-      {/* Full-screen video backgrounds with crossfade */}
-      <div className="mwc-hero-video-container">
-        {heroVideos.map((src, i) => (
-          <video
-            key={src}
-            className={`mwc-hero-video ${i === activeVideo ? 'mwc-hero-video--active' : ''}`}
-            autoPlay
-            loop
-            muted
-            playsInline
-          >
-            <source src={src} type="video/mp4" />
-          </video>
-        ))}
-        <div className="mwc-hero-video-overlay" />
-        <div className="mwc-hero-video-gradient" />
+      <div className="mwc-hero-wrapper">
+        <div className="mwc-hero-video-container">
+          {heroVideos.map((src, i) => (
+            <video
+              key={src}
+              className={`mwc-hero-video ${i === activeVideo ? 'mwc-hero-video--active' : ''}`}
+              autoPlay
+              loop
+              muted
+              playsInline
+            >
+              <source src={src} type="video/mp4" />
+            </video>
+          ))}
+          <div className="mwc-hero-overlay-1" />
+          <div className="mwc-hero-overlay-2" />
+          <div className="mwc-hero-overlay-3" />
+        </div>
+        
+        <ParticleBackground />
+
+        <div className="mwc-hero-content-wrapper">
+          <div className="mwc-hero-top">
+            <motion.img 
+              initial={{ opacity: 0, y: -20 }}
+              animate={step >= 0 ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              src="/logo-new.png" 
+              alt="Tenbel" 
+              className="mwc-hero-logo" 
+            />
+            <button onClick={onSkip} className="mwc-hero-skip">
+              Skip Intro <ArrowRight size={14} style={{ marginLeft: 6 }} />
+            </button>
+          </div>
+
+          <div className="mwc-hero-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeVideo}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="mwc-hero-text-group"
+              >
+                <div className="mwc-hero-eyebrow">CONNECTING POSSIBILITIES</div>
+                <h1 className="mwc-hero-headline">
+                  Empowering a Sustainably<br/>
+                  <span className="mwc-hero-highlight">Connected</span> Future
+                </h1>
+                <p className="mwc-hero-description">Off-Grid Connectivity &bull; Mesh Networks &bull; IoT Solutions</p>
+              </motion.div>
+            </AnimatePresence>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={step >= 0 ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="mwc-hero-stats-panel"
+            >
+              <div className="mwc-hero-stat">
+                <div className="mwc-hero-stat-val">5</div>
+                <div className="mwc-hero-stat-lbl">PRODUCT LINES</div>
+              </div>
+              <div className="mwc-hero-stat-div" />
+              <div className="mwc-hero-stat">
+                <div className="mwc-hero-stat-val">6</div>
+                <div className="mwc-hero-stat-lbl">USE CASES</div>
+              </div>
+              <div className="mwc-hero-stat-div" />
+              <div className="mwc-hero-stat">
+                <div className="mwc-hero-stat-val">13 km</div>
+                <div className="mwc-hero-stat-lbl">MESH RANGE</div>
+              </div>
+              <div className="mwc-hero-stat-div" />
+              <div className="mwc-hero-stat">
+                <div className="mwc-hero-stat-val">IP67</div>
+                <div className="mwc-hero-stat-lbl">RATED</div>
+              </div>
+            </motion.div>
+
+            <motion.button
+              initial={{ opacity: 0, y: 15 }}
+              animate={step >= 0 ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              onClick={onEnter}
+              className="mwc-hero-cta"
+            >
+              Enter Showcase <ArrowRight size={18} className="mwc-hero-cta-arrow" />
+            </motion.button>
+          </div>
+
+          <div className="mwc-hero-bottom">
+            <div className="mwc-hero-indicator">
+              <span className="mwc-hero-indicator-text">
+                {String(activeVideo + 1).padStart(2, '0')} / {String(heroVideos.length).padStart(2, '0')}
+              </span>
+              <span className="mwc-hero-indicator-line" />
+              <div className="mwc-hero-dots-container">
+                {heroVideos.map((_, i) => (
+                  <button
+                    key={i}
+                    className={`mwc-hero-dot-new ${i === activeVideo ? 'active' : ''}`}
+                    onClick={() => setActiveVideo(i)}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      {/* Floating particles on top of video */}
-      <ParticleBackground />
-
-      {/* Skip button */}
-      <button onClick={onSkip} className="mwc-skip-btn">
-        Skip Intro <ChevronRight size={14} />
-      </button>
-
-      {/* Video indicator dots */}
-      <div className="mwc-hero-dots">
-        {heroVideos.map((_, i) => (
-          <button
-            key={i}
-            className={`mwc-hero-dot ${i === activeVideo ? 'mwc-hero-dot--active' : ''}`}
-            onClick={() => setActiveVideo(i)}
-          />
-        ))}
-      </div>
-
-      <div className="mwc-intro-content" style={{ paddingTop: '80px', paddingBottom: '40px' }}>
-        {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5, y: 20 }}
-          animate={step >= 0 ? { opacity: 1, scale: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="mwc-intro-logo"
-        >
-          <img src="/logo-new.png" alt="Tenbel" className="mwc-logo-img" />
-        </motion.div>
-
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={step >= 1 ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="mwc-intro-tagline"
-          style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2.2rem)', fontWeight: 700, textShadow: '0 4px 30px rgba(0,0,0,0.6)', maxWidth: '800px', textAlign: 'center' }}
-        >
-          Empowering a Sustainably Connected Future
-        </motion.p>
-
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={step >= 1 ? { opacity: 0.8, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
-          style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.1rem', marginBottom: '32px', letterSpacing: '0.05em' }}
-        >
-          Off-Grid Connectivity • Mesh Networks • IoT Solutions
-        </motion.p>
-
-        {/* Stats row with glassmorphism */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={step >= 2 ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="mwc-intro-stats"
-          style={{ background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.15)' }}
-        >
-          <div className="mwc-stat">
-            <div className="mwc-stat-value"><AnimatedCounter value={5} /></div>
-            <div className="mwc-stat-label">Product Lines</div>
-          </div>
-          <div className="mwc-stat-divider" />
-          <div className="mwc-stat">
-            <div className="mwc-stat-value"><AnimatedCounter value={6} /></div>
-            <div className="mwc-stat-label">Use Cases</div>
-          </div>
-          <div className="mwc-stat-divider" />
-          <div className="mwc-stat">
-            <div className="mwc-stat-value"><AnimatedCounter value={13} suffix=" km" /></div>
-            <div className="mwc-stat-label">Mesh Range</div>
-          </div>
-          <div className="mwc-stat-divider" />
-          <div className="mwc-stat">
-            <div className="mwc-stat-value">IP67</div>
-            <div className="mwc-stat-label">Rated</div>
-          </div>
-        </motion.div>
-
-        {/* Enter button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={step >= 3 ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          style={{ marginTop: '16px', marginBottom: '120px' }}
-        >
-          <button onClick={onEnter} className="mwc-enter-btn" style={{ fontSize: '1.1rem', padding: '18px 48px', boxShadow: '0 0 40px rgba(20,184,166,0.4)' }}>
-            <span>Enter Showcase</span>
-            <ArrowRight size={18} />
-          </button>
-        </motion.div>
         
         {/* Carousels */}
         <motion.div
@@ -1757,9 +1758,19 @@ ${globalAnimStyles}
   z-index: 0;
 }
 
-/* ── Hero Video System ────────────────────────────────── */
+/* ── Hero Showcase Experience ─────────────────────────── */
+.mwc-hero-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 680px;
+  max-height: none;
+  display: flex;
+  flex-direction: column;
+}
+
 .mwc-hero-video-container {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 0;
   overflow: hidden;
@@ -1767,59 +1778,273 @@ ${globalAnimStyles}
 
 .mwc-hero-video {
   position: absolute;
-  top: 50%; left: 50%;
-  min-width: 100%; min-height: 100%;
-  width: auto; height: auto;
-  transform: translate(-50%, -50%) scale(1.05);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
   opacity: 0;
-  transition: opacity 1.5s ease-in-out;
+  transition: opacity 1.2s ease-in-out;
 }
 
 .mwc-hero-video--active {
-  opacity: 0.65;
+  opacity: 1;
 }
 
-.mwc-hero-video-overlay {
+.mwc-hero-overlay-1 {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(6,6,18,0.35) 0%, rgba(6,6,18,0.75) 100%);
+  background: rgba(3, 8, 25, 0.45);
   z-index: 1;
 }
 
-.mwc-hero-video-gradient {
+.mwc-hero-overlay-2 {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(6,6,18,0.6) 0%, transparent 30%, transparent 60%, rgba(6,6,18,0.85) 100%);
+  background: radial-gradient(circle at center, transparent 0%, rgba(5, 11, 28, 0.4) 100%);
   z-index: 2;
 }
 
-.mwc-hero-dots {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 50;
+.mwc-hero-overlay-3 {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(3,8,25,0.25) 0%, rgba(3,8,25,0.20) 45%, rgba(3,8,25,0.72) 100%);
+  z-index: 3;
 }
 
-.mwc-hero-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.4);
-  background: transparent;
+.mwc-hero-content-wrapper {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 42px 32px 32px 32px;
+}
+
+.mwc-hero-top {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.mwc-hero-logo {
+  height: auto;
+  width: 130px;
+}
+
+.mwc-hero-skip {
+  position: absolute;
+  top: -14px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  background: rgba(8, 18, 40, 0.4);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 999px;
+  color: #F7F9FF;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
   cursor: pointer;
-  transition: all 0.4s ease;
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+
+.mwc-hero-skip:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.mwc-hero-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: -4vh;
+}
+
+.mwc-hero-eyebrow {
+  color: #19C6C8;
+  font-size: 12px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.mwc-hero-headline {
+  color: #F7F9FF;
+  font-size: clamp(40px, 5.5vw, 72px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -1.5px;
+  margin: 0 0 20px 0;
+}
+
+.mwc-hero-highlight {
+  background: linear-gradient(90deg, #19D3FF, #7A4DFF, #FF19D4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.mwc-hero-description {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(16px, 1.5vw, 19px);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin: 0 0 40px 0;
+}
+
+.mwc-hero-stats-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 620px;
+  height: 115px;
+  background: rgba(8, 18, 40, 0.68);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 24px;
+  box-shadow: 0 20px 80px rgba(0,0,0,0.35);
+  padding: 0 40px;
+  margin-bottom: 40px;
+}
+
+.mwc-hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.mwc-hero-stat-val {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.mwc-hero-stat-lbl {
+  color: #94a3b8;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+}
+
+.mwc-hero-stat-div {
+  width: 1px;
+  height: 40px;
+  background: rgba(255,255,255,0.1);
+}
+
+.mwc-hero-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 290px;
+  height: 64px;
+  background: linear-gradient(100deg, #18C9D4, #11A9D8);
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 40px rgba(20, 210, 220, 0.28);
+  transition: all 0.3s ease;
+}
+
+.mwc-hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 45px rgba(20, 210, 220, 0.4);
+}
+
+.mwc-hero-cta:hover .mwc-hero-cta-arrow {
+  transform: translateX(4px);
+}
+
+.mwc-hero-cta-arrow {
+  transition: transform 0.3s ease;
+}
+
+.mwc-hero-bottom {
+  display: flex;
+  justify-content: center;
+}
+
+.mwc-hero-indicator {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mwc-hero-indicator-text {
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.mwc-hero-indicator-line {
+  width: 40px;
+  height: 1px;
+  background: rgba(255,255,255,0.3);
+}
+
+.mwc-hero-dots-container {
+  display: flex;
+  gap: 10px;
+}
+
+.mwc-hero-dot-new {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
   padding: 0;
 }
 
-.mwc-hero-dot--active {
-  background: #14b8a6;
-  border-color: #14b8a6;
-  box-shadow: 0 0 12px rgba(20,184,166,0.6);
-  transform: scale(1.3);
+.mwc-hero-dot-new.active {
+  background: #19D3FF;
+  box-shadow: 0 0 10px rgba(25, 211, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .mwc-hero-content-wrapper {
+    padding: 20px 16px;
+  }
+  .mwc-hero-top {
+    justify-content: center;
+  }
+  .mwc-hero-skip {
+    top: -4px;
+    right: 0;
+  }
+  .mwc-hero-stats-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: auto;
+    gap: 20px;
+    padding: 24px;
+    border-radius: 20px;
+  }
+  .mwc-hero-stat-div {
+    display: none;
+  }
+  .mwc-hero-cta {
+    width: 100%;
+    max-width: 300px;
+  }
 }
 
 /* ── Intro ──────────────────────────────────────────────── */

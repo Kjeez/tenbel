@@ -16,6 +16,7 @@ import {
   Eye,
   Volume2,
   VolumeX,
+  Play,
 } from 'lucide-react';
 import {
   RailwayScene,
@@ -1135,6 +1136,23 @@ function UseCaseDetail({ useCase, index, total, onBack, onNext, onPrev }: UseCas
   const [videoIndex, setVideoIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [storyStep, setStoryStep] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    setIsPlaying(true);
+  }, [storyStep]);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
 
 
@@ -1186,15 +1204,25 @@ function UseCaseDetail({ useCase, index, total, onBack, onNext, onPrev }: UseCas
               {useCase.story[storyStep].type === 'video' ? (
                 <>
                   <video 
+                    ref={videoRef}
                     className="mwc-story-media" 
                     autoPlay 
                     muted={isMuted} 
                     playsInline
+                    onClick={togglePlay}
+                    style={{ cursor: 'pointer' }}
                     onEnded={() => setStoryStep(s => (s + 1) % useCase.story.length)}
                   >
                     <source src={useCase.story[storyStep].media} type="video/mp4" />
                   </video>
-                  <button className="mwc-sound-btn" onClick={() => setIsMuted(!isMuted)}>
+                  
+                  {!isPlaying && (
+                    <div className="mwc-story-play-overlay" onClick={togglePlay}>
+                      <Play size={64} fill="white" color="white" opacity={0.8} />
+                    </div>
+                  )}
+
+                  <button className="mwc-sound-btn mwc-sound-btn--story" onClick={() => setIsMuted(!isMuted)}>
                     {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
                   </button>
                 </>
@@ -1262,9 +1290,26 @@ function UseCaseDetail({ useCase, index, total, onBack, onNext, onPrev }: UseCas
         >
           {useCase.videos && useCase.videos.length > 0 ? (
             <>
-              <video key={useCase.videos[videoIndex]} className="mwc-detail-hero-img" autoPlay loop muted={isMuted} playsInline>
+              <video 
+                ref={videoRef}
+                key={useCase.videos[videoIndex]} 
+                className="mwc-detail-hero-img" 
+                autoPlay 
+                loop 
+                muted={isMuted} 
+                playsInline
+                onClick={togglePlay}
+                style={{ cursor: 'pointer' }}
+              >
                 <source src={useCase.videos[videoIndex]} type="video/mp4" />
               </video>
+              
+              {!isPlaying && (
+                <div className="mwc-story-play-overlay" onClick={togglePlay}>
+                  <Play size={64} fill="white" color="white" opacity={0.8} />
+                </div>
+              )}
+
               <button className="mwc-sound-btn" onClick={() => setIsMuted(!isMuted)}>
                 {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
               </button>
@@ -2613,6 +2658,18 @@ ${globalAnimStyles}
   align-items: center;
   justify-content: center;
   padding: 100px 40px 180px;
+}
+
+.mwc-story-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.3);
+  z-index: 12;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .mwc-story-gradient-overlay {

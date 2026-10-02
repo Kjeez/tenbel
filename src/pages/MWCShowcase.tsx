@@ -1793,21 +1793,21 @@ ${globalAnimStyles}
 .mwc-hero-overlay-1 {
   position: absolute;
   inset: 0;
-  background: rgba(3, 8, 25, 0.45);
+  background: rgba(3, 8, 25, 0.25);
   z-index: 1;
 }
 
 .mwc-hero-overlay-2 {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 0%, rgba(5, 11, 28, 0.4) 100%);
+  background: radial-gradient(circle at center, transparent 0%, rgba(5, 11, 28, 0.25) 100%);
   z-index: 2;
 }
 
 .mwc-hero-overlay-3 {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(3,8,25,0.25) 0%, rgba(3,8,25,0.20) 45%, rgba(3,8,25,0.72) 100%);
+  background: linear-gradient(to bottom, rgba(3,8,25,0.15) 0%, rgba(3,8,25,0.10) 45%, rgba(3,8,25,0.60) 100%);
   z-index: 3;
 }
 

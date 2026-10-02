@@ -974,6 +974,23 @@ function ProductDetail({ product, index, total, onBack, onNext, onPrev }: Produc
   const Icon = product.icon;
   const [videoIndex, setVideoIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    setIsPlaying(true);
+  }, [videoIndex]);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   return (
     <motion.div
@@ -1011,9 +1028,26 @@ function ProductDetail({ product, index, total, onBack, onNext, onPrev }: Produc
       >
         {product.videos && product.videos.length > 0 ? (
           <>
-            <video key={product.videos[videoIndex]} className="mwc-detail-hero-img" autoPlay loop muted={isMuted} playsInline>
+            <video 
+              ref={videoRef}
+              key={product.videos[videoIndex]} 
+              className="mwc-detail-hero-img" 
+              autoPlay 
+              loop 
+              muted={isMuted} 
+              playsInline
+              onClick={togglePlay}
+              style={{ cursor: 'pointer' }}
+            >
               <source src={product.videos[videoIndex]} type="video/mp4" />
             </video>
+            
+            {!isPlaying && (
+              <div className="mwc-story-play-overlay" onClick={togglePlay}>
+                <Play size={64} fill="white" color="white" opacity={0.8} />
+              </div>
+            )}
+
             <button className="mwc-sound-btn" onClick={() => setIsMuted(!isMuted)}>
               {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
             </button>

@@ -57,6 +57,20 @@ const products = [
       { label: 'Battery', value: '3–4 weeks' },
       { label: 'Connectivity', value: 'Bluetooth + LoRa' },
     ],
+    story: [
+      {
+        type: 'video',
+        media: '/videos/Hikers_connecting_via_mesh_network_20261001173508.mp4',
+        title: 'The Problem: No Infrastructure, No Voice',
+        text: 'Traditional communication requires towers, SIMs, and power grids. In off-grid environments like deep forests and mountains, none of this exists — leaving communities isolated.',
+      },
+      {
+        type: 'video',
+        media: '/videos/LoRa_devices_communicating_on_rocks_20261001173513.mp4',
+        title: 'The Solution: OffGrid by Tenbel',
+        text: 'Sub-GHz LoRa mesh communication — no SIM, no Wi-Fi, no infrastructure. Peer-to-peer range up to 2 km, mesh range up to 13 km. 3–4 week battery. Zero network charges.',
+      }
+    ]
   },
   {
     id: 'commsbox',
@@ -84,6 +98,20 @@ const products = [
       { label: 'Security', value: 'End-to-End Encrypted' },
       { label: 'Forms', value: 'Briefcase + Candy Box' },
     ],
+    story: [
+      {
+        type: 'video',
+        media: '/videos/Rescue_teams_setting_up_communic._20261001173531.mp4',
+        title: 'The Problem: Minutes Matter, No Network',
+        text: 'In emergencies, every minute of communication blackout costs lives. Traditional setups take hours or days to deploy — time that victims simply don\'t have.',
+      },
+      {
+        type: 'video',
+        media: '/videos/Rescue_teams_setting_up_communic._20261001173529.mp4',
+        title: 'The Solution: Emergency CommsBox',
+        text: 'Open the case, power on, and a secure multi-connectivity network is live in under 3 minutes. IP67 rated, encrypted, mission-critical — communication restored instantly.',
+      }
+    ]
   },
   {
     id: 'railway',
@@ -110,6 +138,20 @@ const products = [
       { label: 'Tech', value: '5G/4G/Wi-Fi 6E/GPS' },
       { label: 'Integration', value: 'CCTV + WiFi + Sat' },
     ],
+    story: [
+      {
+        type: 'video',
+        media: '/videos/Train_moving_along_railway_tracks_20261001173524.mp4',
+        title: 'The Problem: Fragmented Systems',
+        text: 'Cameras, sensors, Wi-Fi, and satellite links all run on separate systems. No unified management means blind spots, delayed alerts, and manual monitoring.',
+      },
+      {
+        type: 'video',
+        media: '/videos/Data_flowing_through_city_infras._20261001173450.mp4',
+        title: 'The Solution: Tenbel Railway Infrastructure',
+        text: 'High-gain antennas, industrial routers, and ruggedized accessories — all unified through a central router. CCTV, Wi-Fi, satellite, and collision prevention in one system.',
+      }
+    ]
   },
   {
     id: 'enterprise',
@@ -137,6 +179,20 @@ const products = [
       { label: 'Network', value: 'Industrial Ethernet' },
       { label: 'Use', value: 'Factory / Medical / Fleet' },
     ],
+    story: [
+      {
+        type: 'video',
+        media: '/videos/RFID_scanner_reading_product_tag_20261001173449.mp4',
+        title: 'The Problem: Manual Tracking Fails at Scale',
+        text: 'Spreadsheets, barcodes, and manual checks can\'t keep up with modern enterprise demands. Assets get lost, batches go untraced, and quality control breaks down.',
+      },
+      {
+        type: 'video',
+        media: '/videos/Smart_factory_production_line_in._20261001173455.mp4',
+        title: 'The Solution: Enterprise IoT by Tenbel',
+        text: 'RFID readers, IoT sensors, and industrial networking — automated tracking from factory floor to delivery. Real-time visibility across your entire operation.',
+      }
+    ]
   },
   {
     id: 'remote',
@@ -164,6 +220,20 @@ const products = [
       { label: 'Failover', value: 'Automatic (<2s)' },
       { label: 'Monitoring', value: '24/7 Dashboard' },
     ],
+    story: [
+      {
+        type: 'video',
+        media: '/videos/Hospital_switches_to_backup_conn._20261001173501.mp4',
+        title: 'The Problem: No Backup, No Recovery',
+        text: 'Single-link connectivity means one failure away from total isolation. Telemedicine sessions drop, guests lose service, warehouses go offline — with no automatic recovery.',
+      },
+      {
+        type: 'video',
+        media: '/videos/Doctor_performing_remote_medical._1080p_20261001173444.mp4',
+        title: 'The Solution: Always-On by Tenbel',
+        text: 'Multi-SIM routers with automatic failover switch between satellite, cellular, and mesh in under 2 seconds. Policy-based routing and 24/7 monitoring — zero downtime.',
+      }
+    ]
   },
 ];
 
@@ -227,6 +297,20 @@ const useCases = [
       'Works in any terrain — mountains, forests, valleys',
     ],
     realWorld: 'Trekkers in the Indian Himalayas use OffGrid to stay connected across valleys and peaks where no cell tower reaches, ensuring safety and coordination during multi-day expeditions.',
+    story: [
+      {
+        type: 'video',
+        media: '/videos/Hikers_connecting_via_mesh_network_20261001173508.mp4',
+        title: 'The Problem: No Signal, No Safety',
+        text: 'Hikers venture deep into mountains and forests where cell towers don\'t exist. A single wrong turn or injury can become life-threatening without any way to call for help.',
+      },
+      {
+        type: 'video',
+        media: '/videos/LoRa_devices_communicating_on_rocks_20261001173513.mp4',
+        title: 'The Solution: Mesh-Connected Wilderness',
+        text: 'Tenbel OffGrid creates a peer-to-peer mesh network via LoRa — no SIM, no towers needed. Groups stay connected across valleys and peaks with SOS alerts and location sharing.',
+      }
+    ]
   },
   {
     id: 'railway',
@@ -249,6 +333,20 @@ const useCases = [
       'Ruggedized for outdoor railway environments',
     ],
     realWorld: 'Tenbel\'s integrated railway system connects CCTV cameras, collision sensors, passenger Wi-Fi, and satellite links through a single enterprise router — enabling automatic emergency braking when obstacles are detected.',
+    story: [
+      {
+        type: 'video',
+        media: '/videos/Train_moving_along_railway_tracks_20261001173524.mp4',
+        title: 'The Problem: Blind Tracks, Fatal Collisions',
+        text: 'Railway networks span thousands of kilometres with limited visibility. Without real-time communication between trains and control centres, collisions and delays cost lives and billions.',
+      },
+      {
+        type: 'video',
+        media: '/videos/Data_flowing_through_city_infras._20261001173450.mp4',
+        title: 'The Solution: Fully Connected Railway',
+        text: 'Tenbel connects CCTV, collision sensors, passenger Wi-Fi, and satellite links through a single enterprise router — enabling automatic emergency braking and real-time AI monitoring.',
+      }
+    ]
   },
   {
     id: 'agriculture',
@@ -272,6 +370,20 @@ const useCases = [
       'Auto-harvest and quality sorting',
     ],
     realWorld: 'Smart harvesters with Tenbel IoT sensors automatically navigate fields, avoid collisions, and sort harvest quality — all connected through OffGrid mesh networks where cellular coverage doesn\'t exist.',
+    story: [
+      {
+        type: 'video',
+        media: '/videos/Autonomous_harvester_in_wheat_field_20261001173521.mp4',
+        title: 'The Problem: Disconnected Farms',
+        text: 'Modern farming demands precision and automation, but vast agricultural fields have zero cellular coverage. Equipment operates blind, wasting resources and reducing yields.',
+      },
+      {
+        type: 'video',
+        media: '/videos/RFID_sensor_scanning_crop_row_20261001173514.mp4',
+        title: 'The Solution: AI-Powered Smart Agriculture',
+        text: 'Tenbel equips harvesters with IoT sensors, RFID tracking, and OffGrid mesh connectivity. Autonomous navigation, collision avoidance, and real-time quality sorting — all without cellular networks.',
+      }
+    ]
   },
   {
     id: 'factory',
@@ -295,6 +407,20 @@ const useCases = [
       'Full traceability from line to shelf',
     ],
     realWorld: 'Tenbel\'s RFID and IoT systems enable factory floors to automatically code, filter, and sort products by quality — reducing waste by 40% and ensuring complete batch traceability.',
+    story: [
+      {
+        type: 'video',
+        media: '/videos/Smart_factory_production_line_in._20261001173455.mp4',
+        title: 'The Problem: Blind Production Lines',
+        text: 'Traditional factories lack real-time visibility into quality and waste. Defective products pass unnoticed, batch traceability is manual, and downtime costs millions.',
+      },
+      {
+        type: 'video',
+        media: '/videos/RFID_scanner_reading_product_tag_20261001173449.mp4',
+        title: 'The Solution: Intelligent Manufacturing',
+        text: 'Tenbel\'s RFID and IoT systems automate date coding, quality filtering, and waste detection. Every product is tracked from production line to shelf with full traceability.',
+      }
+    ]
   },
   {
     id: 'remote-connectivity',
@@ -318,6 +444,20 @@ const useCases = [
       'Leak-proof, weather-resistant deployment',
     ],
     realWorld: 'On a remote island, a doctor diagnoses patients via telemedicine with junior nurses on-site. When the satellite link drops, Tenbel\'s failover system automatically switches to cellular backup — zero downtime.',
+    story: [
+      {
+        type: 'video',
+        media: '/videos/Hospital_switches_to_backup_conn._20261001173501.mp4',
+        title: 'The Problem: One Link, Total Isolation',
+        text: 'Remote hospitals, island resorts, and warehouses depend on a single fragile connection. When it drops, patients lose access to specialists, operations halt, and lives are at risk.',
+      },
+      {
+        type: 'video',
+        media: '/videos/Doctor_performing_remote_medical._1080p_20261001173444.mp4',
+        title: 'The Solution: Unbreakable Connectivity',
+        text: 'Tenbel\'s auto-failover system instantly switches between satellite, cellular, and mesh links. Remote telemedicine, resort Wi-Fi, and warehouse monitoring stay online — always.',
+      }
+    ]
   },
 ];
 
@@ -974,12 +1114,13 @@ function ProductDetail({ product, index, total, onBack, onNext, onPrev }: Produc
   const Icon = product.icon;
   const [videoIndex, setVideoIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
+  const [storyStep, setStoryStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setIsPlaying(true);
-  }, [videoIndex]);
+  }, [videoIndex, storyStep]);
 
   const togglePlay = () => {
     if (videoRef.current) {
@@ -1019,63 +1160,156 @@ function ProductDetail({ product, index, total, onBack, onNext, onPrev }: Produc
         </div>
       </div>
 
-      {/* Hero image/video pulled outside container for full width */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        className="mwc-detail-hero"
-      >
-        {product.videos && product.videos.length > 0 ? (
-          <>
-            <video 
-              ref={videoRef}
-              key={product.videos[videoIndex]} 
-              className="mwc-detail-hero-img" 
-              autoPlay 
-              loop 
-              muted={isMuted} 
-              playsInline
-              onClick={togglePlay}
-              style={{ cursor: 'pointer' }}
+      {/* Conditional Hero: Story Mode OR Standard Video Mode */}
+      {product.story && product.story.length > 0 ? (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mwc-detail-hero mwc-detail-hero--wide mwc-detail-hero--story"
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={storyStep}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mwc-story-media-container"
             >
-              <source src={product.videos[videoIndex]} type="video/mp4" />
-            </video>
-            
-            {!isPlaying && (
-              <div className="mwc-story-play-overlay" onClick={togglePlay}>
-                <Play size={64} fill="white" color="white" opacity={0.8} />
-              </div>
-            )}
+              {product.story[storyStep].type === 'video' ? (
+                <>
+                  <video 
+                    ref={videoRef}
+                    className="mwc-story-media" 
+                    autoPlay 
+                    muted={isMuted} 
+                    playsInline
+                    onClick={togglePlay}
+                    style={{ cursor: 'pointer' }}
+                    onEnded={() => setStoryStep(s => (s + 1) % product.story.length)}
+                  >
+                    <source src={product.story[storyStep].media} type="video/mp4" />
+                  </video>
+                  
+                  {!isPlaying && (
+                    <div className="mwc-story-play-overlay" onClick={togglePlay}>
+                      <Play size={64} fill="white" color="white" opacity={0.8} />
+                    </div>
+                  )}
 
-            <button className="mwc-sound-btn" onClick={() => setIsMuted(!isMuted)}>
-              {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-            </button>
-            {product.videos.length > 1 && (
-              <div className="mwc-video-stepper">
-                {product.videos.map((_, i) => (
-                  <button
-                    key={i}
-                    className={`mwc-video-step-btn ${i === videoIndex ? 'active' : ''}`}
-                    onClick={() => setVideoIndex(i)}
-                    style={{ backgroundColor: i === videoIndex ? product.color : 'rgba(255,255,255,0.3)' }}
+                  <button className="mwc-sound-btn mwc-sound-btn--story" onClick={() => setIsMuted(!isMuted)}>
+                    {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                  </button>
+                </>
+              ) : (
+                <div className="mwc-story-animation-wrap">
+                  {/* Animation components if needed */}
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+          
+          <div className="mwc-story-gradient-overlay" />
+
+          <div className="mwc-story-bottom-bar">
+            <div className="mwc-story-text-overlay">
+              <motion.div
+                key={`text-${storyStep}`}
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+              >
+                <div className="mwc-story-step-badge">Phase {storyStep + 1}</div>
+                <h2 className="mwc-story-title">{product.story[storyStep].title}</h2>
+                <p className="mwc-story-desc">{product.story[storyStep].text}</p>
+              </motion.div>
+            </div>
+
+            <div className="mwc-story-controls">
+              <button 
+                className={`mwc-story-nav-btn ${storyStep === 0 ? 'disabled' : ''}`}
+                onClick={() => setStoryStep(s => Math.max(0, s - 1))}
+              >
+                <ArrowLeft size={20} />
+              </button>
+              <div className="mwc-story-dots">
+                {product.story.map((_: any, i: number) => (
+                  <div 
+                    key={i} 
+                    className={`mwc-story-dot ${i === storyStep ? 'active' : ''}`}
+                    onClick={() => setStoryStep(i)}
+                    style={{ backgroundColor: i === storyStep ? product.color : 'rgba(255,255,255,0.3)' }}
                   />
                 ))}
               </div>
-            )}
-          </>
-        ) : (
-          <img src={product.image} alt={product.title} className="mwc-detail-hero-img" />
-        )}
-        <div className="mwc-detail-hero-overlay" />
-        <div className="mwc-detail-hero-content">
-          <div className="mwc-detail-icon" style={{ background: `${product.color}30`, borderColor: `${product.color}60` }}>
-            <Icon size={28} style={{ color: product.color }} />
+              <button 
+                className={`mwc-story-nav-btn ${storyStep === product.story.length - 1 ? 'disabled' : ''}`}
+                onClick={() => setStoryStep(s => Math.min(product.story.length - 1, s + 1))}
+              >
+                <ArrowRight size={20} />
+              </button>
+            </div>
           </div>
-          <h1 className="mwc-detail-title">{product.title}</h1>
-          <p className="mwc-detail-tagline">{product.tagline}</p>
-        </div>
-      </motion.div>
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mwc-detail-hero"
+        >
+          {product.videos && product.videos.length > 0 ? (
+            <>
+              <video 
+                ref={videoRef}
+                key={product.videos[videoIndex]} 
+                className="mwc-detail-hero-img" 
+                autoPlay 
+                loop 
+                muted={isMuted} 
+                playsInline
+                onClick={togglePlay}
+                style={{ cursor: 'pointer' }}
+              >
+                <source src={product.videos[videoIndex]} type="video/mp4" />
+              </video>
+              
+              {!isPlaying && (
+                <div className="mwc-story-play-overlay" onClick={togglePlay}>
+                  <Play size={64} fill="white" color="white" opacity={0.8} />
+                </div>
+              )}
+
+              <button className="mwc-sound-btn" onClick={() => setIsMuted(!isMuted)}>
+                {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+              </button>
+              {product.videos.length > 1 && (
+                <div className="mwc-video-stepper">
+                  {product.videos.map((_: string, i: number) => (
+                    <button
+                      key={i}
+                      className={`mwc-video-step-btn ${i === videoIndex ? 'active' : ''}`}
+                      onClick={() => setVideoIndex(i)}
+                      style={{ backgroundColor: i === videoIndex ? product.color : 'rgba(255,255,255,0.3)' }}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
+          ) : (
+            <img src={product.image} alt={product.title} className="mwc-detail-hero-img" />
+          )}
+          <div className="mwc-detail-hero-overlay" />
+          <div className="mwc-detail-hero-content">
+            <div className="mwc-detail-icon" style={{ background: `${product.color}30`, borderColor: `${product.color}60` }}>
+              <Icon size={28} style={{ color: product.color }} />
+            </div>
+            <h1 className="mwc-detail-title">{product.title}</h1>
+            <p className="mwc-detail-tagline">{product.tagline}</p>
+          </div>
+        </motion.div>
+      )}
 
       <div className="mwc-detail-container">
 

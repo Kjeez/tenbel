@@ -885,7 +885,6 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
             </div>
           </div>
         </motion.div>
-      </div>
     </motion.div>
   );
 }

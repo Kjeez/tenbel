@@ -12,8 +12,12 @@ import {
   Tractor,
   Hospital,
   Shield,
+  Shield,
   Layers,
   Eye,
+  Hexagon,
+  ChevronDown,
+  Volume2,
   Volume2,
   VolumeX,
   Play,
@@ -989,69 +993,136 @@ function IntroScreen({ step, onSkip, onEnter, onSelectProduct, onSelectUseCase }
 function ChooseScreen({ onProducts, onUseCases, onBack }: { onProducts: () => void; onUseCases: () => void; onBack: () => void }) {
   return (
     <motion.div
-      className="mwc-screen"
+      className="mwc-screen mwc-explore-screen"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
-      <ParticleBackground />
+      <div className="mwc-explore-bg">
+        <div className="mwc-explore-bg-image" style={{ backgroundImage: 'url(/mwc-home-bg.jpg)' }} />
+        <div className="mwc-explore-bg-overlay" />
+        <ParticleBackground />
+      </div>
 
-      <div className="mwc-nav-bar" style={{ background: 'transparent', borderBottom: 'none', position: 'absolute' }}>
-        <button onClick={onBack} className="mwc-back-btn">
+      <div className="mwc-explore-nav">
+        <button onClick={onBack} className="mwc-explore-back-btn">
           <ArrowLeft size={16} /> Back
         </button>
       </div>
 
-      <div className="mwc-choose-content">
+      <div className="mwc-explore-content">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mwc-choose-header"
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+          className="mwc-explore-logo-wrap"
         >
-          <img src="/logo-new.png" alt="Tenbel" className="mwc-choose-logo" />
-          <h2 className="mwc-choose-title">What would you like to explore?</h2>
-          <p className="mwc-choose-subtitle">Choose a path to discover Tenbel's solutions</p>
+          <img src="/logo-new.png" alt="Tenbel" className="mwc-explore-logo" />
         </motion.div>
 
-        <div className="mwc-choose-cards">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          className="mwc-explore-header"
+        >
+          <div className="mwc-explore-eyebrow">
+            <span className="mwc-explore-line mwc-explore-line--left" />
+            EXPLORE OUR SHOWCASE
+            <span className="mwc-explore-line mwc-explore-line--right" />
+          </div>
+          <h1 className="mwc-explore-title">
+            What would you like to <span className="mwc-explore-title-highlight">explore?</span>
+          </h1>
+          <p className="mwc-explore-subtitle">
+            Choose a path to discover TENBEL's solutions, real-world applications and the technologies powering a more connected world.
+          </p>
+        </motion.div>
+
+        <div className="mwc-explore-cards">
           <motion.button
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, type: 'spring', stiffness: 100 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
             onClick={onProducts}
-            className="mwc-choose-card mwc-choose-card--products"
+            className="mwc-explore-card mwc-explore-card--products"
           >
-            <div className="mwc-choose-card-glow" />
-            <div className="mwc-choose-card-icon">
-              <Layers size={40} />
+            <div className="mwc-explore-card-bg" style={{ backgroundImage: 'url(/product-commsbox.jpg)' }} />
+            <div className="mwc-explore-card-overlay" />
+            
+            <div className="mwc-explore-card-inner">
+              <div className="mwc-explore-card-top">
+                <span className="mwc-explore-card-num">01 / 02</span>
+              </div>
+              
+              <div className="mwc-explore-card-main">
+                <div className="mwc-explore-card-icon-wrap">
+                  <Layers size={28} />
+                </div>
+                <h3>Our Products</h3>
+                <p>Explore our 5 product lines — OffGrid, CommsBox, Railway, Enterprise IoT & Remote Connectivity.</p>
+                
+                <div className="mwc-explore-chips">
+                  <span><Hexagon size={12} /> Rugged Hardware</span>
+                  <span><Hexagon size={12} /> Scalable Solutions</span>
+                  <span><Hexagon size={12} /> Mesh Networking</span>
+                  <span><Hexagon size={12} /> Global Connectivity</span>
+                </div>
+              </div>
+
+              <div className="mwc-explore-card-bottom">
+                <span className="mwc-explore-cta">Browse Products <ArrowRight size={16} /></span>
+              </div>
             </div>
-            <h3>Our Products</h3>
-            <p>Explore our 5 product lines — OffGrid, CommsBox, Railway, Enterprise IoT & Remote Connectivity</p>
-            <span className="mwc-choose-card-cta">
-              Browse Products <ArrowRight size={16} />
-            </span>
           </motion.button>
 
           <motion.button
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, type: 'spring', stiffness: 100 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.35 }}
             onClick={onUseCases}
-            className="mwc-choose-card mwc-choose-card--usecases"
+            className="mwc-explore-card mwc-explore-card--usecases"
           >
-            <div className="mwc-choose-card-glow mwc-choose-card-glow--alt" />
-            <div className="mwc-choose-card-icon mwc-choose-card-icon--alt">
-              <Eye size={40} />
+            <div className="mwc-explore-card-bg" style={{ backgroundImage: 'url(/usecase-disaster.jpg)' }} />
+            <div className="mwc-explore-card-overlay mwc-explore-card-overlay--alt" />
+            
+            <div className="mwc-explore-card-inner">
+              <div className="mwc-explore-card-top">
+                <span className="mwc-explore-card-num">02 / 02</span>
+              </div>
+              
+              <div className="mwc-explore-card-main">
+                <div className="mwc-explore-card-icon-wrap mwc-explore-card-icon-wrap--alt">
+                  <Eye size={28} />
+                </div>
+                <h3>Use Cases</h3>
+                <p>See real-world applications — Disaster Relief, Railways, Agriculture, Smart Factory & more.</p>
+                
+                <div className="mwc-explore-chips">
+                  <span><Hexagon size={12} /> Industry Applications</span>
+                  <span><Hexagon size={12} /> Critical Infrastructure</span>
+                  <span><Hexagon size={12} /> Remote Communities</span>
+                  <span><Hexagon size={12} /> Smart Environments</span>
+                </div>
+              </div>
+
+              <div className="mwc-explore-card-bottom">
+                <span className="mwc-explore-cta mwc-explore-cta--alt">View Use Cases <ArrowRight size={16} /></span>
+              </div>
             </div>
-            <h3>Use Cases</h3>
-            <p>See real-world applications — Disaster Relief, Railways, Agriculture, Smart Factory & more</p>
-            <span className="mwc-choose-card-cta mwc-choose-card-cta--alt">
-              View Use Cases <ArrowRight size={16} />
-            </span>
           </motion.button>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="mwc-explore-indicator"
+        >
+          SELECT A PATH
+          <ChevronDown size={14} className="mwc-explore-indicator-arrow" />
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -2283,142 +2354,360 @@ ${globalAnimStyles}
 }
 
 /* ── Choose Screen ──────────────────────────────────────── */
-.mwc-choose-content {
+/* ── EXPLORE SHOWCASE (CHOOSE SCREEN) ────────────────────────────────────────────── */
+
+.mwc-explore-screen {
+  background: #030816;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  overflow: hidden;
+  padding: 0;
+}
+
+.mwc-explore-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.mwc-explore-bg-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  filter: saturate(0.8) contrast(1.1);
+}
+
+.mwc-explore-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(0, 190, 255, 0.08), transparent 45%),
+              radial-gradient(circle at 70% 50%, rgba(190, 0, 255, 0.06), transparent 45%),
+              radial-gradient(circle at 50% 50%, transparent 0%, #030816 100%),
+              linear-gradient(to bottom, transparent 60%, #030816 100%);
+}
+
+.mwc-explore-nav {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  z-index: 20;
+}
+
+.mwc-explore-back-btn {
+  background: rgba(10,20,40,0.55);
+  border: 1px solid rgba(255,255,255,0.14);
+  backdrop-filter: blur(14px);
+  border-radius: 999px;
+  height: 44px;
+  padding: 0 20px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mwc-explore-back-btn:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.25);
+  box-shadow: 0 0 15px rgba(255,255,255,0.05);
+}
+
+.mwc-explore-back-btn:hover svg {
+  transform: translateX(-3px);
+}
+
+.mwc-explore-content {
   position: relative;
   z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   width: 100%;
-  max-width: 900px;
-  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex: 1;
+  padding: 65px 24px 30px;
 }
 
-.mwc-choose-header {
-  margin-bottom: 40px;
+.mwc-explore-logo-wrap {
+  margin-bottom: 30px;
 }
 
-.mwc-choose-logo {
-  display: block;
-  margin: 0 auto 24px auto;
-  height: 48px;
-  filter: brightness(1.1);
+.mwc-explore-logo {
+  height: 38px;
+  filter: drop-shadow(0 0 8px rgba(0, 190, 255, 0.3));
 }
 
-.mwc-choose-title {
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 8px;
-  letter-spacing: -0.02em;
-}
-
-.mwc-choose-subtitle {
-  color: #64748b;
-  font-size: 1rem;
-}
-
-.mwc-choose-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  width: 100%;
-}
-
-@media (max-width: 640px) {
-  .mwc-choose-cards {
-    grid-template-columns: 1fr;
-  }
-}
-
-.mwc-choose-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.mwc-explore-header {
   text-align: center;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 24px;
-  padding: 48px 32px 36px;
-  cursor: pointer;
-  transition: all 0.3s;
-  overflow: hidden;
+  margin-bottom: 45px;
 }
 
-.mwc-choose-card:hover {
-  border-color: rgba(20,184,166,0.3);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-}
-
-.mwc-choose-card--usecases:hover {
-  border-color: rgba(232,48,122,0.3);
-}
-
-.mwc-choose-card-glow {
-  position: absolute;
-  top: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(20,184,166,0.15) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.mwc-choose-card-glow--alt {
-  background: radial-gradient(circle, rgba(232,48,122,0.15) 0%, transparent 70%);
-}
-
-.mwc-choose-card-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 24px;
+.mwc-explore-eyebrow {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(20,184,166,0.12);
-  border: 1px solid rgba(20,184,166,0.25);
-  color: #14b8a6;
+  gap: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: #00d2ff;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.mwc-explore-line {
+  height: 1px;
+  width: 32px;
+}
+.mwc-explore-line--left { background: linear-gradient(90deg, transparent, #00d2ff); }
+.mwc-explore-line--right { background: linear-gradient(270deg, transparent, #b400ff); }
+
+.mwc-explore-title {
+  font-size: clamp(32px, 4.5vw, 62px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin: 0 0 16px 0;
+}
+
+.mwc-explore-title-highlight {
+  background: linear-gradient(90deg, #19D3FF, #7A4DFF, #FF19D4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mwc-explore-subtitle {
+  font-size: clamp(15px, 1.5vw, 18px);
+  color: rgba(220,230,245,0.7);
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.mwc-explore-cards {
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  justify-content: center;
+}
+
+.mwc-explore-card {
+  width: 530px;
+  height: 380px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(10,20,40,0.55);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  transition: all 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  text-align: left;
+}
+
+.mwc-explore-card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mwc-explore-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(3,8,20,0.05) 0%, rgba(3,8,20,0.4) 40%, rgba(3,8,20,0.98) 100%);
+  z-index: 1;
+  transition: background 400ms ease;
+}
+
+.mwc-explore-card-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 32px;
+}
+
+.mwc-explore-card-top {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mwc-explore-card-num {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.55);
+  font-weight: 600;
+}
+
+.mwc-explore-card-main {
+  margin-top: auto;
+  margin-bottom: 24px;
+}
+
+.mwc-explore-card-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(0, 210, 255, 0.1);
+  border: 1px solid rgba(0, 210, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00d2ff;
   margin-bottom: 20px;
+  transition: all 400ms ease;
+}
+.mwc-explore-card-icon-wrap--alt {
+  background: rgba(180, 0, 255, 0.1);
+  border-color: rgba(180, 0, 255, 0.25);
+  color: #b400ff;
 }
 
-.mwc-choose-card-icon--alt {
-  background: rgba(232,48,122,0.12);
-  border-color: rgba(232,48,122,0.25);
-  color: #E8307A;
-}
-
-.mwc-choose-card h3 {
-  font-size: 1.3rem;
+.mwc-explore-card h3 {
+  font-size: 28px;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 10px;
+  margin: 0 0 10px 0;
 }
 
-.mwc-choose-card p {
-  color: #64748b;
-  font-size: 0.88rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
+.mwc-explore-card p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+  max-width: 90%;
 }
 
-.mwc-choose-card-cta {
-  display: inline-flex;
+.mwc-explore-chips {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.mwc-explore-chips span {
+  display: flex;
   align-items: center;
   gap: 6px;
-  color: #14b8a6;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  transition: color 300ms ease;
 }
 
-.mwc-choose-card-cta--alt {
-  color: #E8307A;
+.mwc-explore-card-bottom {
+  display: flex;
 }
+
+.mwc-explore-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 210, 255, 0.15);
+  color: #00d2ff;
+  padding: 10px 20px;
+  border-radius: 99px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  border: 1px solid rgba(0, 210, 255, 0.1);
+}
+.mwc-explore-cta--alt {
+  background: rgba(180, 0, 255, 0.15);
+  color: #f472b6;
+  border-color: rgba(180, 0, 255, 0.1);
+}
+
+.mwc-explore-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 210, 255, 0.4);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px rgba(0, 210, 255, 0.15);
+}
+.mwc-explore-card--usecases:hover {
+  border-color: rgba(180, 0, 255, 0.4);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px rgba(180, 0, 255, 0.15);
+}
+
+.mwc-explore-card:hover .mwc-explore-card-bg {
+  transform: scale(1.05);
+}
+
+.mwc-explore-card:hover .mwc-explore-cta {
+  background: rgba(0, 210, 255, 0.25);
+}
+.mwc-explore-card--usecases:hover .mwc-explore-cta--alt {
+  background: rgba(180, 0, 255, 0.25);
+}
+
+.mwc-explore-card:hover .mwc-explore-cta svg {
+  transform: translateX(4px);
+}
+
+.mwc-explore-card:hover .mwc-explore-chips span {
+  color: rgba(255,255,255,0.85);
+}
+.mwc-explore-card:hover .mwc-explore-chips span svg {
+  color: #00d2ff;
+}
+.mwc-explore-card--usecases:hover .mwc-explore-chips span svg {
+  color: #b400ff;
+}
+
+.mwc-explore-indicator {
+  margin-top: auto;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.mwc-explore-indicator-arrow {
+  animation: bounce-subtle 2s infinite ease-in-out;
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+@media (max-width: 900px) {
+  .mwc-explore-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .mwc-explore-card {
+    width: 100%;
+    max-width: 450px;
+    height: 340px;
+  }
+  .mwc-explore-nav {
+    top: 16px;
+    left: 16px;
+  }
+  .mwc-explore-content {
+    padding-top: 80px;
+  }
+}
+
 
 /* ── Carousel Marquee ────────────────────────────────────── */
 .mwc-choose-content-new {

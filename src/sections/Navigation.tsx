@@ -6,6 +6,7 @@ const navLinks = [
   { label: 'PRODUCTS', href: '#products' },
   { label: 'SERVICES', href: '#services' },
   { label: 'PARTNERS', href: '#partners' },
+  { label: 'NEWS', href: '#news' },
   { label: 'ABOUT US', href: '#why' },
   { label: 'RESOURCES', href: '#remote-connectivity' },
 ];
@@ -46,12 +47,12 @@ export default function Navigation() {
         </a>
 
         {/* Desktop Links */}
-        <ul className="hidden lg:flex items-center gap-7 list-none">
+        <ul className="hidden lg:flex items-center gap-5 xl:gap-7 list-none">
           {navLinks.map((link) => (
             <li key={link.href}>
               <button
                 onClick={() => scrollToSection(link.href)}
-                className="text-[#475569] hover:text-[#E8307A] text-[0.8rem] font-medium tracking-[0.08em] transition-colors bg-transparent border-none cursor-pointer flex items-center gap-1"
+                className="text-[#475569] hover:text-[#E8307A] text-[0.8rem] font-medium tracking-[0.08em] transition-colors bg-transparent border-none cursor-pointer flex items-center gap-1 whitespace-nowrap"
               >
                 {link.label}
               </button>
@@ -64,7 +65,7 @@ export default function Navigation() {
           <button
             onClick={() => scrollToSection('#contact')}
             aria-label="Contact us"
-            className="text-white bg-gradient-to-r from-[#E8307A] to-[#c026d3] hover:shadow-lg px-6 py-2.5 rounded-full text-[0.75rem] font-semibold tracking-[0.08em] transition-all cursor-pointer border-none"
+            className="text-white bg-gradient-to-r from-[#E8307A] to-[#c026d3] hover:shadow-lg px-6 py-2.5 rounded-full text-[0.75rem] font-semibold tracking-[0.08em] transition-all cursor-pointer border-none whitespace-nowrap"
           >
             CONTACT US
           </button>
